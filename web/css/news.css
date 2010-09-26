@@ -1,0 +1,69 @@
+#n_head { width: 97%; padding: 7px 5px 7px 3px; border-bottom: 1px solid #CCCCCC; margin: 0 4px; }
+#n_head_name { float: left; color: #666666; margin-left: 15px; position: relative; top: 2px; font-size: 26px; }
+#n_head .sb_m {
+  float: left;
+  position: relative; left: 3px; top: 1px;
+}
+#n_head_stats { float: right; font-size: 12px; margin: 16px 10px 0 0; }
+#n_head_si { float: left; margin: 3px 0 0 10px; }
+#n_head_sd { float: left; margin: 3px 5px 0 0; }
+#n_head_f { float: left; margin: 3px 15px 0 0; }
+#n_content { float: left; margin: 10px; width: 55%; }
+#n_content #via { font-size: 10px; color: #999; position: relative; bottom: 2px; left: -2px; cursor: default; }
+#n_infoBox { float: left; border: 2px solid #CCCCCC; border-left: 1px solid #CCCCCC; border-top: none; padding: 5px 5px 0 5px; margin: 0 5px 10px 4px; width: 310px; }
+#n_infoBox .image { width: 100%; text-align: center; }
+#n_infoBox .image img { max-width: 94%; max-height: 175px; border: double #CCCCCC; padding: 5px; margin: 6px auto; }
+.n_infoItemFirst { padding: 4px; }
+.n_infoItem { border-top: 1px solid #EBEBEB; padding: 4px; position: relative; }
+#n_ii1 { margin-left: 37px; }
+#n_ii2 { margin-left: 46px; }
+#n_ii3 { margin: 5px 0; }
+#n_ii4 { margin-left: 32px; }
+#n_ii4 img { margin-left: 10px; position: relative; top: 2px; }
+#n_ii5 { margin-left: 15px; }
+#n_ii6 { margin-left: 44px; }
+#n_ii7 { margin-left: 43px; }
+.n_llist { margin-left: 122px; }
+#n_attach_button { font-size: 12px; font-weight: bold; color: #666666; position: absolute; right: 5px; top: 5px; }
+#n_attach_button:hover { cursor: pointer; color: #333333; }
+#n_statsToggle { border: 1px solid #CCCCCC; border-bottom: none; background-color: #F2F2F2; font-size: 12px; padding: 2px 5px; margin-top: 7px; }
+#n_statsToggle:hover { background-color: #EAEAEA; cursor: pointer; }
+#n_statsToggle img { position: relative; bottom: 1px; margin-right: 3px; }
+
+.n_tags { width: 98%; border-bottom: 1px solid #CCCCCC; padding: 0 0 10px 0; margin: auto; }
+#newsTagF { padding: 10px 0; position: relative; display: none; }
+#newsTagF .error_list,#newsTagF .error { margin: 0 0 10px 10px; font-weight: bold; color: red; }
+#newsTagF label { 
+  background-color: #ccc; padding: 2px 8px; margin-left: 3px; color: #555; font-weight: bold;
+}
+#newsTagF .tag_name { width: 125px; float: left; }
+#newsTagF .submit { font-size: 14px; position: relative; top: 1px; left: 10px; padding: 3px 10px; background-color: #7B9E10; border: none; color: #fff; font-weight: bold; }
+
+.tag_list li { margin: 10px 0; padding: 0 0 0 10px; }
+.tag_list li .fb_t { margin-left: 4px; }
+#tag_more { float: left; cursor: pointer; font-size: 14px; font-weight: bold; border: 1px solid #ccc; padding: 2px 6px; margin-left: 15px;  }
+#tag_more:hover { border-color: #999; }
+
+#ns_options { margin: 20px 0 0 10px; }
+#ns_options .mod_action { display: block; clear: left; float: left; margin-top: 15px; }
+
+.ns_status_text { font-size: 22px; font-weight: bold; width: 100%; text-align: center; margin-top: 50px; }
+
+#n_locks div { float: right; }
+
+#n_content .extra_links { clear: both; background-color: #EEE; margin-top: 45px; padding: 5px; position: relative; }
+#n_content .extra_links h3 { position: absolute; top: -40px; left: 10px; cursor: default; }
+#n_content .extra_links .new_link { font-size: 12px; font-weight: bold; position: absolute; top: -23px; right: 10px; padding: 2px 8px; }
+#n_content .extra_links .new_link:hover { background-color: #777; color: #fff; cursor: pointer; }
+#n_content .extra_links form { padding: 3px 5px; background-color: #777; margin-bottom: 5px; color: #fff; font-weight: bold; }
+#n_content .extra_links form label { display: block; padding: 5px 0 2px 10px; }
+#n_content .extra_links form input { border-color: #777; color: #333; width: 400px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+#n_content .extra_links form .submit { width: 200px; margin: 5px 0 5px 10px; display: block; }
+#n_content .extra_links ul li { float: left; margin: 5px 9px; }
+#n_content .extra_links ul li .count { font-size: 10px; background-color: #333; color: #fff; padding: 1px 3px; font-weight: bold; position: relative; bottom: 1px; right: 2px; }
+#n_content .extra_links ul li a { font-weight: bold; margin-right: 3px; }
+#n_content .extra_links .fb_t { margin-left: 2px; }
+
+#n_content .chart { margin: 23px 0px; border: 2px solid #ddd; padding: 10px 15px; }
+
+

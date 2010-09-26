@@ -1,0 +1,8 @@
+_limelight:
+  enabled: false
+  lifetime: 300
+
+.all:
+  lifetime: 2592000
+
+# 2592000 = 30 days

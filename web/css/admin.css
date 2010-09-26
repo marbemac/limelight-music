@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+body { font-size: 14px; font-family: tahoma, Arial, "times New Roman"; color: #999999; margin: 0px; padding: 0px; }
+a { text-decoration: none; font-family: tahoma, Arial, "times New Roman"; color: #999999; }
+input { font-size: 14px; font-family: tahoma, Arial, "times New Roman"; color: #999999; border: 2px solid #CCCCCC; padding: 3px; }
+input:focus { border: 2px solid #B9B9B9; }
+
+#topnav { margin: 10px; }
+#topnav div { margin: 5px; padding: 5px; border: 2px solid #7A8E06; float: left; }
+#topnav div:hover { background-color: #FFF; }
+.content { background-color: #fff; }

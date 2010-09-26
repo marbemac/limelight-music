@@ -1,0 +1,9 @@
+_feedLimelight:
+  enabled: true
+  with_layout: true
+  lifetime: 300
+
+_feedNews:
+  enabled: true
+  with_layout: true
+  lifetime: 300

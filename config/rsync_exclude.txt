@@ -1,0 +1,10 @@
+.svn
+.git
+/web/uploads/*
+/cache/*
+/log/*
+/data/*index
+/web/*_dev.php
+/web/*_cache.php
+/web/*_staging.php
+/web/*_test.php

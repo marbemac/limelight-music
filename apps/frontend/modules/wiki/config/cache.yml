@@ -1,0 +1,4 @@
+_segmentShared:
+  enabled: true
+  lifetime: 86400
+  # 1 day

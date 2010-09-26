@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * LimelightReviewPro filter form.
+ *
+ * @package    filters
+ * @subpackage LimelightReviewPro *
+ * @version    SVN: $Id: sfDoctrineFormFilterTemplate.php 11675 2008-09-19 15:21:38Z fabien $
+ */
+class LimelightReviewProFormFilter extends BaseLimelightReviewProFormFilter
+{
+  public function configure()
+  {
+  }
+}

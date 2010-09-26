@@ -1,0 +1,26 @@
+Limelight:
+  lime_iphone:
+    name: iPhone 3G
+    status: Active
+    profile_image: iphone.gif
+    manufacturer: Apple
+    Categories: [cat_gadget, cat_phone, cat_apple, cat_att]
+#    LimelightWiki: [wiki_iphone1, wiki_iphone2]
+#    LimelightCoreSpec: [core_spec_iphone1, core_spec_iphone2, core_spec_iphone3]
+#    LimelightSpec: [spec_iphone1, spec_iphone2, spec_iphone3, spec_iphone4, spec_iphone5, spec_iphone6, spec_iphone7]
+
+  lime_storm:
+    name: Storm
+    status: Active
+    profile_image: storm.gif
+    manufacturer: Blackberry
+#    LimelightWiki: [wiki_storm1]
+#    LimelightCoreSpec: [core_spec_storm1]
+
+LimelightSummary:
+  lime_iphone_s:
+    summary: |
+      The iPhone is Apples first venture into the mobile space. Since its launch, it has rapidly become
+      a leader in the space.
+    Limelight: lime_iphone
+    Version: 2

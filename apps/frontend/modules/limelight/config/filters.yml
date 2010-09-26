@@ -1,0 +1,19 @@
+rendering: ~
+remember_me:
+  class: sfGuardRememberMeFilter
+security:
+  class: sfGuardBasicSecurityFilter
+
+# insert your own filters here
+
+# checks if the user is currently flagged as editing a wiki instance
+# unlocks that wiki instance if the user reloads a page
+wiki_filter:
+  class: wikiFilter
+
+views:
+  class: viewsFilter
+
+cache:     ~
+
+execution: ~

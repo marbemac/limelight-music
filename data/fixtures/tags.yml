@@ -1,0 +1,35 @@
+#Tag:
+#  tag_apple:
+#    name: Apple
+#    News: [news_1]
+#    Limelights: [lime_storm, lime_iphone]
+#
+#  tag_3g:
+#    name: 3G
+#    News: [news_1]
+#    Limelights: [lime_storm, lime_iphone]
+#
+#  tag_mp3:
+#    name: MP3
+#    News: [news_4]
+#    Limelights: [lime_storm]
+#
+#  tag_cellphone:
+#    name: Cellphone
+#    News: [news_1]
+#    Limelights: [lime_storm, lime_iphone]
+#
+#  tag_blackberry:
+#    name: Blackberry
+#    News: [news_1]
+#    Limelights: [lime_storm, lime_iphone]
+#
+#  tag_rim:
+#    name: RIM
+#    News: [news_1]
+#    Limelights: [lime_storm, lime_iphone]
+#
+#  tag_touchscreen:
+#    name: touchscreen
+#    News: [news_1]
+#    Limelights: [lime_storm, lime_iphone]

@@ -1,0 +1,28 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Limelight
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          limelight
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Limelight Management
+        display: [=name, limelight_type, company_name, score, status, profile_image, total_views, is_stub, created_at]
+        sort: [created_at, desc]
+        max_per_page: 20
+      filter:  ~
+      form:
+        class: BackendLimelightForm
+      edit:
+        title: Editing Limelight "%%name%%"
+      new:
+        title: New Limelight

@@ -1,0 +1,261 @@
+BadgeLevel:
+  bl_janitor1:
+    level: 1
+    num_required: 1
+  bl_janitor2:
+    level: 2
+    num_required: 10
+
+  bl_autobiographer1:
+    level: 1
+    num_required: 6
+
+  bl_sheep1:
+    level: 1
+    num_required: 1
+  bl_sheep2:
+    level: 2
+    num_required: 10
+
+  bl_king1:
+    level: 1
+    num_required: 1
+  bl_king2:
+    level: 2
+    num_required: 10
+  bl_king3:
+    level: 3
+    num_required: 50
+  bl_king4:
+    level: 4
+    num_required: 200
+
+  bl_reporter1:
+    level: 1
+    num_required: 1
+  bl_reporter2:
+    level: 2
+    num_required: 10
+  bl_reporter3:
+    level: 3
+    num_required: 50
+  bl_reporter4:
+    level: 4
+    num_required: 200
+
+  bl_news_tagger1:
+    level: 1
+    num_required: 1
+  bl_news_tagger2:
+    level: 2
+    num_required: 10
+
+  bl_news_linker1:
+    level: 1
+    num_required: 1
+  bl_news_linker2:
+    level: 2
+    num_required: 10
+
+  bl_loyalty1:
+    level: 1
+    num_required: 5
+  bl_loyalty2:
+    level: 2
+    num_required: 15
+  bl_loyalty3:
+    level: 3
+    num_required: 30
+  bl_loyalty4:
+    level: 4
+    num_required: 60
+
+  bl_critic1:
+    level: 1
+    num_required: 1
+
+  bl_spectacular1:
+    level: 1
+    num_required: 1
+  bl_spectacular2:
+    level: 2
+    num_required: 10
+  bl_spectacular3:
+    level: 3
+    num_required: 50
+  bl_spectacular4:
+    level: 4
+    num_required: 100
+
+  bl_commentator1:
+    level: 1
+    num_required: 1
+  bl_commentator2:
+    level: 2
+    num_required: 10
+  bl_commentator3:
+    level: 3
+    num_required: 50
+  bl_commentator4:
+    level: 4
+    num_required: 200
+
+  bl_wikiwhat1:
+    level: 1
+    num_required: 1
+  bl_wikiwhat2:
+    level: 2
+    num_required: 5
+  bl_wikiwhat3:
+    level: 3
+    num_required: 30
+  bl_wikiwhat4:
+    level: 4
+    num_required: 75
+
+  bl_foresight1:
+    level: 1
+    num_required: 1
+  bl_foresight2:
+    level: 2
+    num_required: 10
+  bl_foresight3:
+    level: 3
+    num_required: 30
+
+  bl_brainstorm1:
+    level: 1
+    num_required: 1
+  bl_brainstorm2:
+    level: 2
+    num_required: 10
+
+  bl_lucky1:
+    level: 1
+    num_required: 1
+
+  bl_superstar1:
+    level: 2
+    num_required: 1
+
+  bl_money1:
+    level: 2
+    num_required: 1
+
+  bl_nfave1:
+    level: 1
+    num_required: 1
+  bl_nfave2:
+    level: 2
+    num_required: 10
+  bl_nfave3:
+    level: 3
+    num_required: 50
+  bl_nfave4:
+    level: 4
+    num_required: 200
+
+  bl_llfave1:
+    level: 1
+    num_required: 1
+  bl_llfave2:
+    level: 2
+    num_required: 10
+  bl_llfave3:
+    level: 3
+    num_required: 25
+  bl_llfave4:
+    level: 4
+    num_required: 50
+
+  bl_goldenpen1:
+    level: 1
+    num_required: 1
+  bl_goldenpen2:
+    level: 2
+    num_required: 5
+  bl_goldenpen3:
+    level: 3
+    num_required: 20
+  bl_goldenpen4:
+    level: 4
+    num_required: 50
+
+  bl_nerd1:
+    level: 4
+    num_required: 20
+
+  bl_supporter1:
+    level: 3
+    num_required: 1
+
+  bl_opinionated1:
+    level: 1
+    num_required: 1
+  bl_opinionated2:
+    level: 2
+    num_required: 10
+  bl_opinionated3:
+    level: 3
+    num_required: 50
+
+  bl_handyman1:
+    level: 1
+    num_required: 3
+
+  bl_selfportrait1:
+    level: 1
+    num_required: 1
+
+  bl_popular1:
+    level: 1
+    num_required: 1
+  bl_popular2:
+    level: 2
+    num_required: 2
+
+  bl_popularlimelight1:
+    level: 1
+    num_required: 1
+  bl_popularlimelight2:
+    level: 2
+    num_required: 5
+  bl_popularlimelight3:
+    level: 3
+    num_required: 15
+
+  bl_popularnews1:
+    level: 1
+    num_required: 1
+  bl_popularnews2:
+    level: 2
+    num_required: 10
+  bl_popularnews3:
+    level: 3
+    num_required: 20
+
+  bl_verypopularlimelight1:
+    level: 1
+    num_required: 1
+  bl_verypopularlimelight2:
+    level: 2
+    num_required: 5
+  bl_verypopularlimelight3:
+    level: 3
+    num_required: 15
+  bl_verypopularlimelight4:
+    level: 4
+    num_required: 30
+
+  bl_verypopularnews1:
+    level: 1
+    num_required: 1
+  bl_verypopularnews2:
+    level: 2
+    num_required: 10
+  bl_verypopularnews3:
+    level: 3
+    num_required: 20
+  bl_verypopularnews4:
+    level: 4
+    num_required: 40

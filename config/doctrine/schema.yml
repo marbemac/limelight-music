@@ -1,0 +1,1443 @@
+---
+# for database session handling
+Session:
+  columns:
+    id: { type: string(32), primary: true, notnull: true }
+    session_data: { type: string(4000), notnull: true }
+    time: { type: integer(4), notnull: true }
+
+Profile:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    sf_guard_user_id: integer(4)
+    first_name:
+      type: string(255)
+    last_name:
+      type: string(255)
+    zipcode:
+      type: string(30)
+    gender:
+      type: string(30)
+    age_range:
+      type: string(30)
+    rpx_birthday:
+      type: date
+      default: null
+    rpx_url:
+      type: varchar(300)
+      default: null
+    income_range:
+      type: string(30)
+    email:
+      type: string(255)
+      notnull: true
+      email: true
+    total_views: { type: integer(4), default: 0 }
+    status:
+      type: enum
+      values: [Active, Pending, Flagged, Struck, Disabled]
+      default: Pending
+    activate_code:
+      type: string(14)
+      notnull: true
+    activated:
+      type: integer(1)
+      default: 0
+    profile_image:
+      type: string
+      default: user_profile_default.jpg
+    rpx_profile_image:
+      type: bool
+      default: 0
+    score:
+      type: integer(4)
+      default: 0
+    score_ratio: { type: decimal, default: 0 }
+    score_positive_count: { type: integer(4), default: 0 }
+    score_negative_count: { type: integer(4), default: 0 }
+    limelight_count: { type: integer(4), default: 0 }
+    flag_count: { type: integer(4), default: 0 }
+    login_count:
+      type: integer(4)
+      default: 0
+    first_100: { type: bool, default: 0 }
+    first_1000: { type: bool, default: 0 }
+    is_mod: { type: bool, default: 0 }
+    suspend_until: { type: date }
+  relations:
+    User:
+      class: sfGuardUser
+      foreignAlias: Profile
+      foreignType: one
+      onDelete: CASCADE
+
+FollowUserReference:
+  actAs:
+    Timestampable: ~
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    user1_id:
+      type: integer(4)
+    user2_id:
+      type: integer(4)
+
+FollowLimelightReference:
+  actAs:
+    Timestampable: ~
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    user_id:
+      type: integer(4)
+    limelight_id:
+      type: integer(4)
+
+Log:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    type: string(50)
+    message: string(255)
+    user_id: integer(4)
+    ip_address: string(50)
+  indexes:
+    userIndex:                { fields: [user_id] }
+    typeIndex:                { fields: [type] }
+
+###############
+# CATEGORY
+###############
+
+Category:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+    Sluggable:
+      fields: [name]
+      name: name_slug
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    name:
+      type: string(255)
+      notnull: true
+    status:
+      type: enum
+      values: [Active, Pending, Struck, Flagged, Disabled]
+      notnull: true
+      default: Pending
+    num_limelights: { type: integer(4), default: 0 }
+    num_news: { type: integer(4), default: 0 }
+    amazon_category: { type: string(100), default: null }
+    parent_id: integer(4)
+  indexes:
+    index:                { fields: [parent_id] }
+  relations:
+    Parent:
+      class: Category
+      local: parent_id
+      foreign: id
+      foreignAlias: Children
+
+CategoryLimelight:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  columns:
+    limelight_id:     { type: integer(4) }
+    category_id:      { type: integer(4) }
+  relations:
+    Limelight:        { onDelete: CASCADE, local: limelight_id, foreign: id }
+    Category:         { onDelete: CASCADE, local: category_id, foreign: id }
+
+##################
+# END CATEGORY
+##################
+
+# parent class for all tables of type item
+Item:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    status: { type: enum, values: [Active, Pending, Struck, Flagged, Disabled], default: Active }
+    slice_id: integer(4)
+    user_id: { type: integer(4) }
+  indexes:
+    userIndex:                     { fields: [user_id] }
+
+##################
+# LIMELIGHT
+##################
+
+Limelight:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  actAs:
+    Sluggable:
+      fields: [name]
+      name: name_slug
+  columns:
+    name:                          { type: string(255), notnull: true }
+    score:                         { type: integer(4), default: 0, notnull: true }
+    profile_image:                 { type: string(255), default: limelight_profile_default.gif }
+    total_views:                   { type: integer(4), default: 0 }
+    favorite_badge_flag:           { type: integer(1), default: 0 }
+    reviewable:                    { type: integer(1), default: 1 }
+    wiki_lock:                     { type: integer(1), default: 0 }
+    spec_lock:                     { type: integer(1), default: 0 }
+    procon_lock:                   { type: integer(1), default: 0 }
+    module_specifications:         { type: bool, default: 0 }
+    module_features:               { type: bool, default: 0 }
+    module_procon:                 { type: bool, default: 0 }
+    module_products:               { type: bool, default: 0 }
+    limelight_type:                { type: enum, values: [product, technology, company, source], default: product }
+    company_name:                  { type: string(255), default: null }
+    company_id:                    { type: integer(4) }
+    is_stub:                       { type: integer(1), default: 1 }
+  indexes:
+    manufacturerIndex:             { fields: [manufacturer] }
+  relations:
+    User:                          { class: sfGuardUser, local: user_id, foreignAlias: Limelights, foreign: id, onDelete: CASCADE }
+    Categories:                    { class: Category, refClass: CategoryLimelight, local: limelight_id, foreign: category_id }
+    Newss:                         { class: News, refClass: LimelightNews, foreignAlias: Limelights }
+    Wikis:                         { class: Wiki, refClass: LimelightWiki, local: limelight_id, foreign: wiki_group_id, foreignAlias: Limelights }
+    Company:                       { class: Limelight, local: company_id, foreignAlias: Products }
+
+LimelightSlice:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+    Sluggable:
+      fields: [name]
+      name: name_slug
+  columns:
+    name:                          { type: string(255), notnull: true }
+    profile_image:                 { type: string(255), default: limelight_profile_default.gif }
+    slice_type:                    { type: enum, values: [model, version], default: product }
+    user_id:                       { type: integer(4) }
+    item_id:                       { type: integer(4) }
+  relations:
+    User:        { class: sfGuardUser, local: user_id, foreignAlias: LimelightSlices, foreign: id, onDelete: CASCADE }
+    Limelight:   { local: item_id, foreignAlias: Slices, onDelete: CASCADE }
+
+LimelightSummary:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  columns:
+    summary:     { type: string(500), default: null }
+    version:     { type: integer(3), default: 1 }
+    is_active:   { type: bool, default: 1}
+    item_id:     { type: integer(4) }
+    slice_id:    { type: integer(4) }
+  relations:
+    User:        { class: sfGuardUser, local: user_id, foreignAlias: Limelights, foreign: id, onDelete: CASCADE }
+    Limelight:   { local: item_id, foreignAlias: Summaries, onDelete: CASCADE }
+
+LimelightWiki:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    limelight_id: { type: integer(4) }
+    wiki_group_id: { type: integer(4) }
+    order_id: { type: integer(4) }
+  relations:
+    Limelight:
+      local: limelight_id
+      foreignAlias: LimelightWikis
+      onDelete: CASCADE
+    Wiki:
+      local: wiki_group_id
+      foreign: group_id
+      foreignAlias: LimelightWikis
+      onDelete: CASCADE
+
+Wiki:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  columns:
+    topics: string(255)
+    content: string
+    note:
+      type: string(255)
+      default: null
+    version:           { type: integer(4), default: 1 }
+    score:             { type: integer(4), default: 0 }
+    is_active:         { type: bool, default: 0 }
+    edit_type:         { type: enum, values: [minor, major], default: minor }
+    edit_lock:         { type: bool, default: 0 }
+    edit_lock_start:   { type: datetime }
+    edit_lock_time:    { type: datetime }
+    edit_lock_user_id: { type: integer(4) }
+    lock_code:         { type: bool, default: 0 }
+    group_id:          { type: integer(4), notnull: true }
+  indexes:
+    groupIndex:             { fields: [group_id, version] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: Wikis
+      onDelete: CASCADE
+
+##################
+# END LIMELIGHT
+##################
+
+#################
+# SPECIFICATIONS
+#################
+
+Specification:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+    Sluggable:
+      fields: [name]
+      name: name_slug
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    name: { type: string(100) }
+    status: { type: enum, values: [Active, Pending, Struck, Flagged, Disabled], default: Active }
+    score: { type: integer(4), default: 0 }
+    user_id: integer(4)
+  indexes:
+    userIndex:         { fields: [user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: Specifications
+      onDelete: CASCADE
+
+CategorySpecification:
+  options:
+    symfony:
+      form:   false
+      filter: false
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    category_id: integer(4)
+    specification_id: integer(4)
+    status: { type: enum, values: [Active, Pending, Struck, Flagged, Disabled], default: Active }
+  indexes:
+    categoryIndex:         { fields: [category_id] }
+  relations:
+    Category:
+      local: category_id
+      foreignAlias: Specifications
+      onDelete: CASCADE
+    Specification:
+      local: specification_id
+      foreignAlias: Categories
+      onDelete: CASCADE
+
+LimelightSpecification:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  actAs:
+    Sluggable:
+      fields: [content]
+      name: content_slug
+  columns:
+    content: { type: string(150) }
+    score: { type: integer(4), default: 0 }
+    source_url:
+      type: string(255)
+      default: null
+    source_id: integer(4)
+    specification_id: integer(4)
+    slice_id: integer(4)
+    item_id: integer(4)
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: LimelightSpecifications
+      onDelete: CASCADE
+    Specification:
+      local: specification_id
+      foreignAlias: LimelightSpecifications
+      onDelete: CASCADE
+    Source:
+      class: Limelight
+      local: source_id
+      foreignAlias: Specifications
+    Item:
+      class: Limelight
+      local: item_id
+      foreignAlias: Specifications
+      onDelete: CASCADE
+
+#############
+# END SPECIFICATIONS
+#############
+
+News:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  actAs:
+    Sluggable:
+      fields: [title]
+      name: title_slug
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+    content:
+      type: string(2000)
+      notnull: true
+    news_image:
+      type: string(255)
+      default: news_profile_default.gif
+    score:
+      type: integer(4)
+      default: 0
+      notnull: true
+    total_views:
+      type: integer(4)
+      default: 0
+    favorited_count:
+      type: integer(4)
+      default: 0
+    favorite_badge_flag: { type: integer(1), default: 0 }
+    tag_lock:
+      type: integer(3)
+      default: 0
+    comment_lock:
+      type: integer(3)
+      default: 0
+    user_id: integer(4)
+  indexes:
+    index:                { fields: [user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: News
+      onDelete: CASCADE
+
+LimelightNews:
+  columns:
+    limelight_id: integer(4)
+    news_id: integer(4)
+  relations:
+    Limelight:
+      local: limelight_id
+      foreign: id
+      foreignAlias: LimelightNews
+      onDelete: CASCADE
+    News:
+      local: news_id
+      foreign: id
+      foreignAlias: NewsLimelights
+      onDelete: CASCADE
+
+#########
+# LINKS
+#########
+
+NewsLink:
+  actAs:
+    Sluggable:
+      fields: [source_url]
+      name: source_url_slug
+  inheritance:
+    type:             concrete
+    extends:          Item
+  columns:
+    source_url: { type: string(255), unique: true }
+    score: { type: integer(4), default: 0 }
+    item_id: integer(4)
+    source_id: integer(4)
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: NewsLinks
+      onDelete: CASCADE
+    Source:
+      class: Limelight
+      local: source_id
+      foreignAlias: NewsLinks
+      onDelete: CASCADE
+    Item:
+      class: News
+      local: item_id
+      foreignAlias: Links
+      onDelete: CASCADE
+
+#############
+# COMMENT
+#############
+
+Comment:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  actAs: { Timestampable: ~ }
+  columns:
+    content:
+      type: string(1000)
+      notnull: true
+    score:
+      type: integer(4)
+      default: 0
+      notnull: true
+    type:
+      type: enum
+      values: [News, LimelightReviewUser, LimelightReviewPro, Wiki]
+      notnull: true
+    parent_id: integer(4)
+    edited:
+      type: integer(2)
+      default: 0
+      notnull: true
+    user_id: integer(4)
+    News_id: { type: integer(4), default: null }
+    Wiki_id: { type: integer(4), default: null }
+    LimelightReviewUser_id: { type: integer(4), default: null }
+    LimelightReviewPro_id: { type: integer(4), default: null }
+  indexes:
+    index:                { fields: [user_id] }
+    parentIndex:          { fields: [parent_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: Comments
+      onDelete: CASCADE
+    Parent:
+      class: Comment
+      local: parent_id
+      foreign: id
+      foreignAlias: Children
+      onDelete: CASCADE
+    News:
+      local: News_id
+      foreignAlias: Comments
+      onDelete: CASCADE
+    LimelightReviewUser:
+      local: LimelightReviewUser_id
+      foreignAlias: Comments
+      onDelete: CASCADE
+    LimelightReviewPro:
+      local: LimelightReviewPro_id
+      foreignAlias: Comments
+      onDelete: CASCADE
+    Wiki:
+      local: Wiki_id
+      foreignAlias: Comments
+      onDelete: CASCADE
+
+#############
+# TAGS
+#############
+
+Tag:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+    Sluggable:
+      fields: [name]
+      name: name_slug
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    name: { type: string(50) }
+    status: { type: enum, values: [Active, Pending, Struck, Flagged, Disabled], default: Active }
+    score: { type: integer(4), default: 0 }
+    user_id: integer(4)
+  indexes:
+    userIndex:         { fields: [user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: NewTags
+      onDelete: CASCADE
+
+NewsTag:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  columns:
+    score: { type: integer(4), default: 0 }
+    tag_id: integer(4)
+    item_id: integer(4)
+  indexes:
+    itemIndex:         { fields: [item_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: NewsTags
+      onDelete: CASCADE
+    Tag:
+      local: tag_id
+      foreignAlias: NewsTags
+      onDelete: CASCADE
+    Item:
+      class: News
+      local: item_id
+      foreignAlias: Tags
+      onDelete: CASCADE
+
+#############
+# END TAG
+#############
+
+UserAction:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    Limelight_id: { type: integer(4), default: null }
+    News_id: { type: integer(4), default: null }
+    Comment_id: { type: integer(4), default: null }
+    LimelightProCon_id: { type: integer(4), default: null }
+    Wiki_id: { type: integer(4), default: null }
+    LimelightReviewUser_id: { type: integer(4), default: null }
+    LimelightReviewPro_id: { type: integer(4), default: null }
+    LimelightSpecification_id: { type: integer(4), default: null }
+    NewsTag_id: { type: integer(4), default: null }
+    type: string(30)
+    user_id: integer(4)
+    status: { type: enum, values: [Active, Pending, Flagged, Struck, Disabled], default: Active }
+  indexes:
+    userIndex:      { fields: [user_id] }
+    itemIndex:      { fields: [type] }
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: Actions
+    Limelights:
+      class: Limelight
+      local: Limelight_id
+    News:
+      class: News
+      local: News_id
+    Comments:
+      class: Comment
+      local: Comment_id
+    LimelightProcons:
+      class: LimelightProCon
+      local: LimelightProCon_id
+    Wikis:
+      class: Wiki
+      local: Wiki_id
+    LimelightUserReviews:
+      class: LimelightReviewUser
+      local: LimelightReviewUser_id
+    LimelightProReviews:
+      class: LimelightReviewPro
+      local: LimelightReviewPro_id
+    LimelightSpecifications:
+      class: LimelightSpecification
+      local: LimelightSpecification_id
+
+Badge:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+    Sluggable:
+      fields: [name]
+      name: name_slug
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    name: { type: string(255) }
+    description: { type: string(255) }
+    type: { type: string(100) }
+    image_name: { type: string(255), default: null }
+    status: { type: string(50), default: 'Active' }
+
+BadgeLevel:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    level: { type: integer(3) }
+    num_required: { type: integer(4) }
+    badge_id: { type: integer(4) }
+  indexes:
+    badgeIndex:           { fields: [badge_id] }
+  relations:
+    Badge:
+      class: Badge
+      local: badge_id
+      foreignAlias: BadgeLevels
+      onDelete: CASCADE
+
+UserBadge:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    num_completed: { type: integer(4, default: 0 }
+    level_completed: { type: integer(4), default: 0 }
+    user_id: { type: integer(4) }
+    badge_id: { type: integer(4) }
+  indexes:
+    userIndex:       { fields: [user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: Badges
+      onDelete: CASCADE
+    Badge:
+      class: Badge
+      local: badge_id
+      foreignAlias: UserBadges
+      onDelete: CASCADE
+
+LimelightOwn:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    item_id:           { type: integer(4) }
+    user_id:           { type: integer(4) }
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreign: id
+    Item:
+      class: Limelight
+      local: item_id
+      foreignAlias: Owned
+      onDelete: CASCADE
+
+LimelightProCon:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  actAs:
+    Sluggable:
+      fields: [name]
+      name: name_slug
+  columns:
+    name:
+      type: string(255)
+      notnull: true
+    score:
+      type: integer(4)
+      default: 0
+      notnull: true
+    type:
+      type: enum
+      values: [pro, con]
+    item_id: integer(4)
+    user_id: integer(4)
+  indexes:
+    itemIndex:                { fields: [item_id] }
+    userIndex:                { fields: [user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+    Item:
+      class: Limelight
+      local: item_id
+      foreignAlias: LimelightProCons
+      onDelete: CASCADE
+
+# holds the different types of scores relevant to each category
+# for example video games would have graphics, sound, gameplay etc.
+CategoryScoreType:
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    category_id: integer(4)
+    title: string(50)
+    description: string(500)
+  relations:
+    Category:
+      local: category_id
+      onDelete: CASCADE
+      foreignAlias: ScoreTypes
+
+LimelightReviewScorePart:
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    category_score_type_id: integer(4)
+    review_id: integer(4)
+    score: integer(3)
+  relations:
+    CategoryScoreType:
+      local: category_score_type_id
+      onDelete: CASCADE
+      foreignAlias: Parts
+    LimelightReviewUser:
+      local: review_id
+      onDelete: CASCADE
+      foreignAlias: Parts
+
+LimelightReviewPro:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  columns:
+    user_id: integer(4)
+    item_id: integer(4)
+    excerpt: string(255)
+    source_url: string(255)
+    score:
+      type: integer(4)
+      default: 0
+    review_score_given: integer(3)
+    review_score_max: integer(3)
+    source_id: integer(4)
+  indexes:
+    index:                { fields: [item_id, user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      onDelete: CASCADE
+      foreignAlias: ProReviews
+    Item:
+      class: Limelight
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: ProReviews
+    Source:
+      class: Limelight
+      local: source_id
+      onDelete: CASCADE
+      foreignAlias: ProReviews
+
+LimelightReviewUser:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  columns:
+    user_id: integer(4)
+    item_id: integer(4)
+    title: string(255)
+    content: string(1000)
+    score:
+      type: integer(4)
+      default: 0
+    review_score:
+      type: integer(3)
+      default: 0
+    edited:
+      type: integer(2)
+      default: 0
+      notnull: true
+  indexes:
+    index:                { fields: [item_id, user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      onDelete: CASCADE
+      foreignAlias: UserReviews
+    Item:
+      class: Limelight
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: UserReviews
+
+##################
+# FAVORITES
+##################
+
+Favorite:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    user_id: integer(4)
+    item_id: integer(4)
+  indexes:
+    userIndex:           { fields: [user_id] }
+    itemIndex:           { fields: [item_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: Favorites
+
+NewsFavorite:
+  inheritance:
+    type:             concrete
+    extends:          Favorite
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: NewsFavorites
+    Item:
+      class: News
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Favorited
+
+LimelightFavorite:
+  inheritance:
+    type:             concrete
+    extends:          Favorite
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: LimelightFavorites
+    Item:
+      class: Limelight
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Favorited
+
+ProReviewFavorite:
+  inheritance:
+    type:             concrete
+    extends:          Favorite
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: UserReviewFavorites
+    Item:
+      class: LimelightProReview
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Favorited
+
+UserReviewFavorite:
+  inheritance:
+    type:             concrete
+    extends:          Favorite
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: UserReviewFavorites
+    Item:
+      class: LimelightUserReview
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Favorited
+
+
+
+##################
+# END FAVORITES
+##################
+
+##########
+# VIEWS
+##########
+
+View:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    count: { type: integer(4), default: 1 }
+    user_id: { type: integer(4) }
+  indexes:
+    userIndex:           { fields: [user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: Viewed
+
+UserView:
+  inheritance:
+    type:             concrete
+    extends:          View
+  columns:
+    target_user_id: integer(4)
+  indexes:
+    targetUserindex:                { fields: [target_user_id] }
+  relations:
+    Item:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: target_user_id
+      foreignAlias: Views
+
+LimelightView:
+  inheritance:
+    type:             concrete
+    extends:          View
+  columns:
+    item_id: integer(4)
+  indexes:
+    limelightIndex:                { fields: [item_id] }
+  relations:
+    Item:
+      class: Limelight
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Views
+
+NewsView:
+  inheritance:
+    type:             concrete
+    extends:          View
+  columns:
+    item_id: integer(4)
+  indexes:
+    newsIndex:                { fields: [item_id] }
+  relations:
+    Item:
+      class: News
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Views
+
+SourceView:
+  inheritance:
+    type:             concrete
+    extends:          View
+  columns:
+    item_id: integer(4)
+  indexes:
+    sourceIndex:                { fields: [item_id] }
+  relations:
+    Item:
+      class: Limelight
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Views
+
+###############
+# END VIEWS
+###############
+
+################
+# SCORES
+################
+
+UserScore:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    amount: { type: integer(3), default: 1 }
+    type:
+      type: enum
+      values: [News, Comment, NewsTag, LimelightProCon, LimelightReviewPro, LimelightReviewUser, LimelightSpecification, LimelightWiki]
+    status:
+      type: enum
+      values: [Flagged, Struck, Disabled, Active]
+      default: Active
+    item_id: integer(4)
+    user_id: integer(4)
+    target_user_id: { type: integer(4), default: null }
+  indexes:
+    userindex:                { fields: [user_id, item_id] }
+  relations:
+    Rater: { class: sfGuardUser, onDelete: CASCADE, local: user_id, foreignAlias: Scored }
+    TargetUser: { class: sfGuardUser, onDelete: CASCADE, local: target_user_id, foreignAlias: Scores }
+
+LimelightScore:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    amount: { type: integer(3), default: 1 }
+    item_id: integer(4)
+    type:
+      type: enum
+      values: [News, Wiki, LimelightReviewUser, LimelightReviewPro, LimelightProCon, LimelightSpecification]
+    status:
+      type: enum
+      values: [Flagged, Struck, Disabled, Active]
+      default: Active
+    contributing_item_id:
+      type: integer(4)
+      default: null
+    user_id:
+      type: integer(4)
+      default: null
+  indexes:
+    limelightIndex:                { fields: [item_id] }
+    userIndex:                     { fields: [user_id] }
+  relations:
+    Item:
+      class: Limelight
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+Score:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    amount: { type: integer(3), default: 1 }
+    status:
+      type: enum
+      values: [Flagged, Struck, Disabled, Active]
+      default: Active
+    user_id: integer(4)
+    target_user_id: { type: integer(4), default: null }
+    item_id: integer(4)
+  indexes:
+    userIndex:    { fields: [user_id] }
+    itemIndex:    { fields: [item_id] }
+  relations:
+    Rater: { class: sfGuardUser, onDelete: CASCADE, local: user_id, foreignAlias: Scored }
+    TargetUser: { class: sfGuardUser, onDelete: CASCADE, local: target_user_id, foreignAlias: Scores }
+
+NewsScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: News
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+CommentScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: Comment
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+NewsTagScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: NewsTag
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+LimelightProConScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: LimelightProCon
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+LimelightReviewProScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: LimelightReviewPro
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: scores
+
+LimelightReviewUserScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: LimelightReviewUser
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+NewsLinkScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: NewsLink
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+WikiScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: Wiki
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+LimelightSpecificationScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: LimelightSpecification
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+################
+# END SCORES
+################
+
+##############
+# FLAGS
+##############
+
+Flag:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    type:
+      type: enum
+      values: [Duplicate, Wrong Limelight, Spam, Broken Link, Innapropriate, Other]
+    user_id: integer(4)
+    item_id: integer(4)
+  indexes:
+    userIndex:           { fields: [user_id] }
+    itemIndex:           { fields: [item_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: Flags
+
+NewsFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: News
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Flags
+
+CommentFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: Comment
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Flags
+
+LimelightSpecificationFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: LimelightSpecification
+      local: item_id
+      foreignAlias: Flags
+      onDelete: CASCADE
+
+LimelightWikiFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: LimelightWiki
+      local: item_id
+      foreignAlias: LimelightWikiFlags
+      onDelete: CASCADE
+      foreignAlias: Flags
+
+LimelightReviewProFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: LimelightReviewPro
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Flags
+
+LimelightReviewUserFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: LimelightReviewUser
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Flags
+
+LimelightProConFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: LimelightProCon
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Flags
+
+NewsTagFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: NewsTag
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Flags
+
+NewsLinkFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: NewsLink
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Flags
+
+WikiFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: Wiki
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Flags
+
+#############
+# END FLAGS
+#############
+
+UserNotification:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    message: { type: string(255) }
+    type: { type: enum, values: [misc, badge, moderator] }
+    is_read: { type: integer(1), default: 0 }
+    user_id: { type: integer(4) }
+  indexes:
+    userIndex:           { fields: [user_id] }
+  relations:
+    User: { class: sfGuardUser, onDelete: CASCADE, local: user_id, foreignAlias: Notifications }
+
+UserStrike:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    type: { type: string(50) }
+    status: { type: string(50), default: 'Active' }
+    user_id: { type: integer(4) }
+  indexes:
+    userIndex:           { fields: [user_id] }
+  relations:
+    User: { class: sfGuardUser, onDelete: CASCADE, local: user_id, foreignAlias: Strikes }
+
+BetaEmail:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    email:
+      type: string(255)
+      notnull: true
+      email: true
+    ip:
+      type: string(50)
+      notnull: true
+
+BetaGiveaway:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    guess:
+      type: string(255)
+      notnull: true
+    group_code: integer
+    beta_email_id: integer
+  relations:
+    BetaEmail: { onDelete: CASCADE, local: beta_email_id, foreignAlias: GiveawayEntries }
+
+UserRevenue:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    amount: float
+    popularity: integer(4)
+    status:
+      type: enum
+      values: [Active, Pending, Flagged, Struck, Disabled]
+      default: Active
+    claimed: { type: bool, default: 0 }
+    claim_date: { type: datetime }
+    paypal_invoice: { type: string(255) }
+    user_id: { type: integer(4) }
+  indexes:
+    userIndex:           { fields: [user_id] }
+  relations:
+    User: { class: sfGuardUser, onDelete: CASCADE, local: user_id, foreignAlias: Revenue }

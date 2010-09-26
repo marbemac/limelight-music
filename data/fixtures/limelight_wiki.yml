@@ -1,0 +1,105 @@
+#LimelightWiki:
+#  wiki_iphone1:
+#    content: |
+#      This is some test content for the iphone wiki.
+#    version: 1
+#  wiki_iphone2:
+#    content: |
+#      The interface is based around the Home screen, a graphical list of
+#      available applications. iPhone apps normally run one at a time (although
+#      most functionality is still available when making a call). The home
+#      screen can be accessed at any time by a hardware button, closing the open
+#      application in the process.[39] By default, the Home screen contains the
+#      following icons: Text (SMS messaging), Calendar, Photos, Camera, YouTube,
+#      Stocks, Maps (Google Maps), Weather, Clock, Calculator, Notes, Settings,
+#      iTunes (store), and App Store. Four other applications, docked at the
+#      base of the screen, delineate the iPhone's main purposes: Phone, Mail,
+#      Safari (Internet), and iPod (music).[40] On January 15, 2008, Apple
+#      released software update 1.1.3 which allowed users create "Web Clips,"
+#      icons on the home screen that resemble apps that open a user-defined page
+#      in Safari. Since that update, users have been allowed to rearrange icons
+#      and place them on other adjacent home screens (up to nine), which can be
+#      accessed by a horizontal swipe.[41] Users can also add and remove icons
+#      from the dock, which does not change with the home screen. Each home
+#      screen holds up to sixteen icons and the dock holds up to four.
+#    version: 2
+#    active: true
+#
+#  wiki_storm1:
+#    content: |
+#      This is some test content for the STORM wiki.
+#    version: 1
+#    active: true
+
+#Wiki:
+#  w_phone1:
+#    topics: phones
+#    content: |
+#      <p>This is test content for the phone wiki The word, <b>phone</b>, should be
+#      bold.</p>
+#    version: 1
+#    note: initial wiki submit
+#    edit_type: major
+#    is_active: 0
+#    group_id: 1
+#  w_phone2:
+#    topics: phones
+#    content: |
+#      <p>This is test content for the phone wiki. The word, <b>phone</b>, should be
+#      bold.</p>
+#    version: 2
+#    note: corrected punctuation mistake
+#    edit_type: minor
+#    is_active: 0
+#    group_id: 1
+#  w_phone3:
+#    topics: phones
+#    content: |
+#      <p>This is test content for the phone wiki. The word, <b>phone</b>, should be
+#      bold.</p><p>I added a bunch of content, this is a major edit!</p>
+#    version: 3
+#    note: added a new line about new content
+#    edit_type: major
+#    is_active: 1
+#    group_id: 1
+#
+#  w_iphone1:
+#    topics: iphone
+#    content: |
+#      <p>Here is some iphone wiki specific content.</p>
+#    version: 1
+#    note: initial wiki submit
+#    edit_type: major
+#    is_active: 0
+#    group_id: 2
+#  w_iphone2:
+#    topics: iphone
+#    content: |
+#      <p>Here is some iphone wiki specific content. The 3GS is the latest revision
+#      of the iPhone. Content. There are many instances of the word 'content' in this
+#      segment, content content content.</p>
+#    version: 2
+#    note: added a new line about the 3Gs
+#    edit_type: major
+#    is_active: 1
+#    group_id: 2
+#
+#LimelightWiki:
+#  lw_storm1:
+#    wiki_group_id: 1
+#    order_id: 1
+#    Limelight: lime_storm
+#
+#  lw_iphone1:
+#    wiki_group_id: 1
+#    order_id: 1
+#    Limelight: lime_iphone
+#  lw_iphone2:
+#    wiki_group_id: 2
+#    order_id: 2
+#    Limelight: lime_iphone
+
+
+
+
+    

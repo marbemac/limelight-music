@@ -1,0 +1,46 @@
+test:
+  default:
+    class: sfDoctrineDatabase
+    param:
+      dsn:      mysql:host=localhost;dbname=limelight
+      username: evario
+      password: sTrNMYx7tMALDfve
+
+staging:
+  default:
+    class: sfDoctrineDatabase
+    param:
+      dsn:      mysql:host=localhost;dbname=limelight_staging
+      username: evario
+      password: sTrNMYx7tMALDfve
+
+all:
+  default:
+    class: sfDoctrineDatabase
+    param:
+      dsn:      mysql:host=localhost;dbname=limelight
+      username: evario
+      password: sTrNMYx7tMALDfve
+
+#dev:
+#  propel:
+#    param:
+#      classname:  DebugPDO
+#
+#test:
+#  propel:
+#    param:
+#      classname:  DebugPDO
+#
+#all:
+#  propel:
+#    class:        sfPropelDatabase
+#    param:
+#      classname:  PropelPDO
+#      dsn:        mysql:dbname=limelight;host=localhost
+#      username:   root
+#      password:   
+#      encoding:   utf8
+#      persistent: true
+#      pooling:    true
+

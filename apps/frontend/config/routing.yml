@@ -1,0 +1,793 @@
+# user rules
+user_add_beta_email:
+  url:   /beta/addEmail
+  param: { module: user, action: addBetaEmail }
+
+user_beta_access:
+  url:   /beta/access
+  param: { module: user, action: betaAccess }
+
+user_beta_giveaway:
+  url:   /beta/giveaway
+  param: { module: user, action: betaGiveaway }
+
+user_new:
+  url:   /users/new
+  param: { module: user, action: new }
+
+user_create:
+  url:  /users/create
+  param: { module: user, action: create }
+
+user_created:
+  url:  /users/createSuccess
+  param: { module: user, action: created }
+
+user_validate:
+  url:   /users/validate/:username/:code
+  param: { module: user, action: validate }
+
+user_username_change:
+  url:   /users/changeUsername
+  param: { module: user, action: changeUsername }
+
+user_setting_update:
+  url:   /users/updateSetting
+  param: { module: user, action: updateSetting }
+
+user_image_update:
+  url:   /users/updateImage/:id
+  param: { module: user, action: updateImage }
+  requirements:
+    id: \d+
+    
+user_follow_box:
+  url:  /users/followBox/:id
+  param: { module: content, action: followBox, item_type: User }
+
+User_follow:
+  url:  /users/follow/:id
+  param: { module: content, action: follow, item_type: User }
+
+User_unfollow:
+  url:  /users/unfollow/:id
+  param: { module: content, action: unfollow, item_type: User }
+
+user_password_reset:
+  url:   /users/password_reset/:username/:code
+  param: { module: sfGuardAuth, action: passwordReset }
+
+signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /users/request_password
+  param: { module: sfGuardAuth, action: password }
+
+user_clear_notifications:
+  url:   /users/clear_notifications
+  param: { module: user, action: clearNotifications }
+
+user_delete_notification:
+  url:   /users/delete_notification/:id
+  param: { module: user, action: deleteNotification }
+  requirements:
+    id: \d+
+
+user_redeem:
+  url:  /users/redeem
+  param: { module: user, action: paypalClaimRedeem }
+
+user_tab:
+  url:   /users/tabs/:username
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: tab, page: tab }
+
+user_badge:
+  url:   /users/:username/badges
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: badge }
+
+user_stat_revenue:
+  url:   /users/:username/statsrevenue
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: statRevenue }
+
+user_following:
+  url:   /users/:username/user_following
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: followingUser }
+
+lime_following:
+  url:   /users/:username/lime_following
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: followingLimelight }
+
+user_favorited:
+  url:   /users/:username/favorited
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: favorited }
+
+user_settings:
+  url:   /users/:username/settings
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: settings }
+
+user_minifeed_more:
+  url:   /users/:username/:page
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: minifeedMore }
+
+user_following_more:
+  url:   /users/:username/user_following/:page
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: followingUserMore }
+
+lime_following_more:
+  url:   /users/:username/lime_following/:page
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: followingLimelightMore }
+
+user_favorited_more:
+  url:   /users/:username/favorited/:page
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: favoritedMore }
+
+user_show:
+  url:   /users/:username
+  class: sfDoctrineRoute
+  options: { model: sfGuardUser, type: object }
+  param: { module: user, action: minifeed }
+
+# news rules
+news_add:
+  url:   /news/add
+  param: { module: news, action: add }
+
+news_add_process:
+  url:   /news/add/process
+  param: { module: news, action: processAdd }
+
+news_add_upload_image:
+  url:   /news/add/image_upload
+  param: { module: news, action: uploadImage }
+
+news_lookup:
+  url:   /news/lookup
+  param: { module: news, action: lookup }
+
+news_tag_add:
+  url: /news/tags/add/:news_id
+  param: { module: news, action: addTag }
+
+news_tag_rate_box:
+  url:  /news/tags/rateBox/:id
+  param: { module: content, action: rateBox, item_type: NewsTag }
+  requirements:
+    id: \d+
+
+NewsTag_update_score:
+  url:  /news/tags/updateScore/:id/:d
+  param: { module: content, action: updateScore, item_type: NewsTag }
+  requirements:
+    id: \d+
+
+news_tag_flag_box:
+  url:  /news/tags/flagBox/:id
+  param: { module: content, action: flagBox, item_type: NewsTag }
+  requirements:
+    id: \d+
+
+NewsTag_flag:
+  url:  /news/tags/flag/:id
+  param: { module: content, action: flag, item_type: NewsTag }
+  requirements:
+    id: \d+
+
+news_link_add:
+  url:   /news/links/add/:item_id
+  param: { module: news, action: linkAdd }
+  requirements:
+    item_id: \d+
+
+news_link_rate_box:
+  url:  /news/links/rateBox/:id
+  param: { module: content, action: rateBox, item_type: NewsLink }
+
+NewsLink_update_score:
+  url:  /news/links/updateScore/:id/:d
+  param: { module: content, action: updateScore, item_type: NewsLink }
+
+news_link_flag_box:
+  url:  /news/links/flagBox/:id
+  param: { module: content, action: flagBox, item_type: NewsLink }
+  requirements:
+    id: \d+
+
+NewsLink_flag:
+  url:  /news/links/flag/:id
+  param: { module: content, action: flag, item_type: NewsLink }
+  requirements:
+    id: \d+
+
+news_rate_box:
+  url:  /news/rateBox/:id
+  param: { module: content, action: rateBox, item_type: News }
+
+News_update_score:
+  url:  /news/updateScore/:id/:d
+  param: { module: content, action: updateScore, item_type: News }
+
+news_flag_box:
+  url:  /news/flagBox/:id
+  param: { module: content, action: flagBox, item_type: News }
+  requirements:
+    id: \d+
+
+News_flag:
+  url:  /news/flag/:id
+  param: { module: content, action: flag, item_type: News }
+  requirements:
+    id: \d+
+
+news_favorite_box:
+  url:  /news/favoriteBox/:id
+  param: { module: content, action: favoriteBox, item_type: News }
+  requirements:
+    id: \d+
+
+News_favorite:
+  url:  /news/favorite/:id
+  param: { module: content, action: favorite, item_type: News }
+  requirements:
+    id: \d+
+
+News_unfavorite:
+  url:  /news/unfavorite/:id
+  param: { module: content, action: unfavorite, item_type: News }
+  requirements:
+    id: \d+
+
+news_disable:
+  url:   /news/disable/:item_id
+  param: { module: content, action: disable, item_type: News }
+
+news_tag_lock:
+  url:   /news/tagLock/:item_id
+  param: { module: content, action: lockFunction, item_type: News, lock: tag_lock }
+  requirements:
+    item_id: \d+
+
+news_comment_lock:
+  url:   /news/commentLock/:item_id
+  param: { module: content, action: lockFunction, item_type: News, lock: comment_lock }
+  requirements:
+    item_id: \d+
+
+news_show:
+  url:   /news/:title_slug
+  param: { module: news, action: show }
+
+# comment rules
+comment_add_form:
+  url:   /comments/add/form/:type/:item_id
+  param: { module: comment, action: addForm }
+
+comment_add:
+  url:   /comments/add/:type/:item_id/:parent_id
+  param: { module: comment, action: add }
+
+comment_rate_box:
+  url:  /comments/rateBox/:id
+  param: { module: content, action: rateBox, item_type: Comment }
+
+Comment_update_score:
+  url:  /comments/updateScore/:id/:d
+  param: { module: content, action: updateScore, item_type: Comment }
+
+comment_flag_box:
+  url:  /comments/flagBox/:id
+  param: { module: content, action: flagBox, item_type: Comment }
+  requirements:
+    id: \d+
+
+Comment_flag:
+  url:  /comments/flag/:id
+  param: { module: content, action: flag, item_type: Comment }
+  requirements:
+    id: \d+
+
+comment_disable:
+  url:   /comments/disable/:item_id
+  param: { module: content, action: disable, item_type: Comment }
+
+comment_update:
+  url:   /comments/update
+  param: { module: comment, action: update }
+
+# wiki rules
+wiki_load_editor:
+  url:   /wikis/loadEditor/:id
+  param: { module: wiki, action: loadEditor }
+  requirements:
+    id: \d+
+
+wiki_update_editor:
+  url:   /wikis/updateEditor/:id
+  param: { module: wiki, action: updateEditor }
+  requirements:
+    id: \d+
+
+wiki_unload_editor:
+  url:   /wikis/unloadEditor/:id
+  param: { module: wiki, action: unloadEditor }
+  requirements:
+    id: \d+
+
+wiki_save_revision:
+  url:   /wikis/save/:id
+  param: { module: wiki, action: save }
+  requirements:
+    id: \d+
+
+wiki_resort:
+  url:   /wikis/resort
+  param: { module: wiki, action: resort }
+
+wiki_new_segment:
+  url:   /wikis/new/:ll_id
+  param: { module: wiki, action: newSegment }
+  requirements:
+    ll_id: \d+
+
+wiki_find_segments:
+  url:   /wikis/search
+  param: { module: wiki, action: findSegments }
+
+wiki_segment:
+  url:   /wikis/segment/:id
+  param: { module: wiki, action: getSegment }
+  requirements:
+    id: \d+
+
+wiki_segment_unlink:
+  url:   /wikis/segment/unlink/:id
+  param: { module: wiki, action: unlinkSegment }
+  requirements:
+    id: \d+
+
+wiki_segment_link:
+  url:   /wikis/segment/link/:ll_id/:group_id
+  param: { module: wiki, action: linkSegment }
+  requirements:
+    ll_id: \d+
+    group_id: \d+
+
+wiki_history:
+  url:   /wikis/history/:group_id/:page
+  param: { module: wiki, action: history, page: 1 }
+  requirements:
+    group_id: \d+
+
+wiki_revision:
+  url:   /wikis/revision/:item_id
+  param: { module: wiki, action: revision }
+  requirements:
+    group_id: \d+
+    id: \d+
+
+wiki_rate_box:
+  url:  /wikis/rateBox/:id
+  param: { module: content, action: rateBox, item_type: Wiki }
+
+Wiki_update_score:
+  url:  /wikis/updateScore/:id/:d
+  param: { module: content, action: updateScore, item_type: Wiki }
+
+wiki_flag_box:
+  url:  /wikis/flagBox/:id
+  param: { module: content, action: flagBox, item_type: Wiki }
+  requirements:
+    id: \d+
+
+Wiki_flag:
+  url:  /wikis/flag/:id
+  param: { module: content, action: flag, item_type: Wiki }
+  requirements:
+    id: \d+
+
+wiki_revert:
+  url:   /wikis/revert/:group_id/:item_id
+  param: { module: wiki, action: revert }
+  requirements:
+    item_id: \d+
+    group_id: \d+
+
+
+
+
+
+
+
+
+
+
+
+
+
+wiki_disable:
+  url:   /disableWiki
+  param: { module: limelight, action: disableWiki }
+
+wiki_lock:
+  url:   /wikiLock
+  param: { module: limelight, action: lockWiki }
+
+# search rules
+populate_lime_companies_ac:
+  url:   /limelights/companies/ac
+  param: { module: search, action: populateCompanies, type: ac }
+populate_sources_ac:
+  url:   /sources/ac
+  param: { module: search, action: populateSources, type: ac }
+populate_lime_specifications_ac:
+  url:   /limelights/specifications/ac
+  param: { module: search, action: populateSpecifications, type: ac }
+populate_lime_pros_ac:
+  url:   /limelights/pros/ac
+  param: { module: search, action: populateProsCons, type: ac, item_type: pro }
+populate_lime_cons_ac:
+  url:   /limelights/cons/ac
+  param: { module: search, action: populateProsCons, type: ac, item_type: con }
+populate_specifications_ac:
+  url:   /specifications/ac
+  param: { module: search, action: populateLimeSpecifications, type: ac }
+populate_limelights_ac:
+  url:   /searchAhead/limelights/ac
+  param: { module: search, action: populateLimelights, type: ac }
+populate_limelights_tbl:
+  url:   /searchAhead/limelights/tbl
+  param: { module: search, action: populateLimelights, type: tbl }
+populate_users_ac:
+  url:   /searchAhead/users/ac
+  param: { module: search, action: populateUsers, type: ac }
+populate_users_tbl:
+  url:   /searchAhead/users/tbl
+  param: { module: search, action: populateUsers, type: tbl }
+populate_tags_ac:
+  url:   /searchAhead/tags/ac
+  param: { module: search, action: populateTags, type: ac }
+populate_tags_tbl:
+  url:   /searchAhead/tags/tbl
+  param: { module: search, action: populateTags, type: tbl }
+populate_specs_ac:
+  url:   /searchAhead/specs/ac
+  param: { module: search, action: populateSpecs, type: ac }
+power_search:
+  url:   /powerSearch
+  param: { module: search, action: powerSearch, type: filter }
+power_compare:
+  url:   /powerCompare
+  param: { module: search, action: powerSearch, type: compare }
+basic_search:
+  url:   /basicSearch
+  param: { module: search, action: basicSearch }
+tag_searchahead:
+  url:   /tags/searchahead
+  param: { module: content, action: tagSearchahead }
+
+# limelight rules
+lime_rate_box:
+  url:  /limelights/rateBox/:id
+  param: { module: content, action: rateBox, item_type: Limelight }
+
+Limelight_update_score:
+  url:  /limelights/updateScore/:id/:d
+  param: { module: content, action: updateScore, item_type: Limelight }
+
+lime_suggest:
+  url:   /limelights/suggest
+  param: { module: limelight, action: suggest }
+
+lime_suggest_process:
+  url:   /limelights/suggest/process
+  param: { module: limelight, action: processSuggest }
+
+lime_approve:
+  url:   /limelights/approve/:id
+  param: { module: limelight, action: approve }
+  requirements:
+    id: \d+
+
+lime_check:
+  url:   /limelights/check
+  param: { module: limelight, action: check }
+
+limelight_favorite_box:
+  url:  /limelights/favoriteBox/:id
+  param: { module: content, action: favoriteBox, item_type: Limelight }
+  requirements:
+    id: \d+
+
+Limelight_favorite:
+  url:  /limelights/favorite/:id
+  param: { module: content, action: favorite, item_type: Limelight }
+  requirements:
+    id: \d+
+
+Limelight_unfavorite:
+  url:  /limelights/unfavorite/:id
+  param: { module: content, action: unfavorite, item_type: Limelight }
+  requirements:
+    id: \d+
+
+lime_follow_box:
+  url:  /limelights/followBox/:id
+  param: { module: content, action: followBox, item_type: Limelight }
+
+Limelight_follow:
+  url:  /limelights/follow/:id
+  param: { module: content, action: follow, item_type: Limelight }
+
+Limelight_unfollow:
+  url:  /limelights/unfollow/:id
+  param: { module: content, action: unfollow, item_type: Limelight }
+
+Limelight_update_score:
+  url:  /limelights/updateScore/:id/:d
+  param: { module: content, action: updateScore, item_type: Limelight }
+
+lime_own:
+  url:   /limelights/own/:item_id/:count
+  param: { module: limelight, action: own }
+
+lime_disown:
+  url:   /limelights/disown/:item_id/:count
+  param: { module: limelight, action: disown }
+
+lime_slice_add:
+  url:   /slices/add
+  param: { module: limelight, action: addSlice }
+
+lime_specification_add:
+  url:   /specifications/add
+  param: { module: limelight, action: addSpecification }
+
+lime_specification_show:
+  url:  /specifications/show/:id
+  param: { module: limelight, action: showSpecification }
+
+lime_specification_rate_box:
+  url:  /specifications/rateBox/:id
+  param: { module: content, action: rateBox, item_type: LimelightSpecification }
+
+LimelightSpecification_update_score:
+  url:  /specifications/updateScore/:id/:d
+  param: { module: content, action: updateScore, item_type: LimelightSpecification }
+
+lime_specification_flag_box:
+  url:  /specifications/flagBox/:id
+  param: { module: content, action: flagBox, item_type: LimelightSpecification }
+  requirements:
+    id: \d+
+
+LimelightSpecification_flag:
+  url:  /specifications/flag/:id
+  param: { module: content, action: flag, item_type: LimelightSpecification }
+  requirements:
+    id: \d+
+
+lime_pro_add:
+  url:  /limelights/pros/add
+  param: { module: limelight, action: addProCon, item_type: pro }
+  requirements:
+    id: \d+
+
+lime_con_add:
+  url:  /limelights/cons/add
+  param: { module: limelight, action: addProCon, item_type: con }
+  requirements:
+    id: \d+
+
+lime_proscons_rate_box:
+  url:  /limelights/proscons/score/:id
+  param: { module: content, action: rateBox, item_type: LimelightProCon }
+
+LimelightProCon_update_score:
+  url:  /limelights/proscons/score/:id/:d
+  param: { module: content, action: updateScore, item_type: LimelightProCon }
+
+lime_proscons_flag_box:
+  url:  /limelights/proscons/flagBox/:id
+  param: { module: content, action: flagBox, item_type: LimelightProCon }
+  requirements:
+    id: \d+
+
+LimelightProCon_flag:
+  url:  /limelights/proscons/flag/:id
+  param: { module: content, action: flag, item_type: LimelightProCon }
+  requirements:
+    id: \d+
+
+lime_summary_edit:
+  url:  /limelights/summary/edit/:id
+  param: { module: limelight, action: editSummary }
+  requirements:
+    id: \d+
+
+lime_show:
+  url:   /limelights/:name_slug
+  class: sfDoctrineRoute
+  options: { model: Limelight, type: object }
+  param: { module: limelight, action: show }
+
+lime_show_news:
+  url:   /limelights/:name_slug/news
+  class: sfDoctrineRoute
+  options: { model: Limelight, type: object }
+  param: { module: limelight, action: showNews }
+
+lime_show_news_more:
+  url:  /limelights/:id/news/:page
+  param: { module: limelight, action: showNews }
+  requirements:
+    id: \d+
+    page: \d+
+
+lime_show_products:
+  url:   /limelights/:name_slug/products
+  class: sfDoctrineRoute
+  options: { model: Limelight, type: object }
+  param: { module: limelight, action: showProducts }
+
+lime_show_products_more:
+  url:  /limelights/:id/products/:page
+  param: { module: limelight, action: showProducts }
+  requirements:
+    id: \d+
+    page: \d+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+lime_reviews_show:
+  url:   /limelights/:name_slug/reviews
+  class: sfDoctrineRoute
+  options: { model: Limelight, type: object }
+  param: { module: limelight, action: showReviews }
+
+lime_show_reviews:
+  url:   /limelights/:name_slug/reviews
+  class: sfDoctrineRoute
+  options: { model: Limelight, type: object }
+  param: { module: limelight, action: showReviews }
+
+# reviews
+lime_review_user_new:
+  url:   /limeReviewUserNew
+  param: { module: reviews, action: newUserReview }
+
+lime_review_user_update:
+  url:   /updateReview
+  param: { module: reviews, action: update }
+
+lime_review_user_update_score:
+  url:   /updateLimeReviewUserScore
+  param: { module: reviews, action: updateReviewUserScore }
+
+lime_review_user_ajax:
+  url:   /ajaxLimeReviewUser
+  param: { module: reviews, action: showUserReviews }
+
+# filter rules
+update_filter:
+  url:   /getContent
+  param: { module: content, action: filter }
+  requirements:
+    sf_method: [POST]
+
+# ajax rules
+hide_top_help:
+  url:   /hideTopHelp
+  param: { module: user, action: hideTopHelp }
+
+hide_welcome_splash:
+  url:   /hideWelcomeSplash
+  param: { module: user, action: hideWelcomeSplash }
+
+feed_news_category:
+  url:   /feed/news/:category
+  param: { module: content, action: feed, type: News }
+
+feed_news_category_more:
+  url:   /feed/news/:category/page/:page
+  param: { module: content, action: feed, type: News }
+
+feed_limelight_category:
+  url:   /feed/limelights/:category
+  param: { module: content, action: feed, type: Limelight }
+
+feed_limelight_category_more:
+  url:   /feed/limelights/:category/page/:page
+  param: { module: content, action: feed, type: Limelight }
+
+feed_more:
+  url:   /feed/page/:page
+  param: { module: content, action: feed }
+
+toggle_ajax_feed:
+  url:   /ajaxFeedToggle
+  param: { module: content, action: toggleAjaxFeed }
+
+rankings_ajax:
+  url:   /rAj/:period
+  param: { module: rankings, action: rankingsFeed }
+
+# deal with janrain login/token
+janrain_tokenize:
+  url:   /tokenize
+  param: { module: user, action: tokenize }
+
+# default rules
+authRequired:
+  url: /oops
+  param: { module: sfGuardAuth, action: secure }
+
+limelight_short:
+  url: /limelights/:name_slug
+  class: sfDoctrineRoute
+  options: { model: Limelight, type: object }
+  param: { module: limelight, action: show }
+
+rankings:
+  url: /rankings
+  param: { module: rankings, action: show }
+
+homepage:
+  url:   /
+  param: { module: content, action: feed }
+
+contribute:
+  url:   /contribute
+  param: { module: content, action: contribute }
+
+default_symfony:
+  url:   /symfony/:action/*
+  param: { module: content }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

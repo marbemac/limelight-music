@@ -1,0 +1,4 @@
+tab:
+  enabled: true
+  with_layout: false
+  lifetime: 60

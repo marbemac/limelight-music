@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Tech Limelight Home
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  has_layout:     true
+  layout:         layout
+
+  components:
+    sidebar: [sidebar, default]
+    usernav: [user, login]
+    filter:  [content, none]

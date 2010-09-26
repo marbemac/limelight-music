@@ -1,0 +1,233 @@
+# default values
+test:
+  rpx_tokenize_url:  http://97.107.135.24/frontend_test.php/tokenize
+
+staging:
+  rpx_tokenize_url:  http://97.107.135.24/frontend_staging.php/tokenize
+
+dev:
+  rpx_tokenize_url:  http://limelight/frontend_dev.php/tokenize
+
+all:
+  recaptcha:
+    public_key: 6Lc7ZQQAAAAAADCpgyeO6BbkVTQFUWEYrMb2glxm
+    private_key:  6Lc7ZQQAAAAAAJVe9Dz_zGGxqmpvLFKs2uKegq_Z
+  sf_google_analytics_plugin:
+    enabled:      true
+    profile_id:   UA-6788018-1
+    tracker:      google
+
+  custom_css_version:  4
+  library_css_version: 2
+  custom_js_version:   6
+  library_js_version:  6
+  site_version:        4
+  site_name:          tech limelight
+
+  # used by janrain in sfGuardAuth tokenize function
+  rpx_api_key:          eb14d9c6e438bab0bc18ac214ee3cabfa93124e7
+  rpx_tokenize_url:     http://www.techlimelight.com/tokenize
+  
+  # used by Amazon
+  amazon_access_key_id: AKIAILSKTZKS64ZKOVBQ
+  amazon_associate_id:  1425-1676-1073
+
+  # paypal max claim
+  paypal:
+    max_claim:     2000
+    min_claim:     1
+
+  beta:
+    pass:                    ilovelimelight
+    giveaway_group:          gadgets
+    giveaway_group_code:     2
+    giveaway_product:        Ipod Shuffle
+    giveaway_guess:          MP3 Player
+
+  # flag_val:         minimum number of users that must flag an item before it is removed and flagged for review
+  # ms_*:             minimum score required to perform the action indicated by *
+  # mt_*:             minimum amount of days the user has been registered
+  # score_flag_val:   score at which the item will be automatically removed and flagged for review
+  # dim_val:          score at which to dim the item (because it is rated poorly)
+  # feed_num:         the number of news items to show per 'section' in feeds
+  # tag_num:          the number of tags to show
+  # procon_num:       the max number of pros/cons to show before the 'show more' button
+  # max_char_count:   the maximum number of characters to show before trimming
+  # max_edited:       the maximum number of times a user can edit the item
+  # max_length:       the maximum total length in characters
+  # max_moderated:    the maximum number of limelights a user is allowed to moderate
+
+  mod:
+    1:  0
+    2:  0
+    3:  0
+    4:  0
+    5:  0
+    6:  0
+    7:  2000
+
+  main_feed_num:            20
+
+  topusers_limit:           10
+  topmodusers_limit:        10
+  toplimelights_limit:      10
+
+  tag_sidebar_max:          10
+  tag_name_max_length:      20
+
+  News_score_flag_val:                   -20
+  NewsLink_score_flag_val:               -10
+  LimelightSpecification_score_flag_val: -10
+  NewsTag_score_flag_val:                -10
+  Wiki_score_flag_val:                   -10
+
+  news:
+    image_path:             /uploads/n_stories
+    flag_val:               10
+    ms_add:                 0
+    ms_flag:                0
+    feed_num:               20
+    feed_max_char_count:    200
+    # used on news pages, the number of days in seconds chart info etc should be pulled from
+    chart_stat_pullback:    864000
+    search_limit:           20
+    # the min and max number of tags/limelights that must be attached to a news story that is being submitted
+    add_tags_min:           3
+    add_tags_max:           10
+    add_limelights_min:     1
+    add_limelights_max:     5
+  limelight:
+    image_path:             /uploads/ll_images
+    tag_num:                10
+    procon_max_length:      100
+    procon_flag_val:        10
+    procon_num:             5
+    # used in limelight head, the number of days in seconds status like new news, reviews etc should be pulled from
+    head_stat_pullback:     259200
+    # used in limelight head charts, the number of days in seconds chart info etc should be pulled from
+    chart_stat_pullback:    604800
+    search_limit:           20
+    name_max_length:        40
+    feed_num:               20
+    product_num:            10
+  reviews:
+    # the number of days in seconds a limelight can be reviewed before its release date
+    enable_user_date:       172800
+    enable_pro_date:        604800
+    title_max_length:       50
+    content_max_length:     1000
+    feed_num:               20
+    ms_add:                 0
+  user:
+    profile_image_path:     /uploads/u_profile/
+    max_change:             10
+    feed_num:               15
+    notifications_max:      5
+    # min strikes required before user is suspended
+    strike_min:             5
+    # time in days that strikes count towards a users current strike min
+    strike_time:            30
+    # how long are users suspended for?
+    suspend_until:          10
+    # at what score_positive_count does vote score ratio kick in?
+    score_ratio_threshold:  25
+    # the maximum number of negative_scores a user can do while not scoring anything positive
+    score_negative_max:     15
+    # the minimum positive_score/negative_score a user must maintain
+    score_ratio_min:        .4
+    # the number of claims to show on the revenue page at a time
+    claimlist_max:          10
+
+  comment:
+    # at what score do we dim the comment
+    dim_val:                -5
+    max_edited:             999
+    max_length:             2000
+    # how many characters to show in a comment feed item
+    feed_item_length:       150
+    
+  spec:
+    flag_val:               10
+    lime_max:               10
+
+  wiki:
+    flag_val:                  10
+    shared_list_max:           10
+    # in seconds, how long can users be idle, and how long can users edit wiki sections
+    edit_inactivity_limit:     300
+    edit_max_time_limit:       1800
+    search_limit:              10
+    # how many chars to show in wiki segment tooltip mouse-overs
+    segment_tooltip_max_char:  1000
+    history_limit:             30
+
+  # controls how many items appear for each group on the rankings page
+  rankings:
+    user_max:              10
+    news_max:              10
+    limelight_max:         10
+
+  # min number of flags of the same type required for item to be marked as flagged and removed
+  # itemMultiplier increases the flags required based on the items score (every x points 1 more flag is required)
+  # userMultiplier increases the flags required based on the submitting users score (every x points 1 more flag is required)
+  flag:
+    NewsFlag_min:                              10
+    NewsFlag_itemMultiplier:                   25
+    NewsFlag_userMultiplier:                   300
+    CommentFlag_min:                           5
+    CommentFlag_itemMultiplier:                3
+    CommentFlag_userMultiplier:                300
+    NewsTagFlag_min:                           5
+    NewsTagFlag_itemMultiplier:                3
+    NewsTagFlag_userMultiplier:                300
+    NewsLinkFlag_min:                          5
+    NewsLinkFlag_itemMultiplier:               3
+    NewsLinkFlag_userMultiplier:               300
+    WikiFlag_min:                              5
+    WikiFlag_itemMultiplier:                   2
+    WikiFlag_userMultiplier:                   200
+    LimelightSpecificationFlag_min:            5
+    LimelightSpecificationFlag_itemMultiplier: 2
+    LimelightSpecificationFlag_userMultiplier: 200
+    LimelightProConFlag_min:                   5
+    LimelightProConFlag_itemMultiplier:        2
+    LimelightProConFlag_userMultiplier:        200
+
+  # 'min' refers to the minimum score/count required to increase the badge stat
+  badge:
+    num_levels:                 4
+    # how many points does a user get for earning a badge point AFTER they have already completed a badge to the max level
+    extra_score:                5
+    score_bronze:               5
+    score_silver:               25
+    score_gold:                 100
+    score_lime:                 300
+    LimelightProConScore_min:   5
+    LimelightProConScore_add:   Opinionated
+    UserView_min:               600
+    UserView_level2_min:        2000
+    UserView_add:               Popular
+    LimelightView_min:          300
+    LimelightView_add:          Popular Limelight
+    NewsView_min:               150
+    NewsView_add:               Popular News
+    NewsScore_min:              5
+    NewsScore_add:              Reporter
+    LimelightView_level2_min:   1000
+    LimelightView_level2_add:   Very Popular Limelight
+    NewsView_level2_min:        500
+    NewsView_level2_add:        Very Popular News
+    NewsTagScore_min:           5
+    NewsTagScore_add:           News Tagger
+    NewsLinkScore_min:          5
+    NewsLinkScore_add:          News Linker
+    CommentScore_min:           5
+    CommentScore_add:           Commentator
+    NewsFavorite_min:           5
+    NewsFavorite_add:           News Fave
+    LimelightFavorite_min:      15
+    LimelightFavorite_add:      Limelight Fave
+    WikiScore_min:              5
+    WikiScore_add:              Wiki What
+    LimelightSpecificationScore_min: 5
+    LimelightSpecificationScore_add: Spec-tacular

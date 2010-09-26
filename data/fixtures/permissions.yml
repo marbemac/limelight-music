@@ -1,0 +1,365 @@
+sfGuardGroup:
+  sgg_admin:
+    name:           admin
+    description:    Administrator group. Has access to most administrative features. Some features may be reserved for the super admin.
+  sgg_supermod:
+    name:           supermod
+    description:    Super Moderator. Has access to most administrative features.
+  sgg_mod1:
+    name:           mod_1
+    description:    Moderator level 1 access group.
+  sgg_mod2:
+    name:           mod_2
+    description:    Moderator level 2 access group.
+  sgg_mod3:
+    name:           mod_3
+    description:    Moderator level 3 access group.
+  sgg_mod4:
+    name:           mod_4
+    description:    Moderator level 4 access group.
+  sgg_mod5:
+    name:           mod_5
+    description:    Moderator level 5 access group.
+  sgg_mod6:
+    name:           mod_6
+    description:    Moderator level 6 access group.
+  sgg_mod7:
+    name:           mod_7
+    description:    Moderator level 7 access group.
+
+sfGuardPermission:
+  sgp_tag_change:
+    name:           tag_change
+    description:    Grants ability to change scores of tags to any amount.
+  sgp_item_disable:
+    name:           item_disable
+    description:    Allows ability to automatically disable any item when flagged.
+  sgp_tag_disable:
+    name:           tag_disable
+    description:    Grants ability to disable tags.
+  sgp_function_lock:
+    name:           function_lock
+    description:    Grants ability to lock many functions on limelight.
+  sgp_disable:
+    name:           disable
+    description:    Grants ability to disable items.
+  
+  sgp_news_submit:
+    name:           news_submit
+    description:    Grants the ability to submit news stories.
+  sgp_comment_submit:
+    name:           comment_submit
+    description:    Grants the ability to add comments.
+  sgp_limelight_review:
+    name:           limelight_review
+    description:    Grants the ability to add reviews to limelights.
+  sgp_tag_add:
+    name:           tag_add
+    description:    Grants the ability to add tags.
+  sgp_downvote:
+    name:           downvote
+    description:    Allows the user to downvote an item.
+  sgp_flag:
+    name:           flag
+    description:    Allows the user to flag items.
+  sgp_tag_add_new:
+    name:           tag_add_new
+    description:    Grants the ability to add NEW tags.
+  sgp_limelight_suggest:
+    name:           limelight_suggest
+    description:    Allows the user to suggest new limelights.
+  sgp_feature_suggest:
+    name:           feature_suggest
+    description:    Allows the user to suggest new website features.
+  sgp_procon_add:
+    name:           procon_add
+    description:    Allows the user to add pros and cons to limelights.
+  sgp_limelight_spec_add:
+    name:           limelight_spec_add
+    description:    Allows the user to add specs to limelights, and update limelight specs.
+  sgp_category_suggest:
+    name:           category_suggest
+    description:    Allows a user to create a new category when contributing an item.
+  sgp_wiki_submit:
+    name:           wiki_submit
+    description:    Allows a user to submit limelight wiki revisions.
+  sgp_wiki_segment_add:
+    name:           wiki_segment_add
+    description:    Allows a user to create new wiki segments.
+  sgp_wiki_segment_unlink:
+    name:           wiki_segment_unlink
+    description:    Allows a user to unlink wiki segments from limelights.
+  sgp_wiki_segment_link:
+    name:           wiki_segment_link
+    description:    Allows a user to link wiki segments to limelights.
+  sgp_wiki_sort:
+    name:           wiki_sort
+    description:    Allows a user to re-sort the order of wiki segments.
+  sgp_limelight_approve:
+    name:           limelight_approve
+    description:    Allows a user to approve suggested limelights.
+  sgp_category_add:
+    name:           category_add
+    description:    Allows a user to add categories to limelights.
+  sgp_category_add_new:
+    name:           category_add_new
+    description:    Allows a user to add NEW categories to limelights.
+  sgp_link_add:
+    name:           link_add
+    description:    Allows a user to add links to items.
+  sgp_link_add_new:
+    name:           link_add_new
+    description:    Allows a user to add links (from a new source) to items.
+  sgp_stub_edit:
+    name:           stub_edit
+    description:    Allows a user to edit limelight stubs.
+
+
+sfGuardGroupPermission:
+  sggp_admin_1:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_tag_change
+  sggp_admin_2:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_tag_disable
+  sggp_admin_3:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_disable
+  sggp_admin_4:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_function_lock
+  sggp_admin_13:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_news_submit
+  sggp_admin_14:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_comment_submit
+  sggp_admin_15:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_limelight_review
+  sggp_admin_16:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_tag_add
+  sggp_admin_17:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_downvote
+  sggp_admin_18:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_flag
+  sggp_admin_19:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_tag_add_new
+  sggp_admin_20:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_limelight_suggest
+  sggp_admin_21:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_feature_suggest
+  sggp_admin_22:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_procon_add
+  sggp_admin_23:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_limelight_spec_add
+  sggp_admin_24:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_category_suggest
+  sggp_admin_25:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_wiki_submit
+  sggp_admin_26:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_limelight_approve
+  sggp_admin_27:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_item_disable
+  sggp_admin_28:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_link_add
+  sggp_admin_29:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_link_add_new
+  sggp_admin_30:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_wiki_sort
+  sggp_admin_31:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_wiki_segment_add
+  sggp_admin_32:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_wiki_segment_unlink
+  sggp_admin_33:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_wiki_segment_link
+  sggp_admin_34:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_category_add
+  sggp_admin_35:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_category_add_new
+  sggp_admin_36:
+    sfGuardGroup:       sgg_admin
+    sfGuardPermission:  sgp_stub_edit
+
+  sggp_supermod_1:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_tag_change
+  sggp_supermod_2:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_function_lock
+  sggp_supermod_3:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_disable
+  sggp_supermod_8:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_news_submit
+  sggp_supermod_9:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_comment_submit
+  sggp_supermod_10:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_limelight_review
+  sggp_supermod_11:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_tag_add
+  sggp_supermod_12:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_downvote
+  sggp_supermod_13:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_flag
+  sggp_supermod_14:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_tag_add_new
+  sggp_supermod_15:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_limelight_suggest
+  sggp_supermod_16:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_feature_suggest
+  sggp_supermod_17:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_procon_add
+  sggp_supermod_18:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_limelight_spec_add
+  sggp_supermod_19:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_category_suggest
+  sggp_supermod_20:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_wiki_submit
+  sggp_supermod_21:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_limelight_approve
+  sggp_supermod_22:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_item_disable
+  sggp_supermod_23:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_link_add
+  sggp_supermod_24:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_link_add_new
+  sggp_supermod_25:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_wiki_sort
+  sggp_supermod_26:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_wiki_segment_add
+  sggp_supermod_32:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_wiki_segment_unlink
+  sggp_supermod_33:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_wiki_segment_link
+  sggp_supermod_34:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_category_add
+  sggp_supermod_35:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_category_add_new
+  sggp_supermod_36:
+    sfGuardGroup:       sgg_supermod
+    sfGuardPermission:  sgp_stub_edit
+
+  sggp_mod1_1:
+    sfGuardGroup:       sgg_mod1
+    sfGuardPermission:  sgp_news_submit
+  sggp_mod1_2:
+    sfGuardGroup:       sgg_mod1
+    sfGuardPermission:  sgp_comment_submit
+  sggp_mod1_3:
+    sfGuardGroup:       sgg_mod1
+    sfGuardPermission:  sgp_limelight_review
+  sggp_mod1_4:
+    sfGuardGroup:       sgg_mod1
+    sfGuardPermission:  sgp_limelight_suggest
+  sggp_mod1_5:
+    sfGuardGroup:       sgg_mod1
+    sfGuardPermission:  sgp_stub_edit
+
+  sggp_mod2_1:
+    sfGuardGroup:       sgg_mod2
+    sfGuardPermission:  sgp_tag_add
+  sggp_mod2_2:
+    sfGuardGroup:       sgg_mod2
+    sfGuardPermission:  sgp_link_add
+
+  sggp_mod3_1:
+    sfGuardGroup:       sgg_mod3
+    sfGuardPermission:  sgp_downvote
+  sggp_mod3_2:
+    sfGuardGroup:       sgg_mod3
+    sfGuardPermission:  sgp_flag
+  sggp_mod3_3:
+    sfGuardGroup:       sgg_mod3
+    sfGuardPermission:  sgp_tag_add_new
+  sggp_mod3_4:
+    sfGuardGroup:       sgg_mod3
+    sfGuardPermission:  sgp_feature_suggest
+  sggp_mod3_5:
+    sfGuardGroup:       sgg_mod3
+    sfGuardPermission:  sgp_link_add_new
+
+  sggp_mod4_1:
+    sfGuardGroup:       sgg_mod4
+    sfGuardPermission:  sgp_procon_add
+  sggp_mod4_2:
+    sfGuardGroup:       sgg_mod4
+    sfGuardPermission:  sgp_limelight_spec_add
+  sggp_mod4_3:
+    sfGuardGroup:       sgg_mod4
+    sfGuardPermission:  sgp_category_suggest
+
+  sggp_mod5_1:
+    sfGuardGroup:       sgg_mod5
+    sfGuardPermission:  sgp_wiki_submit
+
+  sggp_mod6_1:
+    sfGuardGroup:       sgg_mod6
+    sfGuardPermission:  sgp_wiki_segment_add
+  sggp_mod6_2:
+    sfGuardGroup:       sgg_mod6
+    sfGuardPermission:  sgp_wiki_segment_link
+  sggp_mod6_3::
+    sfGuardGroup:       sgg_mod6
+    sfGuardPermission:  sgp_category_add
+
+  sggp_mod7_1:
+    sfGuardGroup:       sgg_mod7
+    sfGuardPermission:  sgp_limelight_approve
+  sggp_mod7_2:
+    sfGuardGroup:       sgg_mod7
+    sfGuardPermission:  sgp_tag_disable
+  sggp_mod7_3::
+    sfGuardGroup:       sgg_mod7
+    sfGuardPermission:  sgp_category_add_new
+
+#sfGuardUserGroup:
+#  sgug_marc:
+#    sfGuardGroup:       sgg_admin
+#    sfGuardUser:        marc
+#  sgug_tester:
+#    sfGuardGroup:       sgg_supermod
+#    sfGuardUser:        tester

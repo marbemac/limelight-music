@@ -1,0 +1,84 @@
+#feedProgressBar_C {
+  width: 92%; margin: 1px auto 15px auto;
+  height: 30px;
+  position: relative;
+  border: 1px solid #CCCCCC;
+}
+#feedProgressBar {
+  width: 100%;
+  height: 30px;
+  filter:alpha(opacity=30);
+	-moz-opacity:0.3;
+	-khtml-opacity: 0.3;
+	opacity: 0.3;
+  background: #2191c0 url(../images/jquery_theme/ui-bg_gloss-wave_75_2191c0_500x100.png) 50% 50% repeat-x;
+}
+#feedProgressBarText {
+  position: absolute; top: 4px; left: 12px;
+  font-size: 14px;
+  color: #06365b; background-color: #fff; padding: 2px 10px;
+  border: 1px solid #4297d7;
+  cursor: default;
+}
+#feed_ajax_spinner { position: absolute; left: 120px; top: 0px; }
+
+.feed_list { padding: 0px; margin: 0px; list-style: none; }
+.feed_list li { margin: 0 5px 40px 5px; position: relative; clear: left; }
+
+.fi_l {
+  width: 85px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  border: 3px solid #C6DA76;
+  z-index: 10;
+}
+.fi_r { padding-left: 95px; }
+.fi_b { padding-left: 95px; margin-top: 15px; position: relative; }
+
+.sb_fi{
+  width: 61px;
+  position: relative;
+  top: -3px; left: -3px;
+}
+.fi_si { position: relative; left: 5px; top: 2px; margin-bottom: 10px; }
+
+.fi_increase {
+  font-size: 11px;
+  border: 1px solid #CCCCCC;
+  margin: 0 3px 3px 3px;
+  padding: 2px 5px;
+}
+
+.fi_title { font-size: 18px; border-bottom: 2px solid #F4F4F4; float: left; padding: 0 5px 2px 5px; min-width: 200px; }
+.fi_date { clear: left; font-size: 12px; color: #aaa3a3; margin-left: 5px; }
+.fi_text { padding: 10px 5px 0 5px; }
+.fi_image img { float: left; max-width: 130px; max-height: 130px; border: double #EBEBEB; padding: 5px; margin: 0 5px 0 0; }
+
+.fi_subBy { font-size: 14px; color: #999999; font-weight: bold; margin: 10px 0 4px 10px; clear: left; }
+.fi_ll_divider { height: 5px; width: 100%; background-color: #C2D86D; }
+.fi_n_divider { height: 5px; width: 100%; background-color: #9DC3E2; position: relative; }
+.fi_n_divider .view_num { color: #666666; border: 2px solid #9DC3E2; position: absolute; top: 3px; left: 5px; padding: 1px 4px; font-size: 12px; cursor: default; }
+.fi_n_divider .comment_num {
+  background: url("../images/comments_icon.gif") no-repeat left;
+  border: 2px solid #9DC3E2; position: absolute; top: 3px; left: 100px;
+  padding: 1px 4px 1px 20px; font-size: 12px;
+  cursor: default; color: #666666;
+}
+.feed_lls {
+  border: 2px solid #9DC3E2; border-top: none; position: absolute; top: 5px; left: 180px;
+  padding: 2px 4px 1px 4px; font-size: 12px; background-color: #EEF7E3;
+  cursor: pointer; color: #666666; font-weight: bold; z-index: 30;
+}
+.feed_lls:hover { background-color: #9DC3E2; color: #fff; }
+.feed_lls .list {
+  position: absolute; top: -57px; left: -2px; z-index: 25;
+  background-color: #fff; border: 2px solid #9DC3E2; border-bottom: 5px solid #9DC3E2;
+  padding: 5px; min-width: 150px; display: none;
+}
+.feed_lls .list .limelight_link { display: block; }
+
+.fi_options { position: absolute; right: 5px; bottom: 7px; color: #999999; }
+.fi_options .interactNegButton { float: left; margin-right: 5px; padding: 2px 5px; }
+.fi_options .interactPosButton { float: left; margin-right: 5px; padding: 2px 5px; }
+.fi_options .interactedButton { float: left; margin-right: 5px; padding: 2px 5px; }

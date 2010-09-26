@@ -1,0 +1,1 @@
+<span class="<?php echo $type ?> <?php echo $class ?> <?php echo $score < 0 ? 'neg' : '' ?> rnd_2" title="<?php echo $title ?>" data-target="<?php echo $target ?>" data-my="<?php echo $my ?>" data-at="<?php echo $at ?>" data-url="<?php echo $url ?>"><?php echo $score ?></span>

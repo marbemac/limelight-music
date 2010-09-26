@@ -1,0 +1,72 @@
+sfGuardUser:
+  package: sfDoctrineGuardPlugin.lib.model.doctrine
+  actAs: [Timestampable]
+  columns:
+    id:
+      type: integer(4)
+      primary: true
+      autoincrement: true
+    rpx_identifier:
+      type: varchar(255)
+      default: null
+    rpx_provider_name:
+      type: varchar(255)
+      default: null
+    username:
+      type: string(128)
+      notnull: true
+      unique: true
+    algorithm:
+      type: string(128)
+      default: sha1
+      notnull: true
+    salt: string(128)
+    password: string(128)
+    is_active:
+      type: boolean
+      default: 1
+    is_super_admin:
+      type: boolean
+      default: 0
+    last_login:
+      type: timestamp
+    username_changed:
+      type: bool
+      default: 0
+    show_help:
+      type: bool
+      default: 1
+    show_welcome_splash:
+      type: bool
+      default: 1
+  indexes:
+    is_active_idx:
+      fields: [is_active]
+    rpx:
+      fields: [rpx_identifier]
+      type: unique
+  relations:
+    groups:
+      class: sfGuardGroup
+      local: user_id
+      foreign: group_id
+      refClass: sfGuardUserGroup
+      foreignAlias: Users
+    permissions:
+      class: sfGuardPermission
+      local: user_id
+      foreign: permission_id
+      refClass: sfGuardUserPermission
+      foreignAlias: Users
+    FollowingUsers:
+      class: sfGuardUser
+      local: user1_id
+      foreign: user2_id
+      refClass: FollowUserReference
+      foreignAlias: Followers
+    FollowingLimelights:
+      class: Limelight
+      local: user_id
+      foreign: limelight_id
+      refClass: FollowLimelightReference
+      foreignAlias: Followers

@@ -1,0 +1,210 @@
+Badge:
+  janitor:
+    name: Janitor
+    type: user
+    description: |
+      Flag items that are eventually removed for the reason you specified
+    BadgeLevels: [bl_janitor1, bl_janitor2]
+
+  autobiographer:
+    name: Autobiographer
+    type: user
+    description: |
+      Complete all profile fields
+    BadgeLevels: [bl_autobiographer1]
+
+  sheep:
+    name: Sheep
+    type: user
+    description: |
+      Follow users
+    BadgeLevels: [bl_sheep1, bl_sheep2]
+
+  king:
+    name: King
+    type: user
+    description: |
+      Gain followers
+    BadgeLevels: [bl_king1, bl_king2, bl_king3, bl_king4]
+
+  reporter:
+    name: Reporter
+    type: news
+    description: |
+      Submit a news story that reaches a score of at least 5
+    BadgeLevels: [bl_reporter1, bl_reporter2, bl_reporter3, bl_reporter4]
+
+  news_tagger:
+    name: News Tagger
+    type: news
+    description: |
+      Add tags to news stories that get a score of at least 5
+    BadgeLevels: [bl_news_tagger1, bl_news_tagger2]
+
+  news_linker:
+    name: News Link
+    type: news
+    description: |
+      Add links to news stories that get a score of at least 5
+    BadgeLevels: [bl_news_linker1, bl_news_linker2]
+
+  loyalty:
+    name: Loyalty
+    type: user
+    description: |
+      Login in at least once a day
+    BadgeLevels: [bl_loyalty1, bl_loyalty2, bl_loyalty3, bl_loyalty4]
+
+  critic:
+    name: Critic
+    type: interact
+    description: |
+      Downvote your first item
+    BadgeLevels: [bl_critic1]
+
+  spectacular:
+    name: Spec-tacular
+    type: limelight
+    description: |
+      Submit a limelight specification that reaches a score of at least 5
+    BadgeLevels: [bl_spectacular1, bl_spectacular2, bl_spectacular3, bl_spectacular4]
+
+  commentator:
+    name: Commentator
+    type: contribute
+    description: |
+      Submit a comment that reaches a score of at least 5
+    BadgeLevels: [bl_commentator1, bl_commentator2, bl_commentator3, bl_commentator4]
+
+  wikiwhat:
+    name: Wiki What
+    type: limelight
+    description: |
+      Submit a limelight wiki revision that reaches a score of at least 5
+    BadgeLevels: [bl_wikiwhat1, bl_wikiwhat2, bl_wikiwhat3, bl_wikiwhat4]
+
+  foresight:
+    name: Foresight
+    type: limelight
+    description: |
+      Suggest a limelight that is accepted
+    BadgeLevels: [bl_foresight1, bl_foresight2, bl_foresight3]
+
+  brainstorm:
+    name: Brainstorm
+    type: contribute
+    description: |
+      Suggest a website update that is accepted
+    BadgeLevels: [bl_brainstorm1, bl_brainstorm2]
+
+  lucky:
+    name: Lucky
+    type: user
+    description: |
+      Win a giveaway
+    BadgeLevels: [bl_lucky1]
+
+  superstar:
+    name: Superstar
+    type: user
+    description: |
+      Win the top user giveaway
+    BadgeLevels: [bl_superstar1]
+
+  money:
+    name: $$$
+    type: user
+    description: |
+      Cash out for the first time
+    BadgeLevels: [bl_money1]
+
+  news_fave:
+    name: News Fave
+    type: news
+    description: |
+      Submit a news story that is favorited by at least 5 users
+    BadgeLevels: [bl_nfave1, bl_nfave2, bl_nfave3, bl_nfave4]
+
+  limelight_fave:
+    name: Limelight Fave
+    type: limelight
+    description: |
+      Suggest a limelight that is favorited by at least 15 users
+    BadgeLevels: [bl_llfave1, bl_llfave2, bl_llfave3, bl_llfave4]
+
+  goldenpen:
+    name: Golden Pen
+    type: limelight
+    description: |
+      Submit a limelight review that reaches a score of at least 5
+    BadgeLevels: [bl_goldenpen1, bl_goldenpen2, bl_goldenpen3, bl_goldenpen4]
+
+  nerd:
+    name: Nerd
+    type: user
+    description: |
+      Earn 20 badges to their max level
+    BadgeLevels: [bl_nerd1]
+
+  supporter:
+    name: Supporter
+    type: user
+    description: |
+      Donate any amout to tech limelight
+    BadgeLevels: [bl_supporter1]
+
+  opinionated:
+    name: Opinionated
+    type: limelight
+    description: |
+      Submit a limelight pro/con that reaches a score of at least 5
+    BadgeLevels: [bl_opinionated1, bl_opinionated2, bl_opinionated3]
+
+  handyman:
+    name: Handyman
+    type: interact
+    description: |
+      Try the power filter, power search, and power compare tools
+    BadgeLevels: [bl_handyman1]
+
+  selfportrait:
+    name: Self Portrait
+    type: user
+    description: |
+      Upload a new profile image
+    BadgeLevels: [bl_selfportrait1]
+
+  popular:
+    name: Popular
+    type: user
+    description: |
+      Accumulate 600 profile views for a bronze badge, 2000 profile views for a silver badge
+    BadgeLevels: [bl_popular1, bl_popular2]
+
+  popularlimelight:
+    name: Popular Limelight
+    type: limelight
+    description: |
+      Suggest limelights that accumulate at least 300 views
+    BadgeLevels: [bl_popularlimelight1, bl_popularlimelight2, bl_popularlimelight3]
+
+  popularnews:
+    name: Popular News
+    type: news
+    description: |
+      Submit news stories that accumulate at least 150 views
+    BadgeLevels: [bl_popularnews1, bl_popularnews2, bl_popularnews3]
+
+  verypopularlimelight:
+    name: Very Popular Limelight
+    type: limelight
+    description: |
+      Suggest limelights that accumulate at least 1000 views
+    BadgeLevels: [bl_verypopularlimelight1, bl_verypopularlimelight2, bl_verypopularlimelight3, bl_verypopularlimelight4]
+
+  verypopularnews:
+    name: Very Popular News
+    type: news
+    description: |
+      Submit news stories that accumulate at least 500 views
+    BadgeLevels: [bl_verypopularnews1, bl_verypopularnews2, bl_verypopularnews4, bl_verypopularnews3]

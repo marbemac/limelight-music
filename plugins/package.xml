@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.9.0" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>sfReCaptchaPlugin</name>
+ <channel>pear.symfony-project.com</channel>
+ <summary>Integrates reCAPTCHA service in symfony</summary>
+ <description>Integrates reCAPTCHA service in symfony</description>
+ <lead>
+  <name>Massimiliano Arione</name>
+  <user>garak</user>
+  <email>garakkio@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <developer>
+  <name>Arthur Koziel</name>
+  <user>arthur.koziel</user>
+  <email>arthur@arthurkoziel.de</email>
+  <active>no</active>
+ </developer>
+ <date>2010-04-08</date>
+ <time>12:03:10</time>
+ <version>
+  <release>1.3.2</release>
+  <api>1.3.0</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.symfony-project.com/license">MIT license</license>
+ <notes>
+-
+ </notes>
+ <contents>
+  <dir name="/">
+   <file md5sum="6b55df239a3f8c7e3b8d1b3da1accbfa" name="lib/helper/recaptchaHelper.php" role="data"/>
+   <file md5sum="d6d72d68b6af746244fadd2548959b3a" name="lib/validator/sfValidatorSchemaReCaptcha.class.php" role="data"/>
+   <file md5sum="ac0182434911ff2004e0e5c5b4e6e536" name="lib/form/reCaptchaForm.class.php" role="data"/>
+   <file md5sum="83f95f344dce30af496deb704692a5ca" name="lib/form/reCaptchaDoctrineForm.class.php" role="data"/>
+   <file md5sum="ed983763586883334ee5c3827cdaf4e0" name="lib/form/reCaptchaPropelForm.class.php" role="data"/>
+   <file md5sum="ba5afbb651be64ec3534cd4f33f4b7ec" name="modules/recaptcha/actions/actions.class.php" role="data"/>
+   <file md5sum="e46977bf22044a5e649638c3d81a5ad4" name="modules/recaptcha/templates/indexSuccess.php" role="data"/>
+   <file md5sum="7c4eefcf7659b1be17fce6518197cccb" name="modules/recaptcha/templates/mailhideSuccess.php" role="data"/>
+   <file md5sum="134760c2721f9e0749d24a71c3c09af4" name="LICENSE" role="data"/>
+   <file md5sum="11dc32163d268eeaf459642bbd845159" name="README" role="data"/>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.1</min>
+   </pearinstaller>
+   
+  </required>
+ </dependencies>
+ <phprelease/>
+ <changelog>
+  <release>
+   <version>
+    <release>1.3.2</release>
+    <api>1.3.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.symfony-project.com/license">MIT license</license>
+   <date>2010-04-08</date>
+   <notes>
+* refactored main form
+* added form for Propel and Doctrine
+* improved README
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.3.1</release>
+    <api>1.3.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license uri="http://www.symfony-project.com/license">MIT license</license>
+   <date>2010-04-07</date>
+   <notes>
+* improved README
+* refactored helper
+* added option to comply with XHTML strict
+   </notes>
+  </release>
+ </changelog>
+</package>

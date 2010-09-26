@@ -1,0 +1,24 @@
+list:
+  enabled: true
+  lifetime: 180
+
+_chartScoreView:
+  enabled: true
+  lifetime: 3600
+  # 30 minutes
+
+_chartNewItems:
+  enabled: true
+  lifetime: 7200
+  # 60 minutes
+
+_lockWiki:
+  enabled: true
+
+_proscons:
+  enabled: true
+
+.all:
+  lifetime: 2592000
+
+# 2592000 = 30 days

@@ -1,0 +1,9 @@
+default:
+  components:
+    sidebar1: [user, topUsers]
+    sidebar2: []
+    sidebar3: []
+    sidebar4: []
+    sidebar5: []
+    sidebar6: []
+    sidebar7: []

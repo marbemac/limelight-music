@@ -1,0 +1,3 @@
+[<?php foreach ($items as $key => $limelight): ?>
+{ "id":"<?php echo $limelight[0] ?>", "manufacturer": "<?php echo $limelight[4] . ' ' ?>", "name": "<?php echo $limelight[1] ?>", "image": "<?php echo addslashes(image_tag(sfConfig::get('app_limelight_image_path').'/thumb/'.$limelight[3])) ?>", "score": "<?php echo $limelight[2] ?>", "url": "<?php echo url_for('limelight_short', array('name_slug' => $limelight[5])) ?>" }<?php echo (isset($items[$key+1]) ? ', ' : '') ?>
+<?php endforeach; ?>]

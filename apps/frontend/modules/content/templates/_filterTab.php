@@ -1,0 +1,1 @@
+<div class="filter_tab"><?php echo $filter_text ?> (coming soon)</div>

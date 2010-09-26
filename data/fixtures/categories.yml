@@ -1,0 +1,66 @@
+Category:
+  cat_technology:
+    name: Technology
+    status: Active
+
+  cat_gadget:
+    name: Gadgets
+    status: Active
+    Children: [cat_phone]
+
+  cat_phone:
+    name: Phones
+    status: Active
+    Children: [cat_apple, cat_htc, cat_motorola, cat_lg, cat_sony, cat_rim, cat_nokia, cat_palm, cat_samsung, cat_verizon, cat_att, cat_sprint, cat_tmobile]
+
+  cat_apple:
+    name: Apple
+    status: Active
+
+  cat_htc:
+    name: HTC
+    status: Active
+
+  cat_motorola:
+    name: Motorola
+    status: Active
+
+  cat_lg:
+    name: LG
+    status: Active
+
+  cat_sony:
+    name: Sony
+    status: Active
+
+  cat_rim:
+    name: RIM Blackberry
+    status: Active
+
+  cat_nokia:
+    name: Nokia
+    status: Active
+
+  cat_palm:
+    name: Palm
+    status: Active
+
+  cat_samsung:
+    name: Samsung
+    status: Active
+
+  cat_verizon:
+    name: Verizon
+    status: Active
+
+  cat_att:
+    name: AT&T
+    status: Active
+
+  cat_sprint:
+    name: Sprint
+    status: Active
+
+  cat_tmobile:
+    name: T Mobile
+    status: Active

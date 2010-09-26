@@ -1,0 +1,1 @@
+<?php echo image_tag('http://chart.apis.google.com/chart?cht=lc&chs=300x110&chxt=x,y&chbh=a,1,12&chf=bg,s,00000000&chdl=daily+score|daily+views&chco=A4C032,DD4715&chdlp=t&chxr=1,'.$data['bottom'].','.$data['scale'].'&chds='.$data['bottom'].','.$data['scale'].'&chd=t:'.$data['data'].'&chxl=0:|'.$data['x_axis']) ?>

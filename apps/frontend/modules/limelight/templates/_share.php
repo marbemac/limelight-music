@@ -1,0 +1,1 @@
+<div class="interactPosButton share rnd_3" data-display="Share this limelight" data-action="likes the '<?php echo ($item->company_name ? $item->company_name.' ' : '') ?><?php echo $item->name ?>' limelight on <?php echo sfConfig::get('app_site_name') ?>" data-url="<?php echo url_for('lime_show', array('name_slug' => $item->name_slug), true) ?>">share</div>

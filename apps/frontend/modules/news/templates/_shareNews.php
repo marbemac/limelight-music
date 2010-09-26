@@ -1,0 +1,1 @@
+<div class="interactPosButton share rnd_3" data-display="Share this news story" data-action="likes the news story '<?php echo $item->title ?>' on <?php echo sfConfig::get('app_site_name') ?>" data-url="<?php echo url_for('news_show', array('title_slug' => $item->title_slug), true) ?>">share</div>

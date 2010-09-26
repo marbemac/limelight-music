@@ -1,0 +1,39 @@
+#Comment:
+#  C_1:
+#    content: |
+#      Comment number 1
+#    score: 8
+#    type: News
+#    Children: [C_1_1, C_1_2]
+#  C_1_1:
+#    content: |
+#      Comment this is a long comment. Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#    score: 13
+#    type: News
+#  C_1_2:
+#    content: |
+#      Comment child number 2
+#    score: 0
+#    type: News
+#
+#  C_2:
+#    content: |
+#      Comment number 2 this is a long comment. Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#      Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem
+#    score: 2
+#    type: News
+#
+#  C_3:
+#    content: |
+#      Comment number 3
+#    score: -7
+#    type: News

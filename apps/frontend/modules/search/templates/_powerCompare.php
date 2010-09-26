@@ -1,0 +1,1 @@
+<div>power compare page</div>

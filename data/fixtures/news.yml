@@ -1,0 +1,59 @@
+News:
+  news_1:
+    title: iPhone 3G reaches 1 million mark, beats Blackberry
+    content: |
+      The iPhone 3G reached 1 million units sold today. This is a large milestone.
+      This is also test content. Lorem ipsum today is saturday. I have a test on
+      Tuesday. I have a paper due on Monday. This is some filler content to try to
+      make the story longer.
+    total_views: 32
+    score: 1893
+    news_image: n_iphone_vs_blackberry.jpg
+    status: Active
+    Limelights: [lime_iphone, lime_storm]
+    Links: [nlink1, nlink6, nlink7]
+  news_2:
+    title: iPhone 3G reaches 1 million mark NUMBER 2
+    content: |
+      The iPhone 3G reached 1 million units sold today. This is a large milestone.
+      This is also test content. Lorem ipsum today is saturday. I have a test on
+      Tuesday. I have a paper due on Monday. This is some filler content to try to
+      make the story longer.
+    total_views: 137
+    score: 24
+    news_image: n_millionMark.jpg
+    status: Active
+    Limelights: [lime_iphone]
+    Links: [nlink2]
+  news_3:
+    title: Blackberry Storm reaches 1 million mark
+    content: |
+      The Blackberry Storm reached 1 million units sold today. This is a large milestone.
+      This is also test content. Lorem ipsum today is saturday. I have a test on
+      Tuesday. I have a paper due on Monday. This is some filler content to try to
+      make the story longer.
+    total_views: 12
+    score: 76
+    status: Active
+    Limelights: [lime_storm]
+    Links: [nlink3]
+  news_4:
+    title: Random story
+    content: |
+      The random story! reached 1 million units sold today. This is a large milestone.
+      This is also test content. Lorem ipsum today is saturday. I have a test on
+      Tuesday. I have a paper due on Monday. This is some filler content to try to
+      make the story longer.
+    status: Active
+    Limelights: [lime_storm]
+    Links: [nlink4]
+  news_5:
+    title: Random story 2
+    content: |
+      The random story number 2! reached 1 million units sold today. This is a large milestone.
+      This is also test content. Lorem ipsum today is saturday. I have a test on
+      Tuesday. I have a paper due on Monday. This is some filler content to try to
+      make the story longer.
+    status: Active
+    Limelights: [lime_storm]
+    Links: [nlink5]
