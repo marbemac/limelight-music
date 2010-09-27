@@ -12,12 +12,14 @@
  * @property integer $edited
  * @property integer $user_id
  * @property integer $News_id
+ * @property integer $Song_id
  * @property integer $Wiki_id
  * @property integer $LimelightReviewUser_id
  * @property integer $LimelightReviewPro_id
  * @property sfGuardUser $User
  * @property Comment $Parent
  * @property News $News
+ * @property Song $Song
  * @property LimelightReviewUser $LimelightReviewUser
  * @property LimelightReviewPro $LimelightReviewPro
  * @property Wiki $Wiki
@@ -33,12 +35,14 @@
  * @method integer             getEdited()                 Returns the current record's "edited" value
  * @method integer             getUserId()                 Returns the current record's "user_id" value
  * @method integer             getNewsId()                 Returns the current record's "News_id" value
+ * @method integer             getSongId()                 Returns the current record's "Song_id" value
  * @method integer             getWikiId()                 Returns the current record's "Wiki_id" value
  * @method integer             getLimelightReviewUserId()  Returns the current record's "LimelightReviewUser_id" value
  * @method integer             getLimelightReviewProId()   Returns the current record's "LimelightReviewPro_id" value
  * @method sfGuardUser         getUser()                   Returns the current record's "User" value
  * @method Comment             getParent()                 Returns the current record's "Parent" value
  * @method News                getNews()                   Returns the current record's "News" value
+ * @method Song                getSong()                   Returns the current record's "Song" value
  * @method LimelightReviewUser getLimelightReviewUser()    Returns the current record's "LimelightReviewUser" value
  * @method LimelightReviewPro  getLimelightReviewPro()     Returns the current record's "LimelightReviewPro" value
  * @method Wiki                getWiki()                   Returns the current record's "Wiki" value
@@ -53,12 +57,14 @@
  * @method Comment             setEdited()                 Sets the current record's "edited" value
  * @method Comment             setUserId()                 Sets the current record's "user_id" value
  * @method Comment             setNewsId()                 Sets the current record's "News_id" value
+ * @method Comment             setSongId()                 Sets the current record's "Song_id" value
  * @method Comment             setWikiId()                 Sets the current record's "Wiki_id" value
  * @method Comment             setLimelightReviewUserId()  Sets the current record's "LimelightReviewUser_id" value
  * @method Comment             setLimelightReviewProId()   Sets the current record's "LimelightReviewPro_id" value
  * @method Comment             setUser()                   Sets the current record's "User" value
  * @method Comment             setParent()                 Sets the current record's "Parent" value
  * @method Comment             setNews()                   Sets the current record's "News" value
+ * @method Comment             setSong()                   Sets the current record's "Song" value
  * @method Comment             setLimelightReviewUser()    Sets the current record's "LimelightReviewUser" value
  * @method Comment             setLimelightReviewPro()     Sets the current record's "LimelightReviewPro" value
  * @method Comment             setWiki()                   Sets the current record's "Wiki" value
@@ -118,6 +124,10 @@ abstract class BaseComment extends Item
              'type' => 'integer',
              'length' => 4,
              ));
+        $this->hasColumn('Song_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             ));
         $this->hasColumn('Wiki_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
@@ -161,6 +171,11 @@ abstract class BaseComment extends Item
 
         $this->hasOne('News', array(
              'local' => 'News_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
+        $this->hasOne('Song', array(
+             'local' => 'Song_id',
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
 

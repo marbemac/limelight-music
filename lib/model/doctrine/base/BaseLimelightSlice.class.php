@@ -54,6 +54,7 @@ abstract class BaseLimelightSlice extends sfDoctrineRecord
              array(
               0 => 'model',
               1 => 'version',
+              2 => 'album',
              ),
              'default' => 'product',
              ));

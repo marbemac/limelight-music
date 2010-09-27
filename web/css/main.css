@@ -169,9 +169,9 @@ div:focus {
  */
 
 #h_wrapper { position: relative; max-width: 1400px; min-width: 1100px; height: 65px; margin: auto; padding: 0; }
-#h_logo { position: absolute; top: 20px; left: -110px; border: none; }
+#h_logo { position: absolute; top: 20px; left: -88px; border: none; }
 #h_logo img { border: none; }
-#h_beta_sign { position: absolute; left: 330px; top: 17px; }
+#h_beta_sign { position: absolute; left: 338px; top: 17px; }
 #h_search { position: absolute; top: 15px; right: 430px; padding: 0 20px 0 0; border: 3px solid #616844; background-color: #616844; height: 28px; width: 20%; }
 #h_search input { width: 60%; position: absolute; font-size: 16px; padding: 4px 5px 5px 5px; border: none; left: 0px; margin: 0px; }
 #h_search .T { color: #fff; font-size: 18px; font-weight: bold; cursor: default; position: absolute; right: 4%; top: 3px; margin: 0px; }
@@ -206,7 +206,7 @@ div:focus {
 .rpx_help.relogin { top: -70px; left: -125px; width: 620px; display: none; }
 
 .rpx_limelight {
-  position: absolute; left: -44px; bottom: -80px; width: 450px; background-color: #fff;
+  position: absolute; left: -69px; bottom: -80px; width: 500px; background-color: #fff;
   padding: 10px; font-size: 18px; line-height: 1.7em; text-align: center;
   font-weight: bold; border: 5px solid #fff;
 }
@@ -243,7 +243,7 @@ div:focus {
 .home_welcome.help_adjust { top: 130px; }
 .home_welcome .main { position: relative; background-color: #E8FF88; margin: 10px 10px 5px 220px; padding: 15px; width: 57%; }
 .home_welcome .main p { margin: 0px; padding: 0px; color: #444; font-size: 15px; line-height: 1.6em; }
-.home_welcome .main .welcome { position: absolute; left: -195px; top: 50%; margin-top: -33px; font-weight: bold; font-size: 22px; width: 150px; text-align: center; line-height: 1.5em; cursor: default; }
+.home_welcome .main .welcome { position: absolute; left: -195px; top: 50%; margin-top: -33px; font-weight: bold; font-size: 22px; width: 160px; text-align: center; line-height: 1.5em; cursor: default; }
 .home_welcome .main img { position: absolute; left: -24px; top: 50%; margin-top: -25px; }
 .home_welcome .main .more_features,.home_welcome .main .hide_features { position: absolute; color: #0F6691; font-weight: bold; padding: 4px 8px; }
 .home_welcome .main .more_features { top: 25px; right: -28%; }
@@ -341,7 +341,7 @@ div:focus {
   color: #094D84; font-size: 10px; font-weight: normal; width: 55px; text-align: center;
 }
 .categories_filter { position: relative; margin: 0 0 0 130px; padding: 0px; }
-.categories_filter li { position: relative; font-size: 16px; color: #fff; float: left; margin: 0 0 0 15px; font-weight: bold; cursor: pointer; }
+.categories_filter li { position: relative; font-size: 13px; color: #fff; float: left; margin: 0 0 0 8px; font-weight: bold; cursor: pointer; }
 .categories_filter .expander { float: left; z-index: 101; font-size: 14px; margin-left: 5px; cursor: default; }
 .categories_filter .expander.top { background: transparent url(../images/category_ribbon_expander.png) left no-repeat; width: 25px; height: 30px; }
 .categories_filter .expander.top.on { background-position: right; }

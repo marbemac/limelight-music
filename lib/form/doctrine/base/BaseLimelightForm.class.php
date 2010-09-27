@@ -55,8 +55,11 @@ abstract class BaseLimelightForm extends ItemForm
     $this->widgetSchema   ['module_products'] = new sfWidgetFormInputText();
     $this->validatorSchema['module_products'] = new sfValidatorPass(array('required' => false));
 
-    $this->widgetSchema   ['limelight_type'] = new sfWidgetFormChoice(array('choices' => array('product' => 'product', 'technology' => 'technology', 'company' => 'company', 'source' => 'source')));
-    $this->validatorSchema['limelight_type'] = new sfValidatorChoice(array('choices' => array(0 => 'product', 1 => 'technology', 2 => 'company', 3 => 'source'), 'required' => false));
+    $this->widgetSchema   ['limelight_type'] = new sfWidgetFormChoice(array('choices' => array('product' => 'product', 'technology' => 'technology', 'company' => 'company', 'source' => 'source', 'artist' => 'artist')));
+    $this->validatorSchema['limelight_type'] = new sfValidatorChoice(array('choices' => array(0 => 'product', 1 => 'technology', 2 => 'company', 3 => 'source', 4 => 'artist'), 'required' => false));
+
+    $this->widgetSchema   ['site'] = new sfWidgetFormChoice(array('choices' => array('tech' => 'tech', 'music' => 'music')));
+    $this->validatorSchema['site'] = new sfValidatorChoice(array('choices' => array(0 => 'tech', 1 => 'music'), 'required' => false));
 
     $this->widgetSchema   ['company_name'] = new sfWidgetFormInputText();
     $this->validatorSchema['company_name'] = new sfValidatorString(array('max_length' => 255, 'required' => false));
@@ -75,6 +78,9 @@ abstract class BaseLimelightForm extends ItemForm
 
     $this->widgetSchema   ['newss_list'] = new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'News'));
     $this->validatorSchema['newss_list'] = new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'News', 'required' => false));
+
+    $this->widgetSchema   ['songs_list'] = new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Song'));
+    $this->validatorSchema['songs_list'] = new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Song', 'required' => false));
 
     $this->widgetSchema   ['wikis_list'] = new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Wiki'));
     $this->validatorSchema['wikis_list'] = new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Wiki', 'required' => false));
@@ -104,6 +110,11 @@ abstract class BaseLimelightForm extends ItemForm
       $this->setDefault('newss_list', $this->object->Newss->getPrimaryKeys());
     }
 
+    if (isset($this->widgetSchema['songs_list']))
+    {
+      $this->setDefault('songs_list', $this->object->Songs->getPrimaryKeys());
+    }
+
     if (isset($this->widgetSchema['wikis_list']))
     {
       $this->setDefault('wikis_list', $this->object->Wikis->getPrimaryKeys());
@@ -120,6 +131,7 @@ abstract class BaseLimelightForm extends ItemForm
   {
     $this->saveCategoriesList($con);
     $this->saveNewssList($con);
+    $this->saveSongsList($con);
     $this->saveWikisList($con);
     $this->saveFollowersList($con);
 
@@ -199,6 +211,44 @@ abstract class BaseLimelightForm extends ItemForm
     if (count($link))
     {
       $this->object->link('Newss', array_values($link));
+    }
+  }
+
+  public function saveSongsList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['songs_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $existing = $this->object->Songs->getPrimaryKeys();
+    $values = $this->getValue('songs_list');
+    if (!is_array($values))
+    {
+      $values = array();
+    }
+
+    $unlink = array_diff($existing, $values);
+    if (count($unlink))
+    {
+      $this->object->unlink('Songs', array_values($unlink));
+    }
+
+    $link = array_diff($values, $existing);
+    if (count($link))
+    {
+      $this->object->link('Songs', array_values($link));
     }
   }
 

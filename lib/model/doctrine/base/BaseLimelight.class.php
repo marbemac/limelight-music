@@ -19,12 +19,14 @@
  * @property bool $module_procon
  * @property bool $module_products
  * @property enum $limelight_type
+ * @property enum $site
  * @property string $company_name
  * @property integer $company_id
  * @property integer $is_stub
  * @property sfGuardUser $User
  * @property Doctrine_Collection $Categories
  * @property Doctrine_Collection $Newss
+ * @property Doctrine_Collection $Songs
  * @property Doctrine_Collection $Wikis
  * @property Limelight $Company
  * @property Doctrine_Collection $Followers
@@ -33,8 +35,9 @@
  * @property Doctrine_Collection $Slices
  * @property Doctrine_Collection $Summaries
  * @property Doctrine_Collection $LimelightWikis
- * @property Doctrine_Collection $Specifications
  * @property Doctrine_Collection $LimelightNews
+ * @property Doctrine_Collection $LimelightSongs
+ * @property Doctrine_Collection $Specifications
  * @property Doctrine_Collection $NewsLinks
  * @property Doctrine_Collection $UserAction
  * @property Doctrine_Collection $Owned
@@ -59,12 +62,14 @@
  * @method bool                getModuleProcon()          Returns the current record's "module_procon" value
  * @method bool                getModuleProducts()        Returns the current record's "module_products" value
  * @method enum                getLimelightType()         Returns the current record's "limelight_type" value
+ * @method enum                getSite()                  Returns the current record's "site" value
  * @method string              getCompanyName()           Returns the current record's "company_name" value
  * @method integer             getCompanyId()             Returns the current record's "company_id" value
  * @method integer             getIsStub()                Returns the current record's "is_stub" value
  * @method sfGuardUser         getUser()                  Returns the current record's "User" value
  * @method Doctrine_Collection getCategories()            Returns the current record's "Categories" collection
  * @method Doctrine_Collection getNewss()                 Returns the current record's "Newss" collection
+ * @method Doctrine_Collection getSongs()                 Returns the current record's "Songs" collection
  * @method Doctrine_Collection getWikis()                 Returns the current record's "Wikis" collection
  * @method Limelight           getCompany()               Returns the current record's "Company" value
  * @method Doctrine_Collection getFollowers()             Returns the current record's "Followers" collection
@@ -73,8 +78,9 @@
  * @method Doctrine_Collection getSlices()                Returns the current record's "Slices" collection
  * @method Doctrine_Collection getSummaries()             Returns the current record's "Summaries" collection
  * @method Doctrine_Collection getLimelightWikis()        Returns the current record's "LimelightWikis" collection
- * @method Doctrine_Collection getSpecifications()        Returns the current record's "Specifications" collection
  * @method Doctrine_Collection getLimelightNews()         Returns the current record's "LimelightNews" collection
+ * @method Doctrine_Collection getLimelightSongs()        Returns the current record's "LimelightSongs" collection
+ * @method Doctrine_Collection getSpecifications()        Returns the current record's "Specifications" collection
  * @method Doctrine_Collection getNewsLinks()             Returns the current record's "NewsLinks" collection
  * @method Doctrine_Collection getUserAction()            Returns the current record's "UserAction" collection
  * @method Doctrine_Collection getOwned()                 Returns the current record's "Owned" collection
@@ -98,12 +104,14 @@
  * @method Limelight           setModuleProcon()          Sets the current record's "module_procon" value
  * @method Limelight           setModuleProducts()        Sets the current record's "module_products" value
  * @method Limelight           setLimelightType()         Sets the current record's "limelight_type" value
+ * @method Limelight           setSite()                  Sets the current record's "site" value
  * @method Limelight           setCompanyName()           Sets the current record's "company_name" value
  * @method Limelight           setCompanyId()             Sets the current record's "company_id" value
  * @method Limelight           setIsStub()                Sets the current record's "is_stub" value
  * @method Limelight           setUser()                  Sets the current record's "User" value
  * @method Limelight           setCategories()            Sets the current record's "Categories" collection
  * @method Limelight           setNewss()                 Sets the current record's "Newss" collection
+ * @method Limelight           setSongs()                 Sets the current record's "Songs" collection
  * @method Limelight           setWikis()                 Sets the current record's "Wikis" collection
  * @method Limelight           setCompany()               Sets the current record's "Company" value
  * @method Limelight           setFollowers()             Sets the current record's "Followers" collection
@@ -112,8 +120,9 @@
  * @method Limelight           setSlices()                Sets the current record's "Slices" collection
  * @method Limelight           setSummaries()             Sets the current record's "Summaries" collection
  * @method Limelight           setLimelightWikis()        Sets the current record's "LimelightWikis" collection
- * @method Limelight           setSpecifications()        Sets the current record's "Specifications" collection
  * @method Limelight           setLimelightNews()         Sets the current record's "LimelightNews" collection
+ * @method Limelight           setLimelightSongs()        Sets the current record's "LimelightSongs" collection
+ * @method Limelight           setSpecifications()        Sets the current record's "Specifications" collection
  * @method Limelight           setNewsLinks()             Sets the current record's "NewsLinks" collection
  * @method Limelight           setUserAction()            Sets the current record's "UserAction" collection
  * @method Limelight           setOwned()                 Sets the current record's "Owned" collection
@@ -205,8 +214,18 @@ abstract class BaseLimelight extends Item
               1 => 'technology',
               2 => 'company',
               3 => 'source',
+              4 => 'artist',
              ),
              'default' => 'product',
+             ));
+        $this->hasColumn('site', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'tech',
+              1 => 'music',
+             ),
+             'default' => 'tech',
              ));
         $this->hasColumn('company_name', 'string', 255, array(
              'type' => 'string',
@@ -220,14 +239,6 @@ abstract class BaseLimelight extends Item
              'type' => 'integer',
              'default' => 1,
              'length' => 1,
-             ));
-
-
-        $this->index('manufacturerIndex', array(
-             'fields' => 
-             array(
-              0 => 'manufacturer',
-             ),
              ));
     }
 
@@ -248,6 +259,11 @@ abstract class BaseLimelight extends Item
              'refClass' => 'LimelightNews',
              'local' => 'limelight_id',
              'foreign' => 'news_id'));
+
+        $this->hasMany('Song as Songs', array(
+             'refClass' => 'LimelightSong',
+             'local' => 'limelight_id',
+             'foreign' => 'song_id'));
 
         $this->hasMany('Wiki as Wikis', array(
              'refClass' => 'LimelightWiki',
@@ -283,13 +299,17 @@ abstract class BaseLimelight extends Item
              'local' => 'id',
              'foreign' => 'limelight_id'));
 
-        $this->hasMany('LimelightSpecification as Specifications', array(
-             'local' => 'id',
-             'foreign' => 'source_id'));
-
         $this->hasMany('LimelightNews', array(
              'local' => 'id',
              'foreign' => 'limelight_id'));
+
+        $this->hasMany('LimelightSong as LimelightSongs', array(
+             'local' => 'id',
+             'foreign' => 'limelight_id'));
+
+        $this->hasMany('LimelightSpecification as Specifications', array(
+             'local' => 'id',
+             'foreign' => 'source_id'));
 
         $this->hasMany('NewsLink as NewsLinks', array(
              'local' => 'id',

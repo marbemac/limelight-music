@@ -4,6 +4,7 @@ Badge:
     type: user
     description: |
       Flag items that are eventually removed for the reason you specified
+    site: music
     BadgeLevels: [bl_janitor1, bl_janitor2]
 
   autobiographer:
@@ -11,6 +12,7 @@ Badge:
     type: user
     description: |
       Complete all profile fields
+    site: music
     BadgeLevels: [bl_autobiographer1]
 
   sheep:
@@ -18,6 +20,7 @@ Badge:
     type: user
     description: |
       Follow users
+    site: music
     BadgeLevels: [bl_sheep1, bl_sheep2]
 
   king:
@@ -25,6 +28,7 @@ Badge:
     type: user
     description: |
       Gain followers
+    site: music
     BadgeLevels: [bl_king1, bl_king2, bl_king3, bl_king4]
 
   reporter:
@@ -41,6 +45,14 @@ Badge:
       Add tags to news stories that get a score of at least 5
     BadgeLevels: [bl_news_tagger1, bl_news_tagger2]
 
+  song_tagger:
+    name: Song Tagger
+    type: song
+    description: |
+      Add tags to songs that get a score of at least 5
+    site: music
+    BadgeLevels: [bl_song_tagger1, bl_song_tagger2]
+
   news_linker:
     name: News Link
     type: news
@@ -53,6 +65,7 @@ Badge:
     type: user
     description: |
       Login in at least once a day
+    site: music
     BadgeLevels: [bl_loyalty1, bl_loyalty2, bl_loyalty3, bl_loyalty4]
 
   critic:
@@ -60,6 +73,7 @@ Badge:
     type: interact
     description: |
       Downvote your first item
+    site: music
     BadgeLevels: [bl_critic1]
 
   spectacular:
@@ -74,6 +88,7 @@ Badge:
     type: contribute
     description: |
       Submit a comment that reaches a score of at least 5
+    site: music
     BadgeLevels: [bl_commentator1, bl_commentator2, bl_commentator3, bl_commentator4]
 
   wikiwhat:
@@ -81,13 +96,15 @@ Badge:
     type: limelight
     description: |
       Submit a limelight wiki revision that reaches a score of at least 5
+    site: music
     BadgeLevels: [bl_wikiwhat1, bl_wikiwhat2, bl_wikiwhat3, bl_wikiwhat4]
 
   foresight:
     name: Foresight
     type: limelight
     description: |
-      Suggest a limelight that is accepted
+      Suggest a limelight that is approved
+    site: music
     BadgeLevels: [bl_foresight1, bl_foresight2, bl_foresight3]
 
   brainstorm:
@@ -125,11 +142,20 @@ Badge:
       Submit a news story that is favorited by at least 5 users
     BadgeLevels: [bl_nfave1, bl_nfave2, bl_nfave3, bl_nfave4]
 
+  song_fave:
+    name: Song Fave
+    type: song
+    description: |
+      Submit a song that is favorited by at least 5 users
+    site: music
+    BadgeLevels: [bl_sfave1, bl_sfave2, bl_sfave3, bl_sfave4]
+
   limelight_fave:
     name: Limelight Fave
     type: limelight
     description: |
       Suggest a limelight that is favorited by at least 15 users
+    site: music
     BadgeLevels: [bl_llfave1, bl_llfave2, bl_llfave3, bl_llfave4]
 
   goldenpen:
@@ -144,13 +170,15 @@ Badge:
     type: user
     description: |
       Earn 20 badges to their max level
+    site: music
     BadgeLevels: [bl_nerd1]
 
   supporter:
     name: Supporter
     type: user
     description: |
-      Donate any amout to tech limelight
+      Donate any amount to music limelight
+    site: music
     BadgeLevels: [bl_supporter1]
 
   opinionated:
@@ -172,6 +200,7 @@ Badge:
     type: user
     description: |
       Upload a new profile image
+    site: music
     BadgeLevels: [bl_selfportrait1]
 
   popular:
@@ -179,6 +208,7 @@ Badge:
     type: user
     description: |
       Accumulate 600 profile views for a bronze badge, 2000 profile views for a silver badge
+    site: music
     BadgeLevels: [bl_popular1, bl_popular2]
 
   popularlimelight:
@@ -186,6 +216,7 @@ Badge:
     type: limelight
     description: |
       Suggest limelights that accumulate at least 300 views
+    site: music
     BadgeLevels: [bl_popularlimelight1, bl_popularlimelight2, bl_popularlimelight3]
 
   popularnews:
@@ -194,6 +225,14 @@ Badge:
     description: |
       Submit news stories that accumulate at least 150 views
     BadgeLevels: [bl_popularnews1, bl_popularnews2, bl_popularnews3]
+
+  popularsong:
+    name: Popular Song
+    type: song
+    description: |
+      Submit songs that accumulate at least 1000 plays
+    site: music
+    BadgeLevels: [bl_popularsong1, bl_popularsong2, bl_popularsong3]
 
   verypopularlimelight:
     name: Very Popular Limelight
@@ -208,3 +247,11 @@ Badge:
     description: |
       Submit news stories that accumulate at least 500 views
     BadgeLevels: [bl_verypopularnews1, bl_verypopularnews2, bl_verypopularnews4, bl_verypopularnews3]
+
+  verypopularsong:
+    name: Very Popular Song
+    type: song
+    description: |
+      Submit songs that accumulate at least 10000 plays
+    site: music
+    BadgeLevels: [bl_verypopularsong1, bl_verypopularsong2, bl_verypopularsong4, bl_verypopularsong3]

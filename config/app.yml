@@ -17,12 +17,13 @@ all:
     profile_id:   UA-6788018-1
     tracker:      google
 
-  custom_css_version:  4
-  library_css_version: 2
-  custom_js_version:   6
-  library_js_version:  6
-  site_version:        4
-  site_name:          tech limelight
+  custom_css_version:  1
+  library_css_version: 1
+  custom_js_version:   1
+  library_js_version:  1
+  site_version:        1
+  site_name:           Music Limelight
+  site_type:           music
 
   # used by janrain in sfGuardAuth tokenize function
   rpx_api_key:          eb14d9c6e438bab0bc18ac214ee3cabfa93124e7
@@ -39,10 +40,6 @@ all:
 
   beta:
     pass:                    ilovelimelight
-    giveaway_group:          gadgets
-    giveaway_group_code:     2
-    giveaway_product:        Ipod Shuffle
-    giveaway_guess:          MP3 Player
 
   # flag_val:         minimum number of users that must flag an item before it is removed and flagged for review
   # ms_*:             minimum score required to perform the action indicated by *
@@ -96,6 +93,21 @@ all:
     add_tags_max:           10
     add_limelights_min:     1
     add_limelights_max:     5
+  song:
+    image_path:             /uploads/songs
+    flag_val:               10
+    ms_add:                 0
+    ms_flag:                0
+    feed_num:               20
+    feed_max_char_count:    200
+    # used on news pages, the number of days in seconds chart info etc should be pulled from
+    chart_stat_pullback:    864000
+    search_limit:           20
+    # the min and max number of tags/limelights that must be attached to a news story that is being submitted
+    add_tags_min:           0
+    add_tags_max:           10
+    add_limelights_min:     1
+    add_limelights_max:     6
   limelight:
     image_path:             /uploads/ll_images
     tag_num:                10

@@ -2,9 +2,8 @@
   <a id="h_logo" href="<?php echo url_for('@homepage') ?>"><img src="/images/header_logo.png" alt="tech limelight logo image" /></a>
   <?php echo image_tag('beta_sign.png', array('id' => 'h_beta_sign')) ?>
 
-  <?php echo link_to('add news', '@news_add', array('class' => 'h_link_1 rnd_3', 'id' => 'h_news')) ?>
-  <?php echo link_to('add limelights', '@lime_suggest', array('class' => 'h_link_1 rnd_3', 'id' => 'h_limelight')) ?>
-  <?php echo link_to('product finder', '@homepage', array('class' => 'h_link_2 rnd_3', 'id' => 'h_finder')) ?>
+  <?php echo link_to('add song', '@song_add', array('class' => 'h_link_1 rnd_3', 'id' => 'h_news')) ?>
+  <?php echo link_to('add limelight', '@lime_suggest', array('class' => 'h_link_1 rnd_3', 'id' => 'h_limelight')) ?>
   <?php echo link_to('help', '@homepage', array('class' => 'h_link_2 rnd_3', 'id' => 'h_help')) ?>
 
   <div id="h_search" class="rnd_3">

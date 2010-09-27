@@ -11,72 +11,6 @@
 <?php include_partial('user/profileNav', array('user' => $user, 'page' => 'stat_revenue')) ?>
 <div class="content_panel">
 
-  <?php if ($me): ?>
-  <div class="user_revenue">
-    <h1>Revenue</h1>
-    <div class="clear"></div>
-    <div class="revenue_box">
-      <div class="popularity rnd_3">
-        <span>popularity since last distribution</span>
-        <?php echo $revenue['revenue']['popularity'] ?>
-      </div>
-      <div class="points rnd_3">
-        <span>unclaimed cash balance</span>
-        $<?php echo $revenue['revenue']['unclaimed'] ?>
-      </div>
-      <div class="redeem rnd_3"><?php echo link_to('redeem', 'user_redeem') ?></div>
-    </div>
-    <p class="description rnd_3">
-      <?php echo sfConfig::get('app_site_name') ?> pays you for contributing popular content. Twice a week, cash* is
-      distributed to the accounts of top users. The amount of cash distributed is based on the amount of revenue generated
-      by <?php echo sfConfig::get('app_site_name') ?> since the last distribution. Become a top user by increasing your
-      popularity score. The popularity score is a combination of changes in your account score,
-      your community participation, and our secret sauce.
-      <span>* a heads up, eventually we plan to move to a points system with rewards from partners</span>
-    </p>
-    <div class="clear"></div>
-
-    <ul class="claims">
-      <li class="h">
-        <div >amount</div>
-        <div>popularity</div>
-        <div>status</div>
-        <div>distributed on</div>
-        <div>claimed on</div>
-      </li>
-
-      <?php if (count($claims) == 0): ?>
-      <li><div>none</div></li>
-      <?php endif; ?>
-
-      <?php foreach ($claims as $key => $claim): ?>
-      <?php $key++ ?>
-
-      <li data-group="<?php echo floor($key/sfConfig::get('app_user_claimlist_max')) ?>" class="<?php echo 'claims_'.floor($key/sfConfig::get('app_user_claimlist_max')) ?> <?php echo ($key != 1) ? 'hide' : '' ?>">
-        <div>$<?php echo $claim['amount'] ?></div>
-        <div><?php echo $claim['popularity'] ?></div>
-        <div class="<?php echo ($claim['claimed']) ? 'claimed' : 'unclaimed' ?> rnd_3">
-          <?php
-          if ($claim['amount'] > 0)
-            echo ($claim['claimed']) ? 'claimed' : 'unclaimed';
-          else
-            echo 'N/A';
-          ?>
-        </div>
-        <div><?php echo date('M d, Y', strtotime($claim['created_at'])) ?></div>
-        <div><?php echo $claim['claim_date'] ? date('M d, Y', strtotime($claim['claim_date'])) : 'N/A' ?></div>
-      </li>
-      <?php endforeach ?>
-    </ul>
-    
-    <div class="clear"></div>
-    <?php if (count($claims) > 1): ?>
-    <div class="claims_show_more">show more claim history</div>
-    <?php endif ?>
-  </div>
-  <?php endif ?>
-  
-
   <div class="user_stats">
     <h1>Statistics</h1>
     <div class="clear"></div>
@@ -123,9 +57,9 @@
     <h2><span>></span>What types of items <?php echo $me ? 'am I' : 'is '.$user->username ?> contributing?</h2>
     <ul class="rated_stats">
       <li>
-        <span>news stories</span>
-        <div id="contributed_stats_News" class="<?php echo $stats['contributed_stats']['News'] > 0 ? 'pos' : '' ?> rnd_3">
-          <?php echo $stats['contributed_stats']['News']; ?>
+        <span>songs</span>
+        <div id="contributed_stats_Song" class="<?php echo $stats['contributed_stats']['Song'] > 0 ? 'pos' : '' ?> rnd_3">
+          <?php echo $stats['contributed_stats']['Song']; ?>
         </div>
       </li>
 
@@ -137,30 +71,9 @@
       </li>
 
       <li>
-        <span>news tags</span>
-        <div id="contributed_stats_NewsTag" class="<?php echo $stats['contributed_stats']['NewsTag'] > 0 ? 'pos' : '' ?> rnd_3">
-          <?php echo $stats['contributed_stats']['NewsTag']; ?>
-        </div>
-      </li>
-
-      <li>
-        <span>news links</span>
-        <div id="contributed_stats_NewsLink" class="<?php echo $stats['contributed_stats']['NewsLink'] > 0 ? 'pos' : '' ?> rnd_3">
-          <?php echo $stats['contributed_stats']['NewsLink']; ?>
-        </div>
-      </li>
-
-      <li>
-        <span>specifications</span>
-        <div id="contributed_stats_LimelightSpecification" class="<?php echo $stats['contributed_stats']['LimelightSpecification'] > 0 ? 'pos' : '' ?> rnd_3">
-          <?php echo $stats['contributed_stats']['LimelightSpecification']; ?>
-        </div>
-      </li>
-
-      <li>
-        <span>pros & cons</span>
-        <div id="contributed_stats_LimelightProCon" class="<?php echo $stats['contributed_stats']['LimelightProCon'] > 0 ? 'pos' : '' ?> rnd_3">
-          <?php echo $stats['contributed_stats']['LimelightProCon']; ?>
+        <span>item tags</span>
+        <div id="contributed_stats_ItemTag" class="<?php echo $stats['contributed_stats']['ItemTag'] > 0 ? 'pos' : '' ?> rnd_3">
+          <?php echo $stats['contributed_stats']['ItemTag']; ?>
         </div>
       </li>
 
@@ -183,12 +96,12 @@
     <h2><span>></span>Where are <?php echo $me ? 'my' : $user->username.'\'s' ?> account points coming from?</h2>
     <ul class="individual_stats">
       <li>
-        <span>news stories</span>
-        <div id="segmented_stats_News_up" class="up rnd_3"><?php echo $stats['segmented_stats']['News']['up']; ?></div>
-        <div id="segmented_stats_News_overall" class="<?php echo $stats['segmented_stats']['News']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_stats']['News']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_stats']['News']['overall']; ?>
+        <span>songs</span>
+        <div id="segmented_stats_Song_up" class="up rnd_3"><?php echo $stats['segmented_stats']['Song']['up']; ?></div>
+        <div id="segmented_stats_Song_overall" class="<?php echo $stats['segmented_stats']['Song']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_stats']['Song']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
+          <?php echo $stats['segmented_stats']['Song']['overall']; ?>
         </div>
-        <div id="segmented_stats_News_down" class="down rnd_3"><?php echo $stats['segmented_stats']['News']['down']; ?></div>
+        <div id="segmented_stats_Song_down" class="down rnd_3"><?php echo $stats['segmented_stats']['Song']['down']; ?></div>
       </li>
 
       <li>
@@ -201,39 +114,12 @@
       </li>
 
       <li>
-        <span>news tags</span>
-        <div id="segmented_stats_NewsTag_up" class="up rnd_3"><?php echo $stats['segmented_stats']['NewsTag']['up']; ?></div>
-        <div id="segmented_stats_NewsTag_overall" class="<?php echo $stats['segmented_stats']['NewsTag']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_stats']['NewsTag']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_stats']['NewsTag']['overall']; ?>
+        <span>item tags</span>
+        <div id="segmented_stats_ItemTag_up" class="up rnd_3"><?php echo $stats['segmented_stats']['ItemTag']['up']; ?></div>
+        <div id="segmented_stats_ItemTag_overall" class="<?php echo $stats['segmented_stats']['ItemTag']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_stats']['ItemTag']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
+          <?php echo $stats['segmented_stats']['ItemTag']['overall']; ?>
         </div>
-        <div id="segmented_stats_NewsTag_down" class="down rnd_3"><?php echo $stats['segmented_stats']['NewsTag']['down']; ?></div>
-      </li>
-
-      <li>
-        <span>news links</span>
-        <div id="segmented_stats_NewsLink_up" class="up rnd_3"><?php echo $stats['segmented_stats']['NewsLink']['up']; ?></div>
-        <div id="segmented_stats_NewsLink_overall" class="<?php echo $stats['segmented_stats']['NewsLink']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_stats']['NewsLink']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_stats']['NewsLink']['overall']; ?>
-        </div>
-        <div id="segmented_stats_NewsLink_down" class="down rnd_3"><?php echo $stats['segmented_stats']['NewsLink']['overall']; ?></div>
-      </li>
-
-      <li>
-        <span>specifications</span>
-        <div id="segmented_stats_LimelightSpecification_up" class="up rnd_3"><?php echo $stats['segmented_stats']['LimelightSpecification']['up']; ?></div>
-        <div id="segmented_stats_LimelightSpecification_overall" class="<?php echo $stats['segmented_stats']['LimelightSpecification']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_stats']['LimelightSpecification']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_stats']['LimelightSpecification']['overall']; ?>
-        </div>
-        <div id="segmented_stats_LimelightSpecification_down" class="down rnd_3"><?php echo $stats['segmented_stats']['LimelightSpecification']['down']; ?></div>
-      </li>
-
-      <li>
-        <span>pros & cons</span>
-        <div id="segmented_stats_LimelightProCon_up" class="up rnd_3"><?php echo $stats['segmented_stats']['LimelightProCon']['up']; ?></div>
-        <div id="segmented_stats_LimelightProCon_overall" class="<?php echo $stats['segmented_stats']['LimelightProCon']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_stats']['LimelightProCon']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_stats']['LimelightProCon']['overall']; ?>
-        </div>
-        <div id="segmented_stats_LimelightProCon_down" class="down rnd_3"><?php echo $stats['segmented_stats']['LimelightProCon']['down']; ?></div>
+        <div id="segmented_stats_NewsTag_down" class="down rnd_3"><?php echo $stats['segmented_stats']['ItemTag']['down']; ?></div>
       </li>
 
       <li>
@@ -259,12 +145,12 @@
     <h2><span>></span>What <?php echo $me ? 'am I' : 'is '.$user->username ?> rating?</h2>
     <ul class="rated_stats">
       <li>
-        <span>news stories</span>
-        <div id="segmented_rated_stats_News_up" class="up rnd_3"><?php echo $stats['segmented_rated_stats']['News']['up']; ?></div>
-        <div id="segmented_rated_stats_News_overall" class="<?php echo $stats['segmented_rated_stats']['News']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_rated_stats']['News']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_rated_stats']['News']['overall']; ?>
+        <span>songs</span>
+        <div id="segmented_rated_stats_Song_up" class="up rnd_3"><?php echo $stats['segmented_rated_stats']['Song']['up']; ?></div>
+        <div id="segmented_rated_stats_Song_overall" class="<?php echo $stats['segmented_rated_stats']['Song']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_rated_stats']['Song']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
+          <?php echo $stats['segmented_rated_stats']['Song']['overall']; ?>
         </div>
-        <div id="segmented_rated_stats_News_down" class="down rnd_3"><?php echo $stats['segmented_rated_stats']['News']['down']; ?></div>
+        <div id="segmented_rated_stats_Song_down" class="down rnd_3"><?php echo $stats['segmented_rated_stats']['Song']['down']; ?></div>
       </li>
 
       <li>
@@ -277,39 +163,12 @@
       </li>
 
       <li>
-        <span>news tags</span>
-        <div id="segmented_rated_stats_NewsTag_up" class="up rnd_3"><?php echo $stats['segmented_rated_stats']['NewsTag']['up']; ?></div>
-        <div id="segmented_rated_stats_NewsTag_overall" class="<?php echo $stats['segmented_rated_stats']['NewsTag']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_rated_stats']['NewsTag']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_rated_stats']['NewsTag']['overall']; ?>
+        <span>item tags</span>
+        <div id="segmented_rated_stats_ItemTag_up" class="up rnd_3"><?php echo $stats['segmented_rated_stats']['ItemTag']['up']; ?></div>
+        <div id="segmented_rated_stats_ItemTag_overall" class="<?php echo $stats['segmented_rated_stats']['ItemTag']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_rated_stats']['ItemTag']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
+          <?php echo $stats['segmented_rated_stats']['ItemTag']['overall']; ?>
         </div>
-        <div id="segmented_rated_stats_NewsTag_down" class="down rnd_3"><?php echo $stats['segmented_rated_stats']['NewsTag']['down']; ?></div>
-      </li>
-
-      <li>
-        <span>news links</span>
-        <div id="segmented_rated_stats_NewsLink_up" class="up rnd_3"><?php echo $stats['segmented_rated_stats']['NewsLink']['up']; ?></div>
-        <div id="segmented_rated_stats_NewsLink_overall" class="<?php echo $stats['segmented_rated_stats']['NewsLink']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_rated_stats']['NewsLink']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_rated_stats']['NewsLink']['overall']; ?>
-        </div>
-        <div id="segmented_rated_stats_NewsLink_down" class="down rnd_3"><?php echo $stats['segmented_rated_stats']['NewsLink']['overall']; ?></div>
-      </li>
-
-      <li>
-        <span>specifications</span>
-        <div id="segmented_rated_stats_LimelightSpecification_up" class="up rnd_3"><?php echo $stats['segmented_rated_stats']['LimelightSpecification']['up']; ?></div>
-        <div id="segmented_rated_stats_LimelightSpecification_overall" class="<?php echo $stats['segmented_rated_stats']['LimelightSpecification']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_rated_stats']['LimelightSpecification']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_rated_stats']['LimelightSpecification']['overall']; ?>
-        </div>
-        <div id="segmented_rated_stats_LimelightSpecification_down" class="down rnd_3"><?php echo $stats['segmented_rated_stats']['LimelightSpecification']['down']; ?></div>
-      </li>
-
-      <li>
-        <span>pros & cons</span>
-        <div id="segmented_rated_stats_LimelightProCon_up" class="up rnd_3"><?php echo $stats['segmented_rated_stats']['LimelightProCon']['up']; ?></div>
-        <div id="segmented_rated_stats_LimelightProCon_overall" class="<?php echo $stats['segmented_rated_stats']['LimelightProCon']['overall'] > 0 ? 'pos' : '' ?> <?php echo $stats['segmented_rated_stats']['LimelightProCon']['overall'] < 0 ? 'neg' : '' ?> rnd_3">
-          <?php echo $stats['segmented_rated_stats']['LimelightProCon']['overall']; ?>
-        </div>
-        <div id="segmented_rated_stats_LimelightProCon_down" class="down rnd_3"><?php echo $stats['segmented_rated_stats']['LimelightProCon']['down']; ?></div>
+        <div id="segmented_rated_stats_ItemTag_down" class="down rnd_3"><?php echo $stats['segmented_rated_stats']['ItemTag']['down']; ?></div>
       </li>
 
       <li>

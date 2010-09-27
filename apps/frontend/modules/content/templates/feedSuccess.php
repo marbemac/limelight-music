@@ -4,22 +4,15 @@
 //use_stylesheet('filter.css');
 //use_stylesheet('feed.css');
 
-slot('title', 'the latest technology news');
+slot('title', 'uncovering trending songs and artists');
 
 slot('sidebar0');
 end_slot();
-?>
 
-<?php
 $filters = $sf_user->getAttribute('filters');
-
-if ($sf_params->get('action') == 'feed' && ((!$sf_user->isAuthenticated() && $sf_user->getAttribute('show_welcome_splash', true)) || ($sf_user->isAuthenticated() && $sf_user->getGuardUser()->show_welcome_splash)))
-  $feedClass = ' home_welcome_placeholder';
-else
-  $feedClass = '';
 ?>
 
-<div class="content_panel<?php echo $feedClass ?>">
+<div class="content_panel">
   <?php include_partial('feedFilters') ?>
   <ul id="main_feed">
     <?php

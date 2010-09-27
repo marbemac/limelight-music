@@ -14,7 +14,7 @@ abstract class BaseUserScoreFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'amount'         => new sfWidgetFormFilterInput(),
-      'type'           => new sfWidgetFormChoice(array('choices' => array('' => '', 'News' => 'News', 'Comment' => 'Comment', 'NewsTag' => 'NewsTag', 'LimelightProCon' => 'LimelightProCon', 'LimelightReviewPro' => 'LimelightReviewPro', 'LimelightReviewUser' => 'LimelightReviewUser', 'LimelightSpecification' => 'LimelightSpecification', 'LimelightWiki' => 'LimelightWiki'))),
+      'type'           => new sfWidgetFormChoice(array('choices' => array('' => '', 'News' => 'News', 'Comment' => 'Comment', 'ItemTag' => 'ItemTag', 'LimelightProCon' => 'LimelightProCon', 'LimelightReviewPro' => 'LimelightReviewPro', 'LimelightReviewUser' => 'LimelightReviewUser', 'LimelightSpecification' => 'LimelightSpecification', 'LimelightWiki' => 'LimelightWiki'))),
       'status'         => new sfWidgetFormChoice(array('choices' => array('' => '', 'Flagged' => 'Flagged', 'Struck' => 'Struck', 'Disabled' => 'Disabled', 'Active' => 'Active'))),
       'item_id'        => new sfWidgetFormFilterInput(),
       'user_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Rater'), 'add_empty' => true)),
@@ -26,7 +26,7 @@ abstract class BaseUserScoreFormFilter extends BaseFormFilterDoctrine
 
     $this->setValidators(array(
       'amount'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'type'           => new sfValidatorChoice(array('required' => false, 'choices' => array('News' => 'News', 'Comment' => 'Comment', 'NewsTag' => 'NewsTag', 'LimelightProCon' => 'LimelightProCon', 'LimelightReviewPro' => 'LimelightReviewPro', 'LimelightReviewUser' => 'LimelightReviewUser', 'LimelightSpecification' => 'LimelightSpecification', 'LimelightWiki' => 'LimelightWiki'))),
+      'type'           => new sfValidatorChoice(array('required' => false, 'choices' => array('News' => 'News', 'Comment' => 'Comment', 'ItemTag' => 'ItemTag', 'LimelightProCon' => 'LimelightProCon', 'LimelightReviewPro' => 'LimelightReviewPro', 'LimelightReviewUser' => 'LimelightReviewUser', 'LimelightSpecification' => 'LimelightSpecification', 'LimelightWiki' => 'LimelightWiki'))),
       'status'         => new sfValidatorChoice(array('required' => false, 'choices' => array('Flagged' => 'Flagged', 'Struck' => 'Struck', 'Disabled' => 'Disabled', 'Active' => 'Active'))),
       'item_id'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'user_id'        => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Rater'), 'column' => 'id')),

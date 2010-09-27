@@ -1,3 +1,4 @@
+---
 sfGuardUser:
   package: sfDoctrineGuardPlugin.lib.model.doctrine
   actAs: [Timestampable]

@@ -11,7 +11,7 @@
  * @property integer $score
  * @property integer $user_id
  * @property sfGuardUser $User
- * @property Doctrine_Collection $NewsTags
+ * @property Doctrine_Collection $ItemTags
  * 
  * @method integer             getId()       Returns the current record's "id" value
  * @method string              getName()     Returns the current record's "name" value
@@ -19,14 +19,14 @@
  * @method integer             getScore()    Returns the current record's "score" value
  * @method integer             getUserId()   Returns the current record's "user_id" value
  * @method sfGuardUser         getUser()     Returns the current record's "User" value
- * @method Doctrine_Collection getNewsTags() Returns the current record's "NewsTags" collection
+ * @method Doctrine_Collection getItemTags() Returns the current record's "ItemTags" collection
  * @method Tag                 setId()       Sets the current record's "id" value
  * @method Tag                 setName()     Sets the current record's "name" value
  * @method Tag                 setStatus()   Sets the current record's "status" value
  * @method Tag                 setScore()    Sets the current record's "score" value
  * @method Tag                 setUserId()   Sets the current record's "user_id" value
  * @method Tag                 setUser()     Sets the current record's "User" value
- * @method Tag                 setNewsTags() Sets the current record's "NewsTags" collection
+ * @method Tag                 setItemTags() Sets the current record's "ItemTags" collection
  * 
  * @package    limelight
  * @subpackage model
@@ -87,7 +87,7 @@ abstract class BaseTag extends sfDoctrineRecord
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
 
-        $this->hasMany('NewsTag as NewsTags', array(
+        $this->hasMany('ItemTag as ItemTags', array(
              'local' => 'id',
              'foreign' => 'tag_id'));
 

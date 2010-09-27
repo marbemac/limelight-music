@@ -17,7 +17,7 @@ abstract class BaseUserScoreForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'             => new sfWidgetFormInputHidden(),
       'amount'         => new sfWidgetFormInputText(),
-      'type'           => new sfWidgetFormChoice(array('choices' => array('News' => 'News', 'Comment' => 'Comment', 'NewsTag' => 'NewsTag', 'LimelightProCon' => 'LimelightProCon', 'LimelightReviewPro' => 'LimelightReviewPro', 'LimelightReviewUser' => 'LimelightReviewUser', 'LimelightSpecification' => 'LimelightSpecification', 'LimelightWiki' => 'LimelightWiki'))),
+      'type'           => new sfWidgetFormChoice(array('choices' => array('News' => 'News', 'Comment' => 'Comment', 'ItemTag' => 'ItemTag', 'LimelightProCon' => 'LimelightProCon', 'LimelightReviewPro' => 'LimelightReviewPro', 'LimelightReviewUser' => 'LimelightReviewUser', 'LimelightSpecification' => 'LimelightSpecification', 'LimelightWiki' => 'LimelightWiki'))),
       'status'         => new sfWidgetFormChoice(array('choices' => array('Flagged' => 'Flagged', 'Struck' => 'Struck', 'Disabled' => 'Disabled', 'Active' => 'Active'))),
       'item_id'        => new sfWidgetFormInputText(),
       'user_id'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Rater'), 'add_empty' => true)),
@@ -30,7 +30,7 @@ abstract class BaseUserScoreForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'             => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'amount'         => new sfValidatorInteger(array('required' => false)),
-      'type'           => new sfValidatorChoice(array('choices' => array(0 => 'News', 1 => 'Comment', 2 => 'NewsTag', 3 => 'LimelightProCon', 4 => 'LimelightReviewPro', 5 => 'LimelightReviewUser', 6 => 'LimelightSpecification', 7 => 'LimelightWiki'), 'required' => false)),
+      'type'           => new sfValidatorChoice(array('choices' => array(0 => 'News', 1 => 'Comment', 2 => 'ItemTag', 3 => 'LimelightProCon', 4 => 'LimelightReviewPro', 5 => 'LimelightReviewUser', 6 => 'LimelightSpecification', 7 => 'LimelightWiki'), 'required' => false)),
       'status'         => new sfValidatorChoice(array('choices' => array(0 => 'Flagged', 1 => 'Struck', 2 => 'Disabled', 3 => 'Active'), 'required' => false)),
       'item_id'        => new sfValidatorInteger(array('required' => false)),
       'user_id'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Rater'), 'required' => false)),

@@ -284,6 +284,15 @@ news_show:
   url:   /news/:title_slug
   param: { module: news, action: show }
 
+# news rules
+song_add:
+  url:   /songs/add
+  param: { module: song, action: add }
+
+song_add_process:
+  url:   /songs/add/process
+  param: { module: song, action: processAdd }
+
 # comment rules
 comment_add_form:
   url:   /comments/add/form/:type/:item_id
@@ -732,6 +741,14 @@ feed_news_category:
 feed_news_category_more:
   url:   /feed/news/:category/page/:page
   param: { module: content, action: feed, type: News }
+
+feed_song_category:
+  url:   /feed/songs/:category
+  param: { module: content, action: feed, type: Song }
+
+feed_song_category_more:
+  url:   /feed/songs/:category/page/:page
+  param: { module: content, action: feed, type: Song }
 
 feed_limelight_category:
   url:   /feed/limelights/:category

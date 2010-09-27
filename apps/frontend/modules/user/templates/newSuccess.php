@@ -3,7 +3,7 @@
 <div class="content_panel">
   <div class="form">
     <h2>Create a New Account</h2>
-    <div id="r_user_url">your personal url: techlimelight.com/users/<span><?php echo ($form['username']->getValue() ? $form['username']->getValue() : '?') ?></span></div>
+    <div id="r_user_url">your personal url: musiclimelight.com/users/<span><?php echo ($form['username']->getValue() ? $form['username']->getValue() : '?') ?></span></div>
     <ul>
       <?php echo form_tag_for($form, '@user') ?>
         <?php foreach ($form as $field): ?>

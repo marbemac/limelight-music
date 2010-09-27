@@ -61,7 +61,7 @@ abstract class BaseUserScore extends sfDoctrineRecord
              array(
               0 => 'News',
               1 => 'Comment',
-              2 => 'NewsTag',
+              2 => 'ItemTag',
               3 => 'LimelightProCon',
               4 => 'LimelightReviewPro',
               5 => 'LimelightReviewUser',

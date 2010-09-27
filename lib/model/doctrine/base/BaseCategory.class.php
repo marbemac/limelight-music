@@ -11,6 +11,7 @@
  * @property integer $num_limelights
  * @property integer $num_news
  * @property string $amazon_category
+ * @property enum $site
  * @property integer $parent_id
  * @property Category $Parent
  * @property Doctrine_Collection $Children
@@ -25,6 +26,7 @@
  * @method integer             getNumLimelights()     Returns the current record's "num_limelights" value
  * @method integer             getNumNews()           Returns the current record's "num_news" value
  * @method string              getAmazonCategory()    Returns the current record's "amazon_category" value
+ * @method enum                getSite()              Returns the current record's "site" value
  * @method integer             getParentId()          Returns the current record's "parent_id" value
  * @method Category            getParent()            Returns the current record's "Parent" value
  * @method Doctrine_Collection getChildren()          Returns the current record's "Children" collection
@@ -38,6 +40,7 @@
  * @method Category            setNumLimelights()     Sets the current record's "num_limelights" value
  * @method Category            setNumNews()           Sets the current record's "num_news" value
  * @method Category            setAmazonCategory()    Sets the current record's "amazon_category" value
+ * @method Category            setSite()              Sets the current record's "site" value
  * @method Category            setParentId()          Sets the current record's "parent_id" value
  * @method Category            setParent()            Sets the current record's "Parent" value
  * @method Category            setChildren()          Sets the current record's "Children" collection
@@ -93,6 +96,15 @@ abstract class BaseCategory extends sfDoctrineRecord
         $this->hasColumn('amazon_category', 'string', 100, array(
              'type' => 'string',
              'length' => 100,
+             ));
+        $this->hasColumn('site', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'tech',
+              1 => 'music',
+             ),
+             'default' => 'tech',
              ));
         $this->hasColumn('parent_id', 'integer', 4, array(
              'type' => 'integer',

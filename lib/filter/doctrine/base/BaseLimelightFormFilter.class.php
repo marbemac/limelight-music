@@ -53,8 +53,11 @@ abstract class BaseLimelightFormFilter extends ItemFormFilter
     $this->widgetSchema   ['module_products'] = new sfWidgetFormFilterInput();
     $this->validatorSchema['module_products'] = new sfValidatorPass(array('required' => false));
 
-    $this->widgetSchema   ['limelight_type'] = new sfWidgetFormChoice(array('choices' => array('' => '', 'product' => 'product', 'technology' => 'technology', 'company' => 'company', 'source' => 'source')));
-    $this->validatorSchema['limelight_type'] = new sfValidatorChoice(array('required' => false, 'choices' => array('product' => 'product', 'technology' => 'technology', 'company' => 'company', 'source' => 'source')));
+    $this->widgetSchema   ['limelight_type'] = new sfWidgetFormChoice(array('choices' => array('' => '', 'product' => 'product', 'technology' => 'technology', 'company' => 'company', 'source' => 'source', 'artist' => 'artist')));
+    $this->validatorSchema['limelight_type'] = new sfValidatorChoice(array('required' => false, 'choices' => array('product' => 'product', 'technology' => 'technology', 'company' => 'company', 'source' => 'source', 'artist' => 'artist')));
+
+    $this->widgetSchema   ['site'] = new sfWidgetFormChoice(array('choices' => array('' => '', 'tech' => 'tech', 'music' => 'music')));
+    $this->validatorSchema['site'] = new sfValidatorChoice(array('required' => false, 'choices' => array('tech' => 'tech', 'music' => 'music')));
 
     $this->widgetSchema   ['company_name'] = new sfWidgetFormFilterInput();
     $this->validatorSchema['company_name'] = new sfValidatorPass(array('required' => false));
@@ -73,6 +76,9 @@ abstract class BaseLimelightFormFilter extends ItemFormFilter
 
     $this->widgetSchema   ['newss_list'] = new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'News'));
     $this->validatorSchema['newss_list'] = new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'News', 'required' => false));
+
+    $this->widgetSchema   ['songs_list'] = new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Song'));
+    $this->validatorSchema['songs_list'] = new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Song', 'required' => false));
 
     $this->widgetSchema   ['wikis_list'] = new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Wiki'));
     $this->validatorSchema['wikis_list'] = new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Wiki', 'required' => false));
@@ -116,6 +122,24 @@ abstract class BaseLimelightFormFilter extends ItemFormFilter
     $query
       ->leftJoin($query->getRootAlias().'.LimelightNews LimelightNews')
       ->andWhereIn('LimelightNews.news_id', $values)
+    ;
+  }
+
+  public function addSongsListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query
+      ->leftJoin($query->getRootAlias().'.LimelightSong LimelightSong')
+      ->andWhereIn('LimelightSong.song_id', $values)
     ;
   }
 
@@ -177,12 +201,14 @@ abstract class BaseLimelightFormFilter extends ItemFormFilter
       'module_procon' => 'Text',
       'module_products' => 'Text',
       'limelight_type' => 'Enum',
+      'site' => 'Enum',
       'company_name' => 'Text',
       'company_id' => 'ForeignKey',
       'is_stub' => 'Number',
       'name_slug' => 'Text',
       'categories_list' => 'ManyKey',
       'newss_list' => 'ManyKey',
+      'songs_list' => 'ManyKey',
       'wikis_list' => 'ManyKey',
       'followers_list' => 'ManyKey',
     ));

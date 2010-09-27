@@ -81,10 +81,11 @@ class UserScoreTable extends Doctrine_Table
 
     $stats['contributed_stats'] = array(
         'News' => 0,
+        'Song' => 0,
         'Comment' => 0,
         'LimelightProCon' => 0,
         'badge' => 0,
-        'NewsTag' => 0,
+        'ItemTag' => 0,
         'LimelightSpecification' => 0,
         'Wiki' => 0,
         'NewsLink' => 0,
@@ -107,10 +108,11 @@ class UserScoreTable extends Doctrine_Table
 
     $stats['segmented_stats'] = array(
         'News' => array('up' => 0, 'overall' => 0, 'down' => 0),
+        'Song' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'Comment' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'LimelightProCon' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'badge' => array('up' => 0, 'overall' => 0, 'down' => 0),
-        'NewsTag' => array('up' => 0, 'overall' => 0, 'down' => 0),
+        'ItemTag' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'LimelightSpecification' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'Wiki' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'NewsLink' => array('up' => 0, 'overall' => 0, 'down' => 0)
@@ -136,10 +138,11 @@ class UserScoreTable extends Doctrine_Table
 
     $stats['segmented_rated_stats'] = array(
         'News' => array('up' => 0, 'overall' => 0, 'down' => 0),
+        'Song' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'Comment' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'LimelightProCon' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'badge' => array('up' => 0, 'overall' => 0, 'down' => 0),
-        'NewsTag' => array('up' => 0, 'overall' => 0, 'down' => 0),
+        'ItemTag' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'LimelightSpecification' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'Wiki' => array('up' => 0, 'overall' => 0, 'down' => 0),
         'NewsLink' => array('up' => 0, 'overall' => 0, 'down' => 0)

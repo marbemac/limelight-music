@@ -15,7 +15,7 @@
     <?php echo link_to('badges', 'user_badge', array('username' => $user->username), 'class=rnd_3'.($page == 'badge' ? ' on' : '')) ?>
   </li>
   <li class="rnd_3">
-    <?php echo link_to('stats & revenue', 'user_stat_revenue', array('username' => $user->username), 'class=rnd_3'.($page == 'stat_revenue' ? ' on' : '')) ?>
+    <?php echo link_to('stats', 'user_stat_revenue', array('username' => $user->username), 'class=rnd_3'.($page == 'stat_revenue' ? ' on' : '')) ?>
   </li>
   <?php if ($sf_user->isAuthenticated() && $sf_user->getGuardUser()->username == $user->username): ?>
     <li class="rnd_3">

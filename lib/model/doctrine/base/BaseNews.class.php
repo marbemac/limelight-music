@@ -166,7 +166,7 @@ abstract class BaseNews extends Item
              'local' => 'id',
              'foreign' => 'News_id'));
 
-        $this->hasMany('NewsTag as Tags', array(
+        $this->hasMany('ItemTag as Tags', array(
              'local' => 'id',
              'foreign' => 'item_id'));
 

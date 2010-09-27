@@ -5,7 +5,7 @@ $filters = $sf_user->getAttribute('filters');
 <div class="feed_filter">
   <div class="header">showing </div>
   <div class="filter_group feed_type rnd_5">
-    <a href="<?php echo url_for('feed_news_category', array('category' => $sf_params->get('category', ''))) ?>" class="news rnd3_5 <?php echo $filters['feed_type'] == 'News' ? 'on' : 'hide' ?>" data-value="News">news stories</a>
+    <a href="<?php echo url_for('feed_song_category', array('category' => $sf_params->get('category', ''))) ?>" class="news rnd3_5 <?php echo $filters['feed_type'] == 'Song' ? 'on' : 'hide' ?>" data-value="Song">songs</a>
     <a href="<?php echo url_for('feed_limelight_category', array('category' => $sf_params->get('category', ''))) ?>" class="limelight rnd3_5 <?php echo $filters['feed_type'] == 'Limelight' ? 'on' : 'hide' ?>" data-value="Limelight">limelights</a>
   </div>
 

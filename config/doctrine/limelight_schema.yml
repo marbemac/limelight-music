@@ -138,6 +138,7 @@ Category:
     num_limelights: { type: integer(4), default: 0 }
     num_news: { type: integer(4), default: 0 }
     amazon_category: { type: string(100), default: null }
+    site: { type: enum, values: [tech, music], default: tech }
     parent_id: integer(4)
   indexes:
     index:                { fields: [parent_id] }
@@ -203,16 +204,16 @@ Limelight:
     module_features:               { type: bool, default: 0 }
     module_procon:                 { type: bool, default: 0 }
     module_products:               { type: bool, default: 0 }
-    limelight_type:                { type: enum, values: [product, technology, company, source], default: product }
+    limelight_type:                { type: enum, values: [product, technology, company, source, artist], default: product }
+    site:                          { type: enum, values: [tech, music], default: tech }
     company_name:                  { type: string(255), default: null }
     company_id:                    { type: integer(4) }
     is_stub:                       { type: integer(1), default: 1 }
-  indexes:
-    manufacturerIndex:             { fields: [manufacturer] }
   relations:
     User:                          { class: sfGuardUser, local: user_id, foreignAlias: Limelights, foreign: id, onDelete: CASCADE }
     Categories:                    { class: Category, refClass: CategoryLimelight, local: limelight_id, foreign: category_id }
     Newss:                         { class: News, refClass: LimelightNews, foreignAlias: Limelights }
+    Songs:                         { class: Song, refClass: LimelightSong, foreignAlias: Limelights }
     Wikis:                         { class: Wiki, refClass: LimelightWiki, local: limelight_id, foreign: wiki_group_id, foreignAlias: Limelights }
     Company:                       { class: Limelight, local: company_id, foreignAlias: Products }
 
@@ -226,7 +227,7 @@ LimelightSlice:
   columns:
     name:                          { type: string(255), notnull: true }
     profile_image:                 { type: string(255), default: limelight_profile_default.gif }
-    slice_type:                    { type: enum, values: [model, version], default: product }
+    slice_type:                    { type: enum, values: [model, version, album], default: product }
     user_id:                       { type: integer(4) }
     item_id:                       { type: integer(4) }
   relations:
@@ -298,6 +299,144 @@ Wiki:
 
 ##################
 # END LIMELIGHT
+##################
+
+##################
+# NEWS
+##################
+
+News:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  actAs:
+    Sluggable:
+      fields: [title]
+      name: title_slug
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+    content:
+      type: string(2000)
+      notnull: true
+    news_image:
+      type: string(255)
+      default: news_profile_default.gif
+    score:
+      type: integer(4)
+      default: 0
+      notnull: true
+    total_views:
+      type: integer(4)
+      default: 0
+    favorited_count:
+      type: integer(4)
+      default: 0
+    favorite_badge_flag: { type: integer(1), default: 0 }
+    tag_lock:
+      type: integer(3)
+      default: 0
+    comment_lock:
+      type: integer(3)
+      default: 0
+    user_id: integer(4)
+  indexes:
+    index:                { fields: [user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: News
+      onDelete: CASCADE
+
+LimelightNews:
+  columns:
+    limelight_id: integer(4)
+    news_id: integer(4)
+  relations:
+    Limelight:
+      local: limelight_id
+      foreign: id
+      foreignAlias: LimelightNews
+      onDelete: CASCADE
+    News:
+      local: news_id
+      foreign: id
+      foreignAlias: NewsLimelights
+      onDelete: CASCADE
+
+##################
+# END NEWS
+##################
+
+##################
+# SONG
+##################
+
+Song:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  actAs:
+    Sluggable:
+      fields: [title]
+      name: name_slug
+  columns:
+    name:
+      type: string(255)
+      notnull: true
+    content:
+      type: string(2000)
+      notnull: true
+    song_image:
+      type: string(255)
+      default: news_profile_default.gif
+    score:
+      type: integer(4)
+      default: 0
+      notnull: true
+    total_plays:
+      type: integer(4)
+      default: 0
+    favorited_count:
+      type: integer(4)
+      default: 0
+    favorite_badge_flag: { type: integer(1), default: 0 }
+    tag_lock:
+      type: integer(3)
+      default: 0
+    comment_lock:
+      type: integer(3)
+      default: 0
+    user_id: integer(4)
+  indexes:
+    index:                { fields: [user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: News
+      onDelete: CASCADE
+
+LimelightSong:
+  columns:
+    limelight_id: integer(4)
+    song_id: integer(4)
+  relations:
+    Limelight:
+      local: limelight_id
+      foreign: id
+      foreignAlias: LimelightSongs
+      onDelete: CASCADE
+    Song:
+      local: song_id
+      foreign: id
+      foreignAlias: SongLimelights
+      onDelete: CASCADE
+
+##################
+# END SONG
 ##################
 
 #################
@@ -393,67 +532,6 @@ LimelightSpecification:
 # END SPECIFICATIONS
 #############
 
-News:
-  inheritance:
-    type:             concrete
-    extends:          Item
-  actAs:
-    Sluggable:
-      fields: [title]
-      name: title_slug
-  columns:
-    title:
-      type: string(255)
-      notnull: true
-    content:
-      type: string(2000)
-      notnull: true
-    news_image:
-      type: string(255)
-      default: news_profile_default.gif
-    score:
-      type: integer(4)
-      default: 0
-      notnull: true
-    total_views:
-      type: integer(4)
-      default: 0
-    favorited_count:
-      type: integer(4)
-      default: 0
-    favorite_badge_flag: { type: integer(1), default: 0 }
-    tag_lock:
-      type: integer(3)
-      default: 0
-    comment_lock:
-      type: integer(3)
-      default: 0
-    user_id: integer(4)
-  indexes:
-    index:                { fields: [user_id] }
-  relations:
-    User:
-      class: sfGuardUser
-      local: user_id
-      foreignAlias: News
-      onDelete: CASCADE
-
-LimelightNews:
-  columns:
-    limelight_id: integer(4)
-    news_id: integer(4)
-  relations:
-    Limelight:
-      local: limelight_id
-      foreign: id
-      foreignAlias: LimelightNews
-      onDelete: CASCADE
-    News:
-      local: news_id
-      foreign: id
-      foreignAlias: NewsLimelights
-      onDelete: CASCADE
-
 #########
 # LINKS
 #########
@@ -516,6 +594,7 @@ Comment:
       notnull: true
     user_id: integer(4)
     News_id: { type: integer(4), default: null }
+    Song_id: { type: integer(4), default: null }
     Wiki_id: { type: integer(4), default: null }
     LimelightReviewUser_id: { type: integer(4), default: null }
     LimelightReviewPro_id: { type: integer(4), default: null }
@@ -536,6 +615,10 @@ Comment:
       onDelete: CASCADE
     News:
       local: News_id
+      foreignAlias: Comments
+      onDelete: CASCADE
+    Song:
+      local: Song_id
       foreignAlias: Comments
       onDelete: CASCADE
     LimelightReviewUser:
@@ -577,7 +660,7 @@ Tag:
       foreignAlias: NewTags
       onDelete: CASCADE
 
-NewsTag:
+ItemTag:
   inheritance:
     type:             concrete
     extends:          Item
@@ -591,11 +674,11 @@ NewsTag:
     User:
       class: sfGuardUser
       local: user_id
-      foreignAlias: NewsTags
+      foreignAlias: ItemTags
       onDelete: CASCADE
     Tag:
       local: tag_id
-      foreignAlias: NewsTags
+      foreignAlias: ItemTags
       onDelete: CASCADE
     Item:
       class: News
@@ -615,14 +698,16 @@ UserAction:
     id: { type: integer(4), primary: true, autoincrement: true }
     Limelight_id: { type: integer(4), default: null }
     News_id: { type: integer(4), default: null }
+    Song_id: { type: integer(4), default: null }
     Comment_id: { type: integer(4), default: null }
     LimelightProCon_id: { type: integer(4), default: null }
     Wiki_id: { type: integer(4), default: null }
     LimelightReviewUser_id: { type: integer(4), default: null }
     LimelightReviewPro_id: { type: integer(4), default: null }
     LimelightSpecification_id: { type: integer(4), default: null }
-    NewsTag_id: { type: integer(4), default: null }
+    ItemTag_id: { type: integer(4), default: null }
     type: string(30)
+    site: { type: enum, values: [tech, music], default: tech }
     user_id: integer(4)
     status: { type: enum, values: [Active, Pending, Flagged, Struck, Disabled], default: Active }
   indexes:
@@ -672,6 +757,7 @@ Badge:
     description: { type: string(255) }
     type: { type: string(100) }
     image_name: { type: string(255), default: null }
+    site: { type: enum, values: [tech, music], default: tech }
     status: { type: string(50), default: 'Active' }
 
 BadgeLevel:
@@ -905,6 +991,22 @@ NewsFavorite:
       local: item_id
       foreignAlias: Favorited
 
+SongFavorite:
+  inheritance:
+    type:             concrete
+    extends:          Favorite
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: SongFavorites
+    Item:
+      class: Song
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Favorited
+
 LimelightFavorite:
   inheritance:
     type:             concrete
@@ -1044,6 +1146,46 @@ SourceView:
 # END VIEWS
 ###############
 
+##########
+# PLAYS
+##########
+
+Play:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true }
+    count: { type: integer(4), default: 1 }
+    user_id: { type: integer(4) }
+  indexes:
+    userIndex:           { fields: [user_id] }
+  relations:
+    User:
+      class: sfGuardUser
+      onDelete: CASCADE
+      local: user_id
+      foreignAlias: Played
+
+SongPlay:
+  inheritance:
+    type:             concrete
+    extends:          Play
+  columns:
+    item_id: integer(4)
+  indexes:
+    limelightIndex:                { fields: [item_id] }
+  relations:
+    Item:
+      class: Song
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Plays
+
+################
+# END PLAYS
+################
+
 ################
 # SCORES
 ################
@@ -1057,7 +1199,7 @@ UserScore:
     amount: { type: integer(3), default: 1 }
     type:
       type: enum
-      values: [News, Comment, NewsTag, LimelightProCon, LimelightReviewPro, LimelightReviewUser, LimelightSpecification, LimelightWiki]
+      values: [News, Comment, ItemTag, LimelightProCon, LimelightReviewPro, LimelightReviewUser, LimelightSpecification, LimelightWiki]
     status:
       type: enum
       values: [Flagged, Struck, Disabled, Active]
@@ -1134,6 +1276,17 @@ NewsScore:
       local: item_id
       foreignAlias: Scores
 
+SongScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: Song
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
 CommentScore:
   inheritance:
     type:             concrete
@@ -1145,13 +1298,13 @@ CommentScore:
       local: item_id
       foreignAlias: Scores
 
-NewsTagScore:
+ItemTagScore:
   inheritance:
     type:             concrete
     extends:          Score
   relations:
     Item:
-      class: NewsTag
+      class: ItemTag
       onDelete: CASCADE
       local: item_id
       foreignAlias: Scores
@@ -1262,6 +1415,17 @@ NewsFlag:
       onDelete: CASCADE
       foreignAlias: Flags
 
+SongFlag:
+  inheritance:
+    type:             concrete
+    extends:          Flag
+  relations:
+    Item:
+      class: Song
+      local: item_id
+      onDelete: CASCADE
+      foreignAlias: Flags
+
 CommentFlag:
   inheritance:
     type:             concrete
@@ -1329,13 +1493,13 @@ LimelightProConFlag:
       onDelete: CASCADE
       foreignAlias: Flags
 
-NewsTagFlag:
+ItemTagFlag:
   inheritance:
     type:             concrete
     extends:          Flag
   relations:
     Item:
-      class: NewsTag
+      class: ItemTag
       local: item_id
       onDelete: CASCADE
       foreignAlias: Flags
@@ -1407,19 +1571,6 @@ BetaEmail:
     ip:
       type: string(50)
       notnull: true
-
-BetaGiveaway:
-  actAs:
-    Timestampable: ~
-    SoftDelete: ~
-  columns:
-    guess:
-      type: string(255)
-      notnull: true
-    group_code: integer
-    beta_email_id: integer
-  relations:
-    BetaEmail: { onDelete: CASCADE, local: beta_email_id, foreignAlias: GiveawayEntries }
 
 UserRevenue:
   actAs:

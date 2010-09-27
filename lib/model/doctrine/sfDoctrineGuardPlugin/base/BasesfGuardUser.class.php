@@ -30,13 +30,13 @@
  * @property Doctrine_Collection $Limelights
  * @property Doctrine_Collection $LimelightSlices
  * @property Doctrine_Collection $Wikis
+ * @property Doctrine_Collection $News
  * @property Doctrine_Collection $Specifications
  * @property Doctrine_Collection $LimelightSpecifications
- * @property Doctrine_Collection $News
  * @property Doctrine_Collection $NewsLinks
  * @property Doctrine_Collection $Comments
  * @property Doctrine_Collection $NewTags
- * @property Doctrine_Collection $NewsTags
+ * @property Doctrine_Collection $ItemTags
  * @property Doctrine_Collection $Actions
  * @property Doctrine_Collection $Badges
  * @property Doctrine_Collection $LimelightOwn
@@ -45,10 +45,12 @@
  * @property Doctrine_Collection $UserReviews
  * @property Doctrine_Collection $Favorites
  * @property Doctrine_Collection $NewsFavorites
+ * @property Doctrine_Collection $SongFavorites
  * @property Doctrine_Collection $LimelightFavorites
  * @property Doctrine_Collection $UserReviewFavorites
  * @property Doctrine_Collection $Viewed
  * @property Doctrine_Collection $Views
+ * @property Doctrine_Collection $Played
  * @property Doctrine_Collection $Scored
  * @property Doctrine_Collection $Scores
  * @property Doctrine_Collection $Flags
@@ -81,13 +83,13 @@
  * @method Doctrine_Collection getLimelights()              Returns the current record's "Limelights" collection
  * @method Doctrine_Collection getLimelightSlices()         Returns the current record's "LimelightSlices" collection
  * @method Doctrine_Collection getWikis()                   Returns the current record's "Wikis" collection
+ * @method Doctrine_Collection getNews()                    Returns the current record's "News" collection
  * @method Doctrine_Collection getSpecifications()          Returns the current record's "Specifications" collection
  * @method Doctrine_Collection getLimelightSpecifications() Returns the current record's "LimelightSpecifications" collection
- * @method Doctrine_Collection getNews()                    Returns the current record's "News" collection
  * @method Doctrine_Collection getNewsLinks()               Returns the current record's "NewsLinks" collection
  * @method Doctrine_Collection getComments()                Returns the current record's "Comments" collection
  * @method Doctrine_Collection getNewTags()                 Returns the current record's "NewTags" collection
- * @method Doctrine_Collection getNewsTags()                Returns the current record's "NewsTags" collection
+ * @method Doctrine_Collection getItemTags()                Returns the current record's "ItemTags" collection
  * @method Doctrine_Collection getActions()                 Returns the current record's "Actions" collection
  * @method Doctrine_Collection getBadges()                  Returns the current record's "Badges" collection
  * @method Doctrine_Collection getLimelightOwn()            Returns the current record's "LimelightOwn" collection
@@ -96,10 +98,12 @@
  * @method Doctrine_Collection getUserReviews()             Returns the current record's "UserReviews" collection
  * @method Doctrine_Collection getFavorites()               Returns the current record's "Favorites" collection
  * @method Doctrine_Collection getNewsFavorites()           Returns the current record's "NewsFavorites" collection
+ * @method Doctrine_Collection getSongFavorites()           Returns the current record's "SongFavorites" collection
  * @method Doctrine_Collection getLimelightFavorites()      Returns the current record's "LimelightFavorites" collection
  * @method Doctrine_Collection getUserReviewFavorites()     Returns the current record's "UserReviewFavorites" collection
  * @method Doctrine_Collection getViewed()                  Returns the current record's "Viewed" collection
  * @method Doctrine_Collection getViews()                   Returns the current record's "Views" collection
+ * @method Doctrine_Collection getPlayed()                  Returns the current record's "Played" collection
  * @method Doctrine_Collection getScored()                  Returns the current record's "Scored" collection
  * @method Doctrine_Collection getScores()                  Returns the current record's "Scores" collection
  * @method Doctrine_Collection getFlags()                   Returns the current record's "Flags" collection
@@ -131,13 +135,13 @@
  * @method sfGuardUser         setLimelights()              Sets the current record's "Limelights" collection
  * @method sfGuardUser         setLimelightSlices()         Sets the current record's "LimelightSlices" collection
  * @method sfGuardUser         setWikis()                   Sets the current record's "Wikis" collection
+ * @method sfGuardUser         setNews()                    Sets the current record's "News" collection
  * @method sfGuardUser         setSpecifications()          Sets the current record's "Specifications" collection
  * @method sfGuardUser         setLimelightSpecifications() Sets the current record's "LimelightSpecifications" collection
- * @method sfGuardUser         setNews()                    Sets the current record's "News" collection
  * @method sfGuardUser         setNewsLinks()               Sets the current record's "NewsLinks" collection
  * @method sfGuardUser         setComments()                Sets the current record's "Comments" collection
  * @method sfGuardUser         setNewTags()                 Sets the current record's "NewTags" collection
- * @method sfGuardUser         setNewsTags()                Sets the current record's "NewsTags" collection
+ * @method sfGuardUser         setItemTags()                Sets the current record's "ItemTags" collection
  * @method sfGuardUser         setActions()                 Sets the current record's "Actions" collection
  * @method sfGuardUser         setBadges()                  Sets the current record's "Badges" collection
  * @method sfGuardUser         setLimelightOwn()            Sets the current record's "LimelightOwn" collection
@@ -146,10 +150,12 @@
  * @method sfGuardUser         setUserReviews()             Sets the current record's "UserReviews" collection
  * @method sfGuardUser         setFavorites()               Sets the current record's "Favorites" collection
  * @method sfGuardUser         setNewsFavorites()           Sets the current record's "NewsFavorites" collection
+ * @method sfGuardUser         setSongFavorites()           Sets the current record's "SongFavorites" collection
  * @method sfGuardUser         setLimelightFavorites()      Sets the current record's "LimelightFavorites" collection
  * @method sfGuardUser         setUserReviewFavorites()     Sets the current record's "UserReviewFavorites" collection
  * @method sfGuardUser         setViewed()                  Sets the current record's "Viewed" collection
  * @method sfGuardUser         setViews()                   Sets the current record's "Views" collection
+ * @method sfGuardUser         setPlayed()                  Sets the current record's "Played" collection
  * @method sfGuardUser         setScored()                  Sets the current record's "Scored" collection
  * @method sfGuardUser         setScores()                  Sets the current record's "Scores" collection
  * @method sfGuardUser         setFlags()                   Sets the current record's "Flags" collection
@@ -297,15 +303,15 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
+        $this->hasMany('News', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
         $this->hasMany('Specification as Specifications', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
         $this->hasMany('LimelightSpecification as LimelightSpecifications', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('News', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
@@ -321,7 +327,7 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('NewsTag as NewsTags', array(
+        $this->hasMany('ItemTag as ItemTags', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
@@ -357,6 +363,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
+        $this->hasMany('SongFavorite as SongFavorites', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
         $this->hasMany('LimelightFavorite as LimelightFavorites', array(
              'local' => 'id',
              'foreign' => 'user_id'));
@@ -372,6 +382,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasMany('UserView as Views', array(
              'local' => 'id',
              'foreign' => 'target_user_id'));
+
+        $this->hasMany('Play as Played', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
 
         $this->hasMany('UserScore as Scored', array(
              'local' => 'id',

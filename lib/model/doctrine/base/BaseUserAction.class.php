@@ -8,14 +8,16 @@
  * @property integer $id
  * @property integer $Limelight_id
  * @property integer $News_id
+ * @property integer $Song_id
  * @property integer $Comment_id
  * @property integer $LimelightProCon_id
  * @property integer $Wiki_id
  * @property integer $LimelightReviewUser_id
  * @property integer $LimelightReviewPro_id
  * @property integer $LimelightSpecification_id
- * @property integer $NewsTag_id
+ * @property integer $ItemTag_id
  * @property string $type
+ * @property enum $site
  * @property integer $user_id
  * @property enum $status
  * @property sfGuardUser $User
@@ -31,14 +33,16 @@
  * @method integer                getId()                        Returns the current record's "id" value
  * @method integer                getLimelightId()               Returns the current record's "Limelight_id" value
  * @method integer                getNewsId()                    Returns the current record's "News_id" value
+ * @method integer                getSongId()                    Returns the current record's "Song_id" value
  * @method integer                getCommentId()                 Returns the current record's "Comment_id" value
  * @method integer                getLimelightProConId()         Returns the current record's "LimelightProCon_id" value
  * @method integer                getWikiId()                    Returns the current record's "Wiki_id" value
  * @method integer                getLimelightReviewUserId()     Returns the current record's "LimelightReviewUser_id" value
  * @method integer                getLimelightReviewProId()      Returns the current record's "LimelightReviewPro_id" value
  * @method integer                getLimelightSpecificationId()  Returns the current record's "LimelightSpecification_id" value
- * @method integer                getNewsTagId()                 Returns the current record's "NewsTag_id" value
+ * @method integer                getItemTagId()                 Returns the current record's "ItemTag_id" value
  * @method string                 getType()                      Returns the current record's "type" value
+ * @method enum                   getSite()                      Returns the current record's "site" value
  * @method integer                getUserId()                    Returns the current record's "user_id" value
  * @method enum                   getStatus()                    Returns the current record's "status" value
  * @method sfGuardUser            getUser()                      Returns the current record's "User" value
@@ -53,14 +57,16 @@
  * @method UserAction             setId()                        Sets the current record's "id" value
  * @method UserAction             setLimelightId()               Sets the current record's "Limelight_id" value
  * @method UserAction             setNewsId()                    Sets the current record's "News_id" value
+ * @method UserAction             setSongId()                    Sets the current record's "Song_id" value
  * @method UserAction             setCommentId()                 Sets the current record's "Comment_id" value
  * @method UserAction             setLimelightProConId()         Sets the current record's "LimelightProCon_id" value
  * @method UserAction             setWikiId()                    Sets the current record's "Wiki_id" value
  * @method UserAction             setLimelightReviewUserId()     Sets the current record's "LimelightReviewUser_id" value
  * @method UserAction             setLimelightReviewProId()      Sets the current record's "LimelightReviewPro_id" value
  * @method UserAction             setLimelightSpecificationId()  Sets the current record's "LimelightSpecification_id" value
- * @method UserAction             setNewsTagId()                 Sets the current record's "NewsTag_id" value
+ * @method UserAction             setItemTagId()                 Sets the current record's "ItemTag_id" value
  * @method UserAction             setType()                      Sets the current record's "type" value
+ * @method UserAction             setSite()                      Sets the current record's "site" value
  * @method UserAction             setUserId()                    Sets the current record's "user_id" value
  * @method UserAction             setStatus()                    Sets the current record's "status" value
  * @method UserAction             setUser()                      Sets the current record's "User" value
@@ -97,6 +103,10 @@ abstract class BaseUserAction extends sfDoctrineRecord
              'type' => 'integer',
              'length' => 4,
              ));
+        $this->hasColumn('Song_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             ));
         $this->hasColumn('Comment_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
@@ -121,13 +131,22 @@ abstract class BaseUserAction extends sfDoctrineRecord
              'type' => 'integer',
              'length' => 4,
              ));
-        $this->hasColumn('NewsTag_id', 'integer', 4, array(
+        $this->hasColumn('ItemTag_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
              ));
         $this->hasColumn('type', 'string', 30, array(
              'type' => 'string',
              'length' => 30,
+             ));
+        $this->hasColumn('site', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'tech',
+              1 => 'music',
+             ),
+             'default' => 'tech',
              ));
         $this->hasColumn('user_id', 'integer', 4, array(
              'type' => 'integer',

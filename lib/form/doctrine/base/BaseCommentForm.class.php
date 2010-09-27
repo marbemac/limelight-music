@@ -34,6 +34,9 @@ abstract class BaseCommentForm extends ItemForm
     $this->widgetSchema   ['News_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('News'), 'add_empty' => true));
     $this->validatorSchema['News_id'] = new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('News'), 'required' => false));
 
+    $this->widgetSchema   ['Song_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Song'), 'add_empty' => true));
+    $this->validatorSchema['Song_id'] = new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Song'), 'required' => false));
+
     $this->widgetSchema   ['Wiki_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Wiki'), 'add_empty' => true));
     $this->validatorSchema['Wiki_id'] = new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Wiki'), 'required' => false));
 

@@ -50,6 +50,13 @@ BadgeLevel:
     level: 2
     num_required: 10
 
+  bl_song_tagger1:
+    level: 1
+    num_required: 1
+  bl_song_tagger2:
+    level: 2
+    num_required: 10
+
   bl_news_linker1:
     level: 1
     num_required: 1
@@ -155,6 +162,19 @@ BadgeLevel:
     level: 4
     num_required: 200
 
+  bl_sfave1:
+    level: 1
+    num_required: 1
+  bl_sfave2:
+    level: 2
+    num_required: 10
+  bl_sfave3:
+    level: 3
+    num_required: 50
+  bl_sfave4:
+    level: 4
+    num_required: 200
+
   bl_llfave1:
     level: 1
     num_required: 1
@@ -234,6 +254,16 @@ BadgeLevel:
     level: 3
     num_required: 20
 
+  bl_popularsong1:
+    level: 1
+    num_required: 1
+  bl_popularsong2:
+    level: 2
+    num_required: 10
+  bl_popularsong3:
+    level: 3
+    num_required: 20
+
   bl_verypopularlimelight1:
     level: 1
     num_required: 1
@@ -257,5 +287,18 @@ BadgeLevel:
     level: 3
     num_required: 20
   bl_verypopularnews4:
+    level: 4
+    num_required: 40
+
+  bl_verypopularsong1:
+    level: 1
+    num_required: 1
+  bl_verypopularsong2:
+    level: 2
+    num_required: 10
+  bl_verypopularsong3:
+    level: 3
+    num_required: 20
+  bl_verypopularsong4:
     level: 4
     num_required: 40

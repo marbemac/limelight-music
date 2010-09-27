@@ -32,6 +32,9 @@ abstract class BaseCommentFormFilter extends ItemFormFilter
     $this->widgetSchema   ['News_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('News'), 'add_empty' => true));
     $this->validatorSchema['News_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('News'), 'column' => 'id'));
 
+    $this->widgetSchema   ['Song_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Song'), 'add_empty' => true));
+    $this->validatorSchema['Song_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Song'), 'column' => 'id'));
+
     $this->widgetSchema   ['Wiki_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Wiki'), 'add_empty' => true));
     $this->validatorSchema['Wiki_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Wiki'), 'column' => 'id'));
 
@@ -58,6 +61,7 @@ abstract class BaseCommentFormFilter extends ItemFormFilter
       'parent_id' => 'ForeignKey',
       'edited' => 'Number',
       'News_id' => 'ForeignKey',
+      'Song_id' => 'ForeignKey',
       'Wiki_id' => 'ForeignKey',
       'LimelightReviewUser_id' => 'ForeignKey',
       'LimelightReviewPro_id' => 'ForeignKey',

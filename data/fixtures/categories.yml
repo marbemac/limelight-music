@@ -1,66 +1,75 @@
 Category:
-  cat_technology:
-    name: Technology
+  cat_rock:
+    name: Rock
     status: Active
+    site: music
 
-  cat_gadget:
-    name: Gadgets
+  cat_hiphop:
+    name: Hip Hop
     status: Active
-    Children: [cat_phone]
+    site: music
 
-  cat_phone:
-    name: Phones
+  cat_rb:
+    name: R&B
     status: Active
-    Children: [cat_apple, cat_htc, cat_motorola, cat_lg, cat_sony, cat_rim, cat_nokia, cat_palm, cat_samsung, cat_verizon, cat_att, cat_sprint, cat_tmobile]
+    site: music
 
-  cat_apple:
-    name: Apple
+  cat_pop:
+    name: Pop
     status: Active
+    site: music
 
-  cat_htc:
-    name: HTC
+  cat_elec:
+    name: Electronic
     status: Active
+    site: music
 
-  cat_motorola:
-    name: Motorola
+  cat_latin:
+    name: Latin
     status: Active
+    site: music
 
-  cat_lg:
-    name: LG
+  cat_reggae:
+    name: Raggae
     status: Active
+    site: music
 
-  cat_sony:
-    name: Sony
+  cat_world:
+    name: World
     status: Active
+    site: music
 
-  cat_rim:
-    name: RIM Blackberry
+  cat_country:
+    name: Country
     status: Active
+    site: music
 
-  cat_nokia:
-    name: Nokia
+  cat_classical:
+    name: Classical
     status: Active
+    site: music
 
-  cat_palm:
-    name: Palm
+  cat_jazz:
+    name: Jazz
     status: Active
+    site: music
 
-  cat_samsung:
-    name: Samsung
+  cat_blues:
+    name: Blues
     status: Active
+    site: music
 
-  cat_verizon:
-    name: Verizon
+  cat_christian:
+    name: Gospel
     status: Active
+    site: music
 
-  cat_att:
-    name: AT&T
+  cat_sound:
+    name: Soundtracks
     status: Active
+    site: music
 
-  cat_sprint:
-    name: Sprint
+  cat_kids:
+    name: Kids
     status: Active
-
-  cat_tmobile:
-    name: T Mobile
-    status: Active
+    site: music

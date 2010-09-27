@@ -91,11 +91,11 @@
 
   <body class="<?php echo $top_help ? 'top_help_on' : '' ?>">
     <noscript>
-      <div id="no_javascript">Tech Limelight uses javascript extensively. Please enable it in your browser.</div>
+      <div id="no_javascript"><?php echo sfConfig::get('app_site_name') ?> uses javascript extensively. Please enable it in your browser.</div>
     </noscript>
     <!--[if IE 6]>
     <div id="ie_6_notice">
-      You're using an old version of internet explorer that <?php echo sfConfig::get('sf_site_name') ?> does not currently support.
+      You're using an old version of internet explorer that <?php echo sfConfig::get('app_site_name') ?> does not currently support.
       Please consider upgrading your IE version or trying one of these alternatives:
       <ul>
         <li><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Upgrade to internet explorer 8</a></li>
@@ -111,11 +111,6 @@
 
     <div id="wrapper">
       <div id="container">
-        <?php
-        if ($sf_params->get('action') == 'feed' && ((!$sf_user->isAuthenticated() && $sf_user->getAttribute('show_welcome_splash', true)) || ($sf_user->isAuthenticated() && $sf_user->getGuardUser()->show_welcome_splash)))
-          include_partial('content/homeWelcome');
-        ?>
-
         <div id="center" class="column">
           <?php if ($sf_user->hasFlash('notice')): ?>
             <div class="user_notice rnd_5"><?php echo $sf_user->getFlash('notice') ?></div>
@@ -127,14 +122,6 @@
           <div id="ll_ajax_spinner" class="ajax_spinner"></div>
         </div>
         <div id="right" class="column">
-
-          <?php
-          // to create padding for the welcome splash
-          if ($sf_params->get('action') == 'feed' && ((!$sf_user->isAuthenticated() && $sf_user->getAttribute('show_welcome_splash', true)) || ($sf_user->isAuthenticated() && $sf_user->getGuardUser()->show_welcome_splash))):
-          ?>
-          <div class="welcome_on"></div>
-          <?php endif ?>
-
           <?php include_slot('sidebar0', '') ?>
           <?php include_component_slot('sidebar1') ?>
           <?php include_component_slot('sidebar2') ?>

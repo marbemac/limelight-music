@@ -8,61 +8,9 @@ sfGuardUser:
     username:       marc
     password:       giants22
     is_super_admin: true
-    #Wikis: [w_phone1, w_phone3, w_iphone1]
-#    LimelightSpec: [spec_iphone1, spec_iphone3, spec_iphone4, spec_iphone5, spec_iphone6, spec_iphone7]
-    Limelights: [lime_iphone, lime_storm]
-    News: [news_1, news_3]
-    Sources: [source1, source2, source3]
-    NewsLinks: [nlink1, nlink3, nlink6, nlink7]
-    #Comments: [C_1, C_3]
-#    Tags: [tag_apple, tag_3g, tag_mp3, tag_cellphone, tag_blackberry, tag_rim, tag_touchscreen]
-#    LimelightTags: []
-#    NewsTags: []
     Profile:
       email: marbasdfasdfemac@gmail.com
       status: Active
       activated: 1
       activate_code: U0000000000000
       is_mod: true
-
-  tester:
-    username:       tester
-    password:       tester
-    is_super_admin: false
-    #Wikis: [w_phone2]
-#    LimelightSpec: [spec_iphone2]
-    News: [news_2, news_4]
-    NewsLinks: [nlink2, nlink4]
-    #Comments: [C_1_1]
-    Profile:
-      email: marc.macasdfleod@tufts.edu
-      status: Active
-      activated: 1
-      activate_code: U0000000000000
-      is_mod: true
-
-  tester2:
-    username:       tester2
-    password:       tester
-    is_super_admin: false
-    #Wikis: [w_iphone2]
-    News: [news_5]
-    NewsLinks: [nlink5]
-    #Comments: [C_1_2]
-    Profile:
-      email: marc.macasdfleod2@tufts.edu
-      status: Active
-      activated: 1
-      activate_code: U0000000000000
-
-  tester3:
-    username:       tester3
-    password:       tester
-    is_super_admin: false
-    #Comments: [C_2]
-    Profile:
-      email: marc.maclasdfeod3@tufts.edu
-      status: Active
-      profile_image: test.gif
-      activated: 1
-      activate_code: U0000000000000

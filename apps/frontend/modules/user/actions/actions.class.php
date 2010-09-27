@@ -598,9 +598,7 @@ class userActions extends sfActions
     $days = $request->getParameter('d', 1);
     $this->user = Doctrine::getTable('sfGuardUser')->getUserByUsername($request->getParameter('username'));
     $this->stats = Doctrine::getTable('UserScore')->getUserStats($this->user->id, $days);
-    $this->revenue = Doctrine::getTable('sfGuardUser')->getUserRevenueStats($this->user->id);
-    $this->claims = Doctrine::getTable('sfGuardUser')->getClaims($this->user->id);
-
+    
     if ($request->isXmlHttpRequest())
     {
       $this->renderText(json_encode($this->stats));

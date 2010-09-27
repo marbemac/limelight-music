@@ -27,7 +27,7 @@ class contentActions extends sfActions
     $filters = null;
     if ($request->hasParameter('category'))
     {
-      $filters['feed_type'] = $request->getParameter('feed_type', 'News');
+      $filters['feed_type'] = $request->getParameter('feed_type', 'Song');
       $filters['time_period'] = 1;
       $filters['sort_by'] = 'popularity';
       if ($request->getParameter('category') == 'all')
@@ -41,7 +41,7 @@ class contentActions extends sfActions
       $user->setAttribute('filters', $filters);
     }
     else if (!$user->getAttribute('filters') || ($this->getRequest()->isXmlHttpRequest() && $request->hasParameter('feed_type'))) {
-      $filters['feed_type'] = $request->getParameter('feed_type', 'News');
+      $filters['feed_type'] = $request->getParameter('feed_type', 'Song');
       $filters['time_period'] = $request->getParameter('time_period', 1);
       $filters['sort_by'] = $request->getParameter('sort_by', 'popularity');
       $tmp_cats = $request->getParameter('categories', 0);

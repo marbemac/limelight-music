@@ -15,7 +15,7 @@ abstract class BaseLimelightSliceFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'name'          => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'profile_image' => new sfWidgetFormFilterInput(),
-      'slice_type'    => new sfWidgetFormChoice(array('choices' => array('' => '', 'model' => 'model', 'version' => 'version'))),
+      'slice_type'    => new sfWidgetFormChoice(array('choices' => array('' => '', 'model' => 'model', 'version' => 'version', 'album' => 'album'))),
       'user_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => true)),
       'item_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Limelight'), 'add_empty' => true)),
       'created_at'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -27,7 +27,7 @@ abstract class BaseLimelightSliceFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'name'          => new sfValidatorPass(array('required' => false)),
       'profile_image' => new sfValidatorPass(array('required' => false)),
-      'slice_type'    => new sfValidatorChoice(array('required' => false, 'choices' => array('model' => 'model', 'version' => 'version'))),
+      'slice_type'    => new sfValidatorChoice(array('required' => false, 'choices' => array('model' => 'model', 'version' => 'version', 'album' => 'album'))),
       'user_id'       => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('User'), 'column' => 'id')),
       'item_id'       => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Limelight'), 'column' => 'id')),
       'created_at'    => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),

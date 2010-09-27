@@ -7,14 +7,11 @@
  * 
  * @property string $email
  * @property string $ip
- * @property Doctrine_Collection $GiveawayEntries
  * 
- * @method string              getEmail()           Returns the current record's "email" value
- * @method string              getIp()              Returns the current record's "ip" value
- * @method Doctrine_Collection getGiveawayEntries() Returns the current record's "GiveawayEntries" collection
- * @method BetaEmail           setEmail()           Sets the current record's "email" value
- * @method BetaEmail           setIp()              Sets the current record's "ip" value
- * @method BetaEmail           setGiveawayEntries() Sets the current record's "GiveawayEntries" collection
+ * @method string    getEmail() Returns the current record's "email" value
+ * @method string    getIp()    Returns the current record's "ip" value
+ * @method BetaEmail setEmail() Sets the current record's "email" value
+ * @method BetaEmail setIp()    Sets the current record's "ip" value
  * 
  * @package    limelight
  * @subpackage model
@@ -42,10 +39,6 @@ abstract class BaseBetaEmail extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('BetaGiveaway as GiveawayEntries', array(
-             'local' => 'id',
-             'foreign' => 'beta_email_id'));
-
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($timestampable0);
