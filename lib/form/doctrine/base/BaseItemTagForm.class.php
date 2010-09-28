@@ -25,6 +25,9 @@ abstract class BaseItemTagForm extends ItemForm
     $this->widgetSchema   ['item_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'add_empty' => true));
     $this->validatorSchema['item_id'] = new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'required' => false));
 
+    $this->widgetSchema   ['type'] = new sfWidgetFormChoice(array('choices' => array('news' => 'news', 'song' => 'song', 'limelight' => 'limelight')));
+    $this->validatorSchema['type'] = new sfValidatorChoice(array('choices' => array(0 => 'news', 1 => 'song', 2 => 'limelight'), 'required' => false));
+
     $this->widgetSchema->setNameFormat('item_tag[%s]');
   }
 

@@ -6,6 +6,7 @@
             'LimelightSpecification' => array('Completely Incorrect', 'Out of Date', 'Duplicate', 'Spam', 'Other'),
             'Wiki' => array('Incorrect Material', 'Innapropriate', 'Spam', 'Other'),
             'News' => array('Duplicate', 'Spam', 'Innapropriate', 'Wrong Limelights', 'Other'),
+            'Song' => array('Duplicate', 'Spam', 'Innapropriate', 'Wrong Limelights', 'Other'),
             'NewsLink' => array('Duplicate', 'Broken Link', 'Spam', 'Incorrect', 'Other'),
             'Comment' => array('Spam', 'Innapropriate', 'Duplicate', 'Other'),
             'NewsTag' => array('Incorrect', 'Duplicate', 'Spam', 'Other'),

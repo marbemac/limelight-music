@@ -27,13 +27,11 @@ class songActions extends sfActions
       $user_id = 0;
       $this->user = 'notlogged';
     }
-    $news_table = Doctrine::getTable('News');
-    $this->title_slug = $request->getParameter('title_slug');
-    $this->newsItem = $news_table->getNewsItem($this->title_slug);
-    $this->links = Doctrine::getTable('NewsLink')->getLinks($this->newsItem['id']);
-    $this->tags = Doctrine::getTable('NewsTag')->getTags($this->newsItem['id']);
-    $this->linkForm = new NewsLinkForm();
-    $this->tagForm = new NewsTagForm();
+    $table = Doctrine::getTable('song');
+    $this->name_slug = $request->getParameter('name_slug');
+    $this->song = $table->getSong($this->name_slug);
+    $this->tags = Doctrine::getTable('ItemTag')->getTags($this->song['id'], 'song');
+    $this->tagForm = new ItemTagForm();
   }
 
   public function executeAdd(sfWebRequest $request)

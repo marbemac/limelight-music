@@ -8,7 +8,7 @@ class CommentTable extends ItemTable
   public function getComments($item_id, $comment_type) {
     $type_column = $comment_type.'_id';
     $q = Doctrine_Query::create()
-        ->select('c.*')
+        ->select('c.*, u.id, p.profile_image')
         ->from('Comment c')
         ->leftJoin('c.User u')
         ->leftJoin('u.Profile p')

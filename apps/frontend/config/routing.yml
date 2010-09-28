@@ -297,6 +297,48 @@ song_upload_file:
   url:   /songs/add/file
   param: { module: song, action: uploadSong }
 
+song_rate_box:
+  url:  /songs/rateBox/:id
+  param: { module: content, action: rateBox, item_type: Song }
+
+Song_update_score:
+  url:  /songs/updateScore/:id/:d
+  param: { module: content, action: updateScore, item_type: Song }
+
+song_flag_box:
+  url:  /songs/flagBox/:id
+  param: { module: content, action: flagBox, item_type: Song }
+  requirements:
+    id: \d+
+
+Song_flag:
+  url:  /songs/flag/:id
+  param: { module: content, action: flag, item_type: Song }
+  requirements:
+    id: \d+
+
+song_favorite_box:
+  url:  /songs/favoriteBox/:id
+  param: { module: content, action: favoriteBox, item_type: Song }
+  requirements:
+    id: \d+
+
+Song_favorite:
+  url:  /songs/favorite/:id
+  param: { module: content, action: favorite, item_type: Song }
+  requirements:
+    id: \d+
+
+Song_unfavorite:
+  url:  /songs/unfavorite/:id
+  param: { module: content, action: unfavorite, item_type: Song }
+  requirements:
+    id: \d+
+
+song_disable:
+  url:   /songs/disable/:item_id
+  param: { module: content, action: disable, item_type: Song }
+
 song_show:
   url:   /songs/:name_slug
   param: { module: song, action: show }

@@ -23,6 +23,9 @@ abstract class BaseItemTagFormFilter extends ItemFormFilter
     $this->widgetSchema   ['item_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'add_empty' => true));
     $this->validatorSchema['item_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Item'), 'column' => 'id'));
 
+    $this->widgetSchema   ['type'] = new sfWidgetFormChoice(array('choices' => array('' => '', 'news' => 'news', 'song' => 'song', 'limelight' => 'limelight')));
+    $this->validatorSchema['type'] = new sfValidatorChoice(array('required' => false, 'choices' => array('news' => 'news', 'song' => 'song', 'limelight' => 'limelight')));
+
     $this->widgetSchema->setNameFormat('item_tag_filters[%s]');
   }
 
@@ -37,6 +40,7 @@ abstract class BaseItemTagFormFilter extends ItemFormFilter
       'score' => 'Number',
       'tag_id' => 'ForeignKey',
       'item_id' => 'ForeignKey',
+      'type' => 'Enum',
     ));
   }
 }

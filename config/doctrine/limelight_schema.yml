@@ -664,7 +664,7 @@ Tag:
     User:
       class: sfGuardUser
       local: user_id
-      foreignAlias: NewTags
+      foreignAlias: Tags
       onDelete: CASCADE
 
 ItemTag:
@@ -675,6 +675,7 @@ ItemTag:
     score: { type: integer(4), default: 0 }
     tag_id: integer(4)
     item_id: integer(4)
+    type: { type: enum, values: [news, song, limelight], default: Song }
   indexes:
     itemIndex:         { fields: [item_id] }
   relations:

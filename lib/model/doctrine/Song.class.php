@@ -12,5 +12,79 @@
  */
 class Song extends BaseSong
 {
+  public function postSave($event)
+  {
+    $cacheDriver = $this->getTable()->getAttribute(Doctrine_Core::ATTR_RESULT_CACHE);
+    $cacheDriver->deleteByPrefix('song_'.$this->name_slug.'_');
 
+    if (sfContext::hasInstance())
+    {
+      $cacheManager = sfContext::getInstance()->getViewCacheManager();
+      if ($cacheManager)
+        $cacheManager->remove('@sf_cache_partial?module=content&action=_feedSong&sf_cache_key='.$this->id);
+    }
+  }
+
+  public function save(Doctrine_Connection $conn = null)
+  {
+    $conn = $conn ? $conn : $this->getTable()->getConnection();
+    $conn->beginTransaction();
+    try
+    {
+      $ret = parent::save($conn);
+
+      $this->updateLuceneIndex();
+
+      $conn->commit();
+
+      return $ret;
+    }
+    catch (Exception $e)
+    {
+      $conn->rollBack();
+      throw $e;
+    }
+  }
+
+  public function delete(Doctrine_Connection $conn = null)
+  {
+    $index = $this->getTable()->getLuceneIndex();
+
+    foreach ($index->find('pk:'.$this->getId()) as $hit)
+    {
+      $index->delete($hit->id);
+    }
+
+    return parent::delete($conn);
+  }
+
+  public function updateLuceneIndex()
+  {
+    $index = $this->getTable()->getLuceneIndex();
+
+    // remove existing entries
+    foreach ($index->find('pk:'.$this->getId()) as $hit)
+    {
+      $index->delete($hit->id);
+    }
+
+    // don't index expired and non-activated jobs
+//    if ($this->getStatus() != 'Active')
+//    {
+//      return;
+//    }
+
+    $doc = new Zend_Search_Lucene_Document();
+
+    // store news primary key to identify it in the search results
+    $doc->addField(Zend_Search_Lucene_Field::Keyword('pk', $this->getId()));
+
+    // index news fields
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('name', $this->getName(), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('content', $this->getContent(), 'utf-8'));
+
+    // add news to the index
+    $index->addDocument($doc);
+    $index->commit();
+  }
 }

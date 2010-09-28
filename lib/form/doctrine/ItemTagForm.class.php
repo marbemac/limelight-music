@@ -10,11 +10,13 @@
  */
 class ItemTagForm extends BaseItemTagForm
 {
-  /**
-   * @see ItemForm
-   */
   public function configure()
   {
-    parent::configure();
+    $this->useFields(array());
+
+    $tag = new tagForm();
+    $this->mergeForm($tag);
+
+    $this->widgetSchema->setNameFormat('itemTag[%s]');
   }
 }

@@ -8,6 +8,7 @@
  * @property integer $score
  * @property integer $tag_id
  * @property integer $item_id
+ * @property enum $type
  * @property sfGuardUser $User
  * @property Tag $Tag
  * @property News $Item
@@ -17,6 +18,7 @@
  * @method integer             getScore()   Returns the current record's "score" value
  * @method integer             getTagId()   Returns the current record's "tag_id" value
  * @method integer             getItemId()  Returns the current record's "item_id" value
+ * @method enum                getType()    Returns the current record's "type" value
  * @method sfGuardUser         getUser()    Returns the current record's "User" value
  * @method Tag                 getTag()     Returns the current record's "Tag" value
  * @method News                getItem()    Returns the current record's "Item" value
@@ -25,6 +27,7 @@
  * @method ItemTag             setScore()   Sets the current record's "score" value
  * @method ItemTag             setTagId()   Sets the current record's "tag_id" value
  * @method ItemTag             setItemId()  Sets the current record's "item_id" value
+ * @method ItemTag             setType()    Sets the current record's "type" value
  * @method ItemTag             setUser()    Sets the current record's "User" value
  * @method ItemTag             setTag()     Sets the current record's "Tag" value
  * @method ItemTag             setItem()    Sets the current record's "Item" value
@@ -54,6 +57,16 @@ abstract class BaseItemTag extends Item
         $this->hasColumn('item_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
+             ));
+        $this->hasColumn('type', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'news',
+              1 => 'song',
+              2 => 'limelight',
+             ),
+             'default' => 'Song',
              ));
 
 
