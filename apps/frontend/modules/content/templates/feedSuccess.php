@@ -4,7 +4,7 @@
 //use_stylesheet('filter.css');
 //use_stylesheet('feed.css');
 
-slot('title', 'uncovering trending songs and artists');
+slot('title', 'discover trending songs and artists');
 
 slot('sidebar0');
 end_slot();

@@ -559,6 +559,66 @@ class LimelightTable extends ItemTable
     }
   }
 
+  // given a user_id, song id, add an array of limelights (names given)
+  // add the limelights if they arent already in the DB, and connect them
+  // to the song
+  public function songAddLimelights($user_id, $song_id, $limelights)
+  {
+    $limelights_slug = array();
+    foreach ($limelights as $limelight)
+      $limelights_slug[] = LimelightUtils::slugify ($limelight);
+
+    $q = Doctrine_Query::create()
+        ->select('id, name_slug')
+        ->from('Limelight')
+        ->whereIn('name_slug', $limelights_slug);
+    $results = $q->execute();
+
+    foreach ($limelights_slug as $key => $limelight)
+    {
+      $found = false;
+
+      if (count($results) > 0)
+      {
+        foreach ($results as $key2 => $result)
+        {
+          if ($limelight == $result['name_slug'])
+          {
+            $limelight_id = $result['id'];
+            $found = true;
+          }
+        }
+      }
+
+      // create the limelight if it hasn't been added before
+      if (!$found)
+      {
+          $l = new Limelight();
+          $l->name = substr($limelights[$key], 0, sfConfig::get('app_limelight_name_max_length'));
+          $l->user_id = $user_id;
+          $l->limelight_type = 'artist';
+          $l->save();
+          $limelight_id = $l->id;
+      }
+
+      // check that it is not already linked
+      $q = Doctrine_Query::create()
+        ->select('id')
+        ->from('LimelightSong')
+        ->where('limelight_id = ? AND song_id = ?', array($limelight_id, $song_id));
+      $link = $q->fetchOne();
+
+      if (!$link)
+      {
+        // link the news story
+        $ls = new LimelightSong();
+        $ls->limelight_id = $limelight_id;
+        $ls->song_id = $song_id;
+        $ls->save();
+      }
+    }
+  }
+
   // checks for limelight matches on a given name, and returns an array
   // of possible limelight links
   public function checkExistence($name)

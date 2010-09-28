@@ -26,8 +26,17 @@ abstract class BaseSongFormFilter extends ItemFormFilter
     $this->widgetSchema   ['score'] = new sfWidgetFormFilterInput(array('with_empty' => false));
     $this->validatorSchema['score'] = new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false)));
 
+    $this->widgetSchema   ['total_views'] = new sfWidgetFormFilterInput();
+    $this->validatorSchema['total_views'] = new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false)));
+
     $this->widgetSchema   ['total_plays'] = new sfWidgetFormFilterInput();
     $this->validatorSchema['total_plays'] = new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false)));
+
+    $this->widgetSchema   ['filename'] = new sfWidgetFormFilterInput();
+    $this->validatorSchema['filename'] = new sfValidatorPass(array('required' => false));
+
+    $this->widgetSchema   ['original_filename'] = new sfWidgetFormFilterInput();
+    $this->validatorSchema['original_filename'] = new sfValidatorPass(array('required' => false));
 
     $this->widgetSchema   ['favorited_count'] = new sfWidgetFormFilterInput();
     $this->validatorSchema['favorited_count'] = new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false)));
@@ -80,7 +89,10 @@ abstract class BaseSongFormFilter extends ItemFormFilter
       'content' => 'Text',
       'song_image' => 'Text',
       'score' => 'Number',
+      'total_views' => 'Number',
       'total_plays' => 'Number',
+      'filename' => 'Text',
+      'original_filename' => 'Text',
       'favorited_count' => 'Number',
       'favorite_badge_flag' => 'Number',
       'tag_lock' => 'Number',

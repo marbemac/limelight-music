@@ -284,7 +284,7 @@ news_show:
   url:   /news/:title_slug
   param: { module: news, action: show }
 
-# news rules
+# song rules
 song_add:
   url:   /songs/add
   param: { module: song, action: add }
@@ -292,6 +292,14 @@ song_add:
 song_add_process:
   url:   /songs/add/process
   param: { module: song, action: processAdd }
+
+song_upload_file:
+  url:   /songs/add/file
+  param: { module: song, action: uploadSong }
+
+song_show:
+  url:   /songs/:name_slug
+  param: { module: song, action: show }
 
 # comment rules
 comment_add_form:

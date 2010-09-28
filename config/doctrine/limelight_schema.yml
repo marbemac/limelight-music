@@ -380,7 +380,7 @@ Song:
     extends:          Item
   actAs:
     Sluggable:
-      fields: [title]
+      fields: [name]
       name: name_slug
   columns:
     name:
@@ -396,9 +396,16 @@ Song:
       type: integer(4)
       default: 0
       notnull: true
+    total_views:
+      type: integer(4)
+      default: 0
     total_plays:
       type: integer(4)
       default: 0
+    filename:
+      type: string(50)
+    original_filename:
+      type: string(50)
     favorited_count:
       type: integer(4)
       default: 0
@@ -1123,6 +1130,21 @@ NewsView:
   relations:
     Item:
       class: News
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Views
+
+SongView:
+  inheritance:
+    type:             concrete
+    extends:          View
+  columns:
+    item_id: integer(4)
+  indexes:
+    songIndex:                { fields: [item_id] }
+  relations:
+    Item:
+      class: Song
       onDelete: CASCADE
       local: item_id
       foreignAlias: Views

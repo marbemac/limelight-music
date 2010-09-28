@@ -9,7 +9,10 @@
  * @property string $content
  * @property string $song_image
  * @property integer $score
+ * @property integer $total_views
  * @property integer $total_plays
+ * @property string $filename
+ * @property string $original_filename
  * @property integer $favorited_count
  * @property integer $favorite_badge_flag
  * @property integer $tag_lock
@@ -20,6 +23,7 @@
  * @property Doctrine_Collection $SongLimelights
  * @property Doctrine_Collection $Comments
  * @property Doctrine_Collection $Favorited
+ * @property Doctrine_Collection $Views
  * @property Doctrine_Collection $Plays
  * @property Doctrine_Collection $Scores
  * @property Doctrine_Collection $Flags
@@ -28,7 +32,10 @@
  * @method string              getContent()             Returns the current record's "content" value
  * @method string              getSongImage()           Returns the current record's "song_image" value
  * @method integer             getScore()               Returns the current record's "score" value
+ * @method integer             getTotalViews()          Returns the current record's "total_views" value
  * @method integer             getTotalPlays()          Returns the current record's "total_plays" value
+ * @method string              getFilename()            Returns the current record's "filename" value
+ * @method string              getOriginalFilename()    Returns the current record's "original_filename" value
  * @method integer             getFavoritedCount()      Returns the current record's "favorited_count" value
  * @method integer             getFavoriteBadgeFlag()   Returns the current record's "favorite_badge_flag" value
  * @method integer             getTagLock()             Returns the current record's "tag_lock" value
@@ -39,6 +46,7 @@
  * @method Doctrine_Collection getSongLimelights()      Returns the current record's "SongLimelights" collection
  * @method Doctrine_Collection getComments()            Returns the current record's "Comments" collection
  * @method Doctrine_Collection getFavorited()           Returns the current record's "Favorited" collection
+ * @method Doctrine_Collection getViews()               Returns the current record's "Views" collection
  * @method Doctrine_Collection getPlays()               Returns the current record's "Plays" collection
  * @method Doctrine_Collection getScores()              Returns the current record's "Scores" collection
  * @method Doctrine_Collection getFlags()               Returns the current record's "Flags" collection
@@ -46,7 +54,10 @@
  * @method Song                setContent()             Sets the current record's "content" value
  * @method Song                setSongImage()           Sets the current record's "song_image" value
  * @method Song                setScore()               Sets the current record's "score" value
+ * @method Song                setTotalViews()          Sets the current record's "total_views" value
  * @method Song                setTotalPlays()          Sets the current record's "total_plays" value
+ * @method Song                setFilename()            Sets the current record's "filename" value
+ * @method Song                setOriginalFilename()    Sets the current record's "original_filename" value
  * @method Song                setFavoritedCount()      Sets the current record's "favorited_count" value
  * @method Song                setFavoriteBadgeFlag()   Sets the current record's "favorite_badge_flag" value
  * @method Song                setTagLock()             Sets the current record's "tag_lock" value
@@ -57,6 +68,7 @@
  * @method Song                setSongLimelights()      Sets the current record's "SongLimelights" collection
  * @method Song                setComments()            Sets the current record's "Comments" collection
  * @method Song                setFavorited()           Sets the current record's "Favorited" collection
+ * @method Song                setViews()               Sets the current record's "Views" collection
  * @method Song                setPlays()               Sets the current record's "Plays" collection
  * @method Song                setScores()              Sets the current record's "Scores" collection
  * @method Song                setFlags()               Sets the current record's "Flags" collection
@@ -93,10 +105,23 @@ abstract class BaseSong extends Item
              'notnull' => true,
              'length' => 4,
              ));
+        $this->hasColumn('total_views', 'integer', 4, array(
+             'type' => 'integer',
+             'default' => 0,
+             'length' => 4,
+             ));
         $this->hasColumn('total_plays', 'integer', 4, array(
              'type' => 'integer',
              'default' => 0,
              'length' => 4,
+             ));
+        $this->hasColumn('filename', 'string', 50, array(
+             'type' => 'string',
+             'length' => 50,
+             ));
+        $this->hasColumn('original_filename', 'string', 50, array(
+             'type' => 'string',
+             'length' => 50,
              ));
         $this->hasColumn('favorited_count', 'integer', 4, array(
              'type' => 'integer',
@@ -157,6 +182,10 @@ abstract class BaseSong extends Item
              'local' => 'id',
              'foreign' => 'item_id'));
 
+        $this->hasMany('SongView as Views', array(
+             'local' => 'id',
+             'foreign' => 'item_id'));
+
         $this->hasMany('SongPlay as Plays', array(
              'local' => 'id',
              'foreign' => 'item_id'));
@@ -172,7 +201,7 @@ abstract class BaseSong extends Item
         $sluggable0 = new Doctrine_Template_Sluggable(array(
              'fields' => 
              array(
-              0 => 'title',
+              0 => 'name',
              ),
              'name' => 'name_slug',
              ));

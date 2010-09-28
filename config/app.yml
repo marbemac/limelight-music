@@ -94,7 +94,8 @@ all:
     add_limelights_min:     1
     add_limelights_max:     5
   song:
-    image_path:             /uploads/songs
+    image_path:             /uploads/songs/images
+    file_path:              /uploads/songs/files
     flag_val:               10
     ms_add:                 0
     ms_flag:                0
@@ -107,7 +108,7 @@ all:
     add_tags_min:           0
     add_tags_max:           10
     add_limelights_min:     1
-    add_limelights_max:     6
+    add_limelights_max:     8
   limelight:
     image_path:             /uploads/ll_images
     tag_num:                10

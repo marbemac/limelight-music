@@ -1519,7 +1519,7 @@ $(document).ready(function(){
           }
         })
 
-        $.scrollTo($('#step1'), 500, {onAfter:function() { $('h2.error').fadeIn(1000); }});
+        $.scrollTo($('#step1'), 500, {onAfter:function() {$('h2.error').fadeIn(1000);}});
       }
       else if (data.result == 'success')
       {
@@ -1623,7 +1623,7 @@ $(document).ready(function(){
   })
 
   // limelight autocomplete on news_add form
-  $('#news_limelight').focus(function() {
+  $('#news_limelight, #song_limelight').focus(function() {
     var self = $(this);
     if (!self.metadata().searchloaded)
     {
@@ -1646,12 +1646,12 @@ $(document).ready(function(){
           if (!item)
             return false;
           $('.limelight_add_C div:not(.clear)').remove();
-          $('#news_limelight').val('');
+          $('.limelight_add_C').show();
+          $('#news_limelight, #song_limelight').val('');
           $.each($('.limelight_add_C li'), function(index, value) {
             if ($(value).children('.name').metadata().name == item.name)
             {
               $(value).addClass('.on');
-              $.stop();
               return false;
             }
           })
@@ -1663,29 +1663,29 @@ $(document).ready(function(){
   });
 
   // add a limelight (not from autocomplete) on news add form
-  $('#news_limelight').keyup(function(e) {
+  $('#news_limelight, #song_limelight').keyup(function(e) {
     if(e.keyCode == 13) {
-      newsAddLimelight();
+      addLimelight($(this));
     }
   })
-  $('#newsAdd_F .limelight_add').click(function() {newsAddLimelight()});
-  function newsAddLimelight()
+  $('#newsAdd_F .limelight_add, #songAdd_F .limelight_add').click(function() { addLimelight($(this).parent().next().children('.ac_input')) });
+  function addLimelight($target)
   {
-    var self = $('#news_limelight');
-    if (self.val() == '')
-      $.stop();
+    if ($target.val() == '')
+      return false;
     $('.ac_results').hide();
     $('.limelight_add_C div:not(.clear)').remove();
+    $('.limelight_add_C').show();
     $.each($('.limelight_add_C li'), function(index, value) {
-      if ($(value).children('.name').text() == self.val())
+      if ($(value).children('.name').text() == $target.val())
       {
-        self.val('');
+        $target.val('');
         $(value).addClass('.on');
-        $.stop();
+        return false;
       }
     })
-    $('.limelight_add_C > div.clear').before('<li id="0"  class="on rnd_3"><img src="'+ self.metadata().default_image_url + '" alt="" /><span class="name" data-name="' + self.val() + '">' + self.val() + '</span><span class="sb_s score rnd_3">NEW</span></li>');
-    self.val('');
+    $('.limelight_add_C > div.clear').before('<li id="0"  class="on rnd_3"><img src="'+ $target.metadata().default_image_url + '" alt="" /><span class="name" data-name="' + $target.val() + '">' + $target.val() + '</span><span class="sb_s score rnd_3">NEW</span></li>');
+    $target.val('');
   }
 
   // toggle summary and stats in the limelight head
@@ -2231,7 +2231,7 @@ $(document).ready(function(){
   }
 
   $('#news_limelight').focus(function() {$('.limelight_add_C').fadeIn(200)});
-  $('#newsAdd_F .tag_suggest li, #newsAdd_F .tag_add_C li, #newsAdd_F .limelight_add_C li').live('click', function() {$(this).toggleClass('on')});
+  $('.tag_suggest li, .tag_add_C li, .limelight_add_C li').live('click', function() {$(this).toggleClass('on')});
 
   // adjust the location of the images on the chosen limelights section of the news add page
   $('.limelight_add_C img').livequery(function() {
@@ -2334,6 +2334,100 @@ $(document).ready(function(){
         data = JSON.parse(data[0]);
         $('#news_add_imageUploader').replaceWith('<img src="' + data.filePath + '" class="news_img rnd_3" />');
         $('#news_image').val(data.fileName);
+      }
+    });
+  }
+
+  // ********************
+
+  // ********************
+  // SONGS
+  // ********************
+
+  // handle the news submission form
+  var songSubmit = function()
+  {
+    var self = $('.song_add .submit');
+    self.unbind('click').text('submitting...').addClass('submitting');
+    var formData = {};
+
+    $('h2.error').hide();
+    $('.error_list').remove();
+
+    // get the basic info
+    formData[$('#songAdd_F #song_name').attr('name')] = $('#songAdd_F #song_name').val();
+    formData[$('#songAdd_F #song_content').attr('name')] = $('#songAdd_F #news_content').val();
+    formData[$('#songAdd_F #song_file').attr('name')] = $('#songAdd_F #song_file').val();
+    formData[$('#songAdd_F #song__csrf_token').attr('name')] = $('#songAdd_F #song__csrf_token').val();
+
+    // get the limelight info
+    formData['limelights'] = {}
+    $.each($('.limelight_add_C .on'), function(index, val) {
+      formData['limelights'][index] = $(val).children('span.name').metadata().name;
+    })
+
+    $.post(self.metadata().url, formData, function(data) {
+      if (data.result == 'error')
+      {
+        self.bind('click.submit', songSubmit).text('submit song').removeClass('submitting');
+
+        // handle the basic info errors
+        $('.song_add .error_list').remove();
+        $.each(data.info_error, function(index, val) {
+          if ($(val).error != '')
+          {
+            $('#song_'+val.name).before(val.error);
+          }
+        })
+
+        // handle the limelight errors
+        if (data.limelight_error == true)
+          $('#song_limelight').before('<ul class="error_list limelights"><li>You must select between 1 and 10 limelights. Selected limelights have a solid green border. Click on limelights to toggle between selected and deselected, or add new ones in the input box below. You currently have '+ $('.limelight_add_C .on, .tag_add_C .on').length +' limelights selected.</li></ul>').parent().parent().addClass('limelights');
+        else
+          $('#song_limelight').parent().parent().removeClass('limelights');
+
+        // handle the file errors
+        if (data.file_error == true)
+          $('#song_add_file').after('<ul class="error_list file"><li>You must upload the song file!</li></ul>');
+
+        $.scrollTo($('.song_add .dont'), 500, {onAfter:function() {
+          $('h2.error').fadeIn(1000);
+        }
+        });
+      }
+      else if (data.result == 'success')
+      {
+        window.location = data.url;
+      }
+      else if (data.result == 'login')
+      {
+        self.bind('click.submit', songSubmit).text('submit song').removeClass('submitting');
+        authenticate();
+      }
+    }, 'json')
+  };
+  $('.song_add .submit').bind('click.submit', songSubmit);
+
+  // song add page file upload
+  if ($('#song_add_file').length > 0) {
+    $('#song_file').val('');
+    $('#song_add_file').uploadify({
+      'uploader'    : '/js/uploadify/uploadify.swf',
+      'script'      : $('#song_add_file').metadata().url,
+      'auto'        : true,
+      'fileDesc'    : 'mp3, mp4, aac, mpa, wma',
+      'fileExt'     : '*.mp3;*.mp4;*.aac;*.mpa;*.wma',
+      'buttonImg'   : '/images/song_add_choose_file.gif',
+      'width'       : 278,
+      'height'      : 40,
+      'sizeLimit'   : 10000000,
+      'buttonText'  : 'choose audio file',
+      'onComplete'  : function(a,b,c,d) {
+        // hack to get around strange uploadify response data
+        var data = d.split('$**$');
+        data = JSON.parse(data[0]);
+        $('#song_file').val(data.fileName);
+        $('#song_add_fileUploader').replaceWith('<div class="song_upload_success">Song successfully uploaded!</div>');
       }
     });
   }

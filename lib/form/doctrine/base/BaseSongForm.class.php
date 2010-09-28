@@ -28,8 +28,17 @@ abstract class BaseSongForm extends ItemForm
     $this->widgetSchema   ['score'] = new sfWidgetFormInputText();
     $this->validatorSchema['score'] = new sfValidatorInteger(array('required' => false));
 
+    $this->widgetSchema   ['total_views'] = new sfWidgetFormInputText();
+    $this->validatorSchema['total_views'] = new sfValidatorInteger(array('required' => false));
+
     $this->widgetSchema   ['total_plays'] = new sfWidgetFormInputText();
     $this->validatorSchema['total_plays'] = new sfValidatorInteger(array('required' => false));
+
+    $this->widgetSchema   ['filename'] = new sfWidgetFormInputText();
+    $this->validatorSchema['filename'] = new sfValidatorString(array('max_length' => 50, 'required' => false));
+
+    $this->widgetSchema   ['original_filename'] = new sfWidgetFormInputText();
+    $this->validatorSchema['original_filename'] = new sfValidatorString(array('max_length' => 50, 'required' => false));
 
     $this->widgetSchema   ['favorited_count'] = new sfWidgetFormInputText();
     $this->validatorSchema['favorited_count'] = new sfValidatorInteger(array('required' => false));
