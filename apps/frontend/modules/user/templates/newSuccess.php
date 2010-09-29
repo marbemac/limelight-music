@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php slot('title', 'register'); ?>
 
 <div class="content_panel">
@@ -23,3 +25,5 @@
     </ul>
   </div>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

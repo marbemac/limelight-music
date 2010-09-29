@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
   slot('title', sprintf('%s wiki revision %d', $revision['topics'], $revision['version']));
   //include_component('wiki', 'segmentShared', array('revision' => $revision, 'sf_cache_key' => 'revision_shared_'.$revision['group_id']))
@@ -58,3 +60,5 @@
     <?php include_partial('wiki/wikiSegment', array('wiki' => $revision)); ?>
 </div>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

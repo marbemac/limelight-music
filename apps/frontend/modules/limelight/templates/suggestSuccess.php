@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
 slot('title', 'suggest a limelight');
 ?>
@@ -153,3 +155,5 @@ slot('title', 'suggest a limelight');
   </div>
   <?php endif ?>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

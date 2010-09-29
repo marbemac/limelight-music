@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
   slot('title', $user->username.' stats and revenue');
   slot('sidebar0');
@@ -183,3 +185,5 @@
     <div class="clear"></div>
   </div>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

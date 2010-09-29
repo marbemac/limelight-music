@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
   use_stylesheet('news.css');
   use_helper('Text');
@@ -149,3 +151,5 @@
     ?>
   <?php endif ?>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

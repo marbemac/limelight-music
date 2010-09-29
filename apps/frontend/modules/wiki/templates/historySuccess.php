@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php slot('title', sprintf('%s wiki history', $active_revision['topics'])); ?>
 
 <?php //include_component('wiki', 'segmentShared', array('revision' => $active_revision, 'sf_cache_key' => 'wiki_shared_'.$active_revision['group_id'])) ?>
@@ -113,3 +115,5 @@
     <?php endforeach ?>
   </ul>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

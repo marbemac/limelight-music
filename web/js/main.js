@@ -117,6 +117,7 @@ $(document).ready(function(){
       })
     })
   })
+  $('.user_link a').live('click', function() { $(this).qtip("hide") });
 
   // **********
   // FILTERS
@@ -969,7 +970,7 @@ $(document).ready(function(){
   });
 
   // user stats time period update
-  $('.user_stats .stats_period').click(function() {
+  $('.user_stats .stats_period').live('click', function() {
     var $self = $(this);
     if ($self.hasClass('on'))
       return;
@@ -2596,10 +2597,12 @@ $(document).ready(function(){
   });
   // END COMMENTS
 
+  // ********************
   // IMPORTANT, main site navigation ajax shit
+  // ********************
   $.address.change(function(event) {
-    $('#center').load(event.value, function() {
-
+    $('#container').load(event.value, function() {
+      
     })
   });
   $('a').live('click', function() {

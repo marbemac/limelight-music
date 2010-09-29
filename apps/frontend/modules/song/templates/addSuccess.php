@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
 slot('title', 'submit a song');
 ?>
@@ -116,3 +118,5 @@ slot('title', 'submit a song');
   </div>
   <?php endif ?>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

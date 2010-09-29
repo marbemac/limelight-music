@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
 slot('title', 'submit a news story');
 ?>
@@ -188,3 +190,5 @@ slot('title', 'submit a news story');
   </div>
   <?php endif ?>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

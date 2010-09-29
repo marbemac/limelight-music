@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
   slot('title', sprintf('%s info', $limelight['name']));
   include_component('limelight', 'limelightHead', array('limelight' => $limelight, 'page' => 'info', 'sf_cache_key' => $limelight['id']));
@@ -75,3 +77,5 @@
   ?>
   </div>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

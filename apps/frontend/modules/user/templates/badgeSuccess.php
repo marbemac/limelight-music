@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
   slot('title', $user->username.' badges');
   slot('sidebar0');
@@ -104,3 +106,5 @@
     <?php endforeach ?>
   </ul>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

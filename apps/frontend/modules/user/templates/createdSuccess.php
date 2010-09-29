@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php slot('title', 'register success!'); ?>
 <div class="content_panel">
   <h3>
@@ -6,3 +8,5 @@
     It should arrive in a few minutes. If it does not, please contact us.
   </h3>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

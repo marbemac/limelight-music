@@ -599,7 +599,7 @@ class userActions extends sfActions
     $this->user = Doctrine::getTable('sfGuardUser')->getUserByUsername($request->getParameter('username'));
     $this->stats = Doctrine::getTable('UserScore')->getUserStats($this->user->id, $days);
     
-    if ($request->isXmlHttpRequest())
+    if ($request->hasParameter('d'))
     {
       $this->renderText(json_encode($this->stats));
       return sfView::NONE;

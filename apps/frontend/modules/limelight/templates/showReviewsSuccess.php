@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
 slot('title', sprintf('%s Reviews | Tech Limelight', $limelight['name']));
 
@@ -87,3 +89,5 @@ if ($sf_user->isAuthenticated() && ($sf_user->hasGroup('admin') || $sf_user->has
     <?php endif; ?>
   </div>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

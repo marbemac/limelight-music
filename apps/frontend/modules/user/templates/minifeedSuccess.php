@@ -1,3 +1,5 @@
+<?php include_partial('content/layoutPart1'); ?>
+
 <?php
   slot('title', $user['username'].' minifeed');
   slot('sidebar0');
@@ -12,3 +14,5 @@
     <?php include_partial('user/actionFeed', array('items' => $items, 'user' => $user, 'next_page' => $next_page, 'feed_more_url' => $feed_more_url)) ?>
   </ul>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>

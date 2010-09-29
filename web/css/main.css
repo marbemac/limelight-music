@@ -1537,7 +1537,9 @@ div:focus {
 /**********************/
 /** LIME PLAYER       */
 /**********************/
+
 #lime_player_C { position: fixed; bottom: 0px; width: 100%; border: none; border-top: 2px solid red; height: 40px; background-color: black; }
+.lp-controls li { float: left; }
 
 /**********************/
 /** LIBRARY OVERRIDES */

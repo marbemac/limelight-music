@@ -1,8 +1,6 @@
-<?php
+<?php include_partial('content/layoutPart1'); ?>
 
-//use_javascript('filter.js');
-//use_stylesheet('filter.css');
-//use_stylesheet('feed.css');
+<?php
 
 slot('title', 'discover trending songs and artists');
 
@@ -20,3 +18,5 @@ $filters = $sf_user->getAttribute('filters');
     ?>
   </ul>
 </div>
+
+<?php include_partial('content/layoutPart2'); ?>
