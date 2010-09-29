@@ -6,7 +6,7 @@ staging:
   rpx_tokenize_url:  http://97.107.135.24/frontend_staging.php/tokenize
 
 dev:
-  rpx_tokenize_url:  http://limelight/frontend_dev.php/tokenize
+  rpx_tokenize_url:  http://music.limelight/frontend_dev.php/tokenize
 
 all:
   recaptcha:

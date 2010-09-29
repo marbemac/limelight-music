@@ -72,16 +72,16 @@ class contentActions extends sfActions
     $this->next_page = $request->getParameter('page', 1)+1;
     $this->feed_more_url = 'feed_more';
 
-    if ($this->getRequest()->isXmlHttpRequest())
-    {
-      return $this->renderPartial('user/actionFeed', array(
-        'items'         => $this->items,
-        'next_page'     => $this->next_page,
-        'feed_more_url' => $this->feed_more_url,
-        'type'          => $filters['feed_type']
-      ));
-      return sfView::NONE;
-    }
+//    if ($this->getRequest()->isXmlHttpRequest())
+//    {
+//      return $this->renderPartial('user/actionFeed', array(
+//        'items'         => $this->items,
+//        'next_page'     => $this->next_page,
+//        'feed_more_url' => $this->feed_more_url,
+//        'type'          => $filters['feed_type']
+//      ));
+//      return sfView::NONE;
+//    }
   }
 
   public function executeFilter($request)

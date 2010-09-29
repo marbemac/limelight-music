@@ -156,6 +156,8 @@
     <div id="ajax_notice" class="rnd_5 hide"></div>
     <div id="ajax_error" class="rnd_5 hide"></div>
 
+    <?php include_partial('content/limePlayer') ?>
+    
     <?php endif; // beta splash page endif ?>
 
     <?php
@@ -192,6 +194,8 @@
       use_javascript('jquery.qtip.ajax.js');
       use_javascript('swfobject.js');
       use_javascript('jquery.uploadify.js');
+      use_javascript('jquery.jplayer.min.js');
+      use_javascript('jquery.address.min.js');
       use_javascript('jquery.timer.js');
       use_javascript('jquery.ajaxQueue.js');
       use_javascript('jquery.bgiframe.js');

@@ -155,6 +155,9 @@ user_show:
   options: { model: sfGuardUser, type: object }
   param: { module: user, action: minifeed }
 
+# lime player
+
+
 # news rules
 news_add:
   url:   /news/add

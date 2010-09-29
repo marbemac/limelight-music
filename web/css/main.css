@@ -1535,6 +1535,11 @@ div:focus {
 .comment_add_F .counter { position: absolute; bottom: 4px; left: 270px; font-weight: bold; }
 
 /**********************/
+/** LIME PLAYER       */
+/**********************/
+#lime_player_C { position: fixed; bottom: 0px; width: 100%; border: none; border-top: 2px solid red; height: 40px; background-color: black; }
+
+/**********************/
 /** LIBRARY OVERRIDES */
 /**********************/
 .textboxlist-autocomplete { z-index: 10; }

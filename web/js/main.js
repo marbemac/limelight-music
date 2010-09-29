@@ -733,17 +733,23 @@ $(document).ready(function(){
   })
   // END CATEGORIES CHOOSER
 
-  $('.filter_group').hover(function() {
-    var $self = $(this);
-    $self.find('a.on, div.on').after($self.find('a:not(.on), div:not(.on)'));
-    $self.addClass('on');
-    $self.find('a:not(.on), div:not(.on, .filler)').show();
-  },
-  function() {
-    var $self = $(this);
-    $self.removeClass('on');
-    $self.find('a:not(.on), div:not(.on, .filler)').hide();
-    initiateFeedReload();
+  $('.filter_group').live('hover', 
+  function(ev) {
+    if (ev.type == 'mouseover')
+    {
+      var $self = $(this);
+      $self.find('a.on, div.on').after($self.find('a:not(.on), div:not(.on)'));
+      $self.addClass('on');
+      $self.find('a:not(.on), div:not(.on, .filler)').show();
+    }
+
+    if (ev.type == 'mouseout')
+    {
+      var $self = $(this);
+      $self.removeClass('on');
+      $self.find('a:not(.on), div:not(.on, .filler)').hide();
+      initiateFeedReload();
+    }
   })
 
   function showFeedUpdateText()
@@ -780,7 +786,7 @@ $(document).ready(function(){
         $('#feed_reload_text').text('reloading feed...');
         $.get($('#feed_reload').metadata().url, filters, function(data) {
           $('#feed_reload_text').fadeOut(1000, function() {$(this).remove()});
-          $('#main_feed').fadeOut(150, function() {$(this).html(data).fadeIn(200)});
+          $('.content_panel').fadeOut(150, function() {$(this).html(data).fadeIn(200)});
         })
         $('#feed_reload').metadata().reload = 0;
       })
@@ -2589,6 +2595,43 @@ $(document).ready(function(){
     });
   });
   // END COMMENTS
+
+  // IMPORTANT, main site navigation ajax shit
+  $.address.change(function(event) {
+    $('#center').load(event.value, function() {
+
+    })
+  });
+  $('a').live('click', function() {
+      if ($(this).hasClass('xa'))
+        return;
+
+      $.address.value($(this).attr('href'));
+      return false;
+  });
+
+  // ********************
+  // JPLAYER
+  // ********************
+
+  $('#lime_player').jPlayer( {
+    ready: function () {
+      this.element.jPlayer("setFile", "/uploads/songs/files/marry.mp3"); // Auto-Plays the file
+    },
+    customCssIds: true,
+    swfPath: "/js"
+  })
+  .jPlayer("cssId", "play", "lplayer_play")
+  .jPlayer("cssId", "pause", "lplayer_pause")
+  .jPlayer("cssId", "stop", "lplayer_stop")
+  .jPlayer("cssId", "loadBar", "lplayer_load_bar")
+  .jPlayer("cssId", "playBar", "lplayer_play_bar")
+  .jPlayer("cssId", "volumeMin", "lplayer_volume_min")
+  .jPlayer("cssId", "volumeMax", "lplayer_volume_max")
+  .jPlayer("cssId", "volumeBar", "lplayer_volume_bar")
+  .jPlayer("cssId", "volumeBarValue", "lplayer_volume_bar_value");
+
+  // END JPLAYER
 
 });
 
