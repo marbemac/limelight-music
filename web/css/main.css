@@ -402,6 +402,15 @@ div:focus {
 .feed.news .stat_box ul img { border: 2px solid #fff; }
 .feed.news .stat_box ul img:hover { border: 2px solid #333; }
 
+.song_play_pause { width: 37px; height: 37px; background: url('../images/lime_player_play_pause_dark.png') }
+.song_play_pause.play { background-position: left; }
+.song_play_pause.pause { background-position: right; }
+
+.feed.song { position: relative; padding: 0 0 0 75px; }
+.feed.song .play_score_box { position: absolute; width: 75px; left: -75px; border-right: 1px solid #DD9C81; }
+.feed.song .play_score_box .play_pause {  }
+.feed.song .play_score_box .sb_full {  }
+
 .feed.limelight { background-color: #ACC451; margin: 0 0 10px 10px; padding: 0 350px 0 0; clear: left; position: relative; height: 260px; }
 .feed.limelight .sb_l {
   border-color: #fff; float: left; margin: 4px 0 0 4px; padding: 10px 0; background-color: #fff;
