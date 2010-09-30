@@ -35,7 +35,7 @@
  * @property Doctrine_Collection $LimelightSpecifications
  * @property Doctrine_Collection $NewsLinks
  * @property Doctrine_Collection $Comments
- * @property Doctrine_Collection $NewTags
+ * @property Doctrine_Collection $Tags
  * @property Doctrine_Collection $ItemTags
  * @property Doctrine_Collection $Actions
  * @property Doctrine_Collection $Badges
@@ -88,7 +88,7 @@
  * @method Doctrine_Collection getLimelightSpecifications() Returns the current record's "LimelightSpecifications" collection
  * @method Doctrine_Collection getNewsLinks()               Returns the current record's "NewsLinks" collection
  * @method Doctrine_Collection getComments()                Returns the current record's "Comments" collection
- * @method Doctrine_Collection getNewTags()                 Returns the current record's "NewTags" collection
+ * @method Doctrine_Collection getTags()                    Returns the current record's "Tags" collection
  * @method Doctrine_Collection getItemTags()                Returns the current record's "ItemTags" collection
  * @method Doctrine_Collection getActions()                 Returns the current record's "Actions" collection
  * @method Doctrine_Collection getBadges()                  Returns the current record's "Badges" collection
@@ -140,7 +140,7 @@
  * @method sfGuardUser         setLimelightSpecifications() Sets the current record's "LimelightSpecifications" collection
  * @method sfGuardUser         setNewsLinks()               Sets the current record's "NewsLinks" collection
  * @method sfGuardUser         setComments()                Sets the current record's "Comments" collection
- * @method sfGuardUser         setNewTags()                 Sets the current record's "NewTags" collection
+ * @method sfGuardUser         setTags()                    Sets the current record's "Tags" collection
  * @method sfGuardUser         setItemTags()                Sets the current record's "ItemTags" collection
  * @method sfGuardUser         setActions()                 Sets the current record's "Actions" collection
  * @method sfGuardUser         setBadges()                  Sets the current record's "Badges" collection
@@ -323,7 +323,7 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('Tag as NewTags', array(
+        $this->hasMany('Tag as Tags', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

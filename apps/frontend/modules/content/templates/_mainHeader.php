@@ -24,7 +24,7 @@
       <a class="rpxnow" id="h_relogin" href="https://tech-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Relogin</a>
     </div>
   <?php else: ?>
-    <a class="rpxnow" id="h_login" class="login" onclick="return false;" href="https://tech-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Sign In</a>
-    <a class="rpxnow" id="h_register" class="register" onclick="return false;" href="https://tech-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Register</a>
+    <a class="rpxnow" id="h_login" class="login xa" onclick="return false;" href="https://tech-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Sign In</a>
+    <a class="rpxnow" id="h_register" class="register xa" onclick="return false;" href="https://tech-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Register</a>
   <?php endif ?>
 </div>

@@ -328,7 +328,7 @@ div:focus {
 .side_tags #tags_add { cursor: pointer; font-size: 11px; font-weight: bold; clear: left; padding-top: 5px; background-color: #666; color: #fff; float: left; padding: 2px 6px; margin: 2px 0 0 2px; }
 
 #feed_reload_text { margin: 0 10px 5px 10px; color: #fff; font-weight: bold; font-size: 16px; background-color: #B33A00; padding: 6px 10px; text-align: center; display: none; }
-.categories { margin: 21px auto 15px auto; min-width: 1100px; max-width: 1185px; padding: 0 0 0 60px; }
+.categories { margin: 21px auto 15px auto; min-width: 1050px; max-width: 1185px; padding: 0 0 0 60px; }
 .categories .arrow { position: absolute; top: -7px; left: 10px; width: 10px; height: 8px; background: transparent url('../images/category_ribbon_arrow.png') no-repeat; display: none; }
 .cat_all { color: #fff;  padding: 4px 7px; font-weight: bold; float: left; margin: 0 10px 0 10px; cursor: pointer; font-size: 16px; position: relative; color: #fff; }
 .cat_all:hover { background-color: #5E5F54; text-decoration: none; color: #fff; }
@@ -1538,8 +1538,36 @@ div:focus {
 /** LIME PLAYER       */
 /**********************/
 
-#lime_player_C { position: fixed; bottom: 0px; width: 100%; border: none; border-top: 2px solid red; height: 40px; background-color: black; }
-.lp-controls li { float: left; }
+#lime_player_C { position: fixed; bottom: 0px; width: 100%; border: none; height: 48px; background: url('../images/lime_player_bg.png') repeat-x; }
+#lime_player_C .lp-single-player { position: relative; min-width: 1100px; max-width: 1400px; width: 100%; margin: auto; }
+
+#lime_player_C .lp-single-player .lp-controls { position: absolute; left: 0px; top: 1px; }
+#lplayer_play,#lplayer_pause { position: absolute; top: 6px; left: 50px; width: 37px; height: 37px; background: url('../images/lime_player_play_pause.png'); }
+#lplayer_play { background-position: left; }
+#lplayer_pause { background-position: right; }
+#lplayer_prev,#lplayer_next { position: absolute; top: 18px; width: 20px; height: 13px; background: url('../images/lime_player_prev_next.png'); }
+#lplayer_prev { background-position: left; left: 15px; }
+#lplayer_next { background-position: right; left: 103px; }
+
+#lime_player_C .lp-single-player .lp-volume-bar { position: absolute; left: 145px; top: 0px; }
+#lplayer_volume_min { position: absolute; left: 0; top: 30px; width: 8px; height: 11px; background: url('../images/lime_player_volume.gif'); }
+#lime_player_C .lp-single-player .lp-volume-bar .lp-volume-bar-slider { position: absolute; left: 15px; top: 28px; width: 75px; height: 3px; background-color: #DC9372; }
+#lime_player_C .lp-single-player .lp-volume-bar .lp-volume-bar-slider { position: absolute; left: 17px; top: 34px; width: 75px; height: 3px; background-color: #DC9372; }
+#lime_player_C .lp-single-player .lp-volume-bar .lp-volume-bar-value { position: absolute; left: 0px; top: 0px; height: 4px; background-color: #fff; }
+#lime_player_C .lp-single-player .lp-volume-bar .lp-volume-bar-value span { position: absolute; right: 0px; top: -5px; height: 13px; width: 4px; background-color: #BEE02C; }
+
+#lime_player_C .lp-single-player .lp-progress { position: absolute; left: 265px; top: 0px; }
+#lp-song-title { position: absolute; left: 10px; top: 10px; font-weight: bold; color: #fff; width: 265px; }
+#lime_player_C .lp-single-player .lp-play-bar { position: absolute; left: 45px; top: 33px; height: 3px; width: 250px; border: 1px solid #fff; }
+#lplayer_play_bar { position: absolute; left: 0px; top: 0px; height: 3px; background-color: #fff; }
+#lplayer_play_time,#lplayer_total_time { position: absolute; top: 27px; left: 0px; color: #fff; font-weight: bold; }
+#lplayer_play_time { left: 0px; }
+#lplayer_total_time { left: 307px; }
+
+#lime_player_C .lp-single-player .lp-interact { position: absolute; right: 0px; top: 4px; }
+#lime_player_C .lp-single-player .lp-interact li { font-size: 20px; color: #fff; font-weight: bold; border-left: 1px solid #fff; padding: 9px 20px; float: right; }
+#lime_player_C .lp-single-player .lp-interact .favorite { width: 30px; height: 27px; background: url('../images/lime_player_favorite.png') left; }
+#lime_player_C .lp-single-player .lp-interact .favorite.on { background-position: right; }
 
 /**********************/
 /** LIBRARY OVERRIDES */

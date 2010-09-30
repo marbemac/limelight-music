@@ -2626,13 +2626,18 @@ $(document).ready(function(){
   })
   .jPlayer("cssId", "play", "lplayer_play")
   .jPlayer("cssId", "pause", "lplayer_pause")
-  .jPlayer("cssId", "stop", "lplayer_stop")
+  //.jPlayer("cssId", "stop", "lplayer_stop")
   .jPlayer("cssId", "loadBar", "lplayer_load_bar")
   .jPlayer("cssId", "playBar", "lplayer_play_bar")
   .jPlayer("cssId", "volumeMin", "lplayer_volume_min")
-  .jPlayer("cssId", "volumeMax", "lplayer_volume_max")
+  //.jPlayer("cssId", "volumeMax", "lplayer_volume_max")
   .jPlayer("cssId", "volumeBar", "lplayer_volume_bar")
   .jPlayer("cssId", "volumeBarValue", "lplayer_volume_bar_value");
+
+  $("#lime_player").jPlayer("onProgressChange", function(lp,ppr,ppa,pt,tt) {
+    $("#lplayer_play_time").text($.jPlayer.convertTime(pt));
+    $("#lplayer_total_time").text($.jPlayer.convertTime(tt));
+  });
 
   // END JPLAYER
 

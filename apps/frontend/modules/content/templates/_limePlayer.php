@@ -5,26 +5,51 @@
   <div class="lp-single-player">
     <div class="lp-interface">
       <ul class="lp-controls">
-        <li><a href="#" id="lplayer_play" class="lp-play" tabindex="1">play</a></li>
-        <li><a href="#" id="lplayer_pause" class="lp-pause" tabindex="1">pause</a></li>
-        <li><a href="#" id="lplayer_stop" class="lp-stop" tabindex="1">stop</a></li>
-        <li><a href="#" id="lplayer_volume_min" class="lp-volume-min" tabindex="1">min volume</a></li>
-        <li><a href="#" id="lplayer_volume_max" class="lp-volume-max" tabindex="1">max volume</a></li>
+        <li><a href="#" id="lplayer_play" class="lp-play" tabindex="1"></a></li>
+        <li><a href="#" id="lplayer_pause" class="lp-pause" tabindex="1"></a></li>
+        <li><a href="#" id="lplayer_next" class="lp-next" tabindex="1"></a></li>
+        <li><a href="#" id="lplayer_prev" class="lp-prev" tabindex="1"></a></li>
       </ul>
-      <div class="lp-progress">
-        <div id="lplayer_load_bar" class="lp-load-bar">
-          <div id="lplayer_play_bar" class="lp-play-bar"></div>
+      <div id="lplayer_volume_bar" class="lp-volume-bar">
+        <a href="#" id="lplayer_volume_min" class="lp-volume-min" tabindex="1"></a>
+        <div class="lp-volume-bar-slider">
+          <div id="lplayer_volume_bar_value" class="lp-volume-bar-value"><span></span></div>
         </div>
       </div>
-      <div id="lplayer_volume_bar" class="lp-volume-bar">
-        <div id="lplayer_volume_bar_value" class="lp-volume-bar-value"></div>
+      <div class="lp-progress">
+        <a id="lp-song-title" href="">Band of Horses - Marry Me</a>
+        <div id="lplayer_load_bar" class="lp-load-bar">
+          <div class="lp-play-bar">
+            <div id="lplayer_play_bar"></div>
+          </div>
+        </div>
+        <div id="lplayer_play_time" class="lp-play-time">00:00</div>
+        <div id="lplayer_total_time" class="lp-total-time">00:00</div>
       </div>
-      <div id="lplayer_play_time" class="lp-play-time"></div>
-      <div id="lplayer_total_time" class="lp-total-time"></div>
     </div>
+
+    <ul class="lp-interact">
+      <li>
+        <div>1 limelight</div>
+      </li>
+      <li>
+        <div>share</div>
+      </li>
+      <li>
+        <div class="favorite"></div>
+      </li>
+      <li>
+        <div class="sb_song rnd_5">
+          <div class="neg"></div>
+          <div class="pos"></div>
+          0
+        </div>
+      </li>
+    </ul>
+
     <div id="lplayer_playlist" class="lp-playlist">
       <ul>
-        <li>Track title</li>
+        <li></li>
       </ul>
     </div>
   </div>
