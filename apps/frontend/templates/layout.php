@@ -42,53 +42,6 @@
     <?php include_stylesheets() ?>
   </head>
 
-
-  <?php if (!$sf_user->hasAttribute('beta_access')): ?>
-  <body id="beta_body">
-    <div id="container">
-      <?php echo image_tag('beta_splash_logo.gif', array('id' => 'beta_splash_logo')) ?>
-      <div id="beta_text">join the beta!</div>
-      <input type="text" id="beta_email" class="beta_input rnd_5"></input>
-      <div id="beta_store_email" class="beta_button rnd_5" data-url="<?php echo url_for('user_add_beta_email') ?>">invite me</div>
-      <div id="beta_or">or</div>
-      <input type="text" id="beta_access_code" class="beta_input rnd_5" value="password"></input>
-      <div id="beta_access" class="beta_button rnd_5" data-url="<?php echo url_for('user_beta_access') ?>">access beta</div>
-      <p id="beta_info" class="rnd_3">
-        <?php echo image_tag('news_add_tag_arrow.gif') ?>
-        Enter your email address to gain access to the beta during the next round of invites.
-        We will <b>never</b> send you spam or share your address.
-      </p>
-      <div id="beta_features">
-        <p class="rnd_5">
-          Want a smart website? A website built for you - a seeker of all that is new and interesting in the tech world?
-          Use Tech Limelight to follow the latest news on your favorite products and companies, find new products, and much more.
-          This ain't your same old boring digg clone. <b>Sign up for the beta above to find out what your missing.</b>
-        </p>
-
-        <ul id="beta_switchers">
-          <li class="t">feature # </li>
-          <li class="rnd_3 on" data-target="#beta_feature_1">1</li>
-          <li class="rnd_3" data-target="#beta_feature_2">2</li>
-          <li class="rnd_3" data-target="#beta_feature_3">3</li>
-          <li class="rnd_3" data-target="#beta_feature_4">4</li>
-          <li class="rnd_3" data-target="#beta_feature_5">5</li>
-          <li class="rnd_3 inactive" data-target="#beta_feature_6">6</li>
-        </ul>
-
-        <?php echo image_tag('beta_feature_slide1.jpg', array('id' => 'beta_feature_1', 'class' => 'feature on')) ?>
-        <?php echo image_tag('beta_feature_slide2.jpg', array('id' => 'beta_feature_2', 'class' => 'feature')) ?>
-        <?php echo image_tag('beta_feature_slide3.jpg', array('id' => 'beta_feature_3', 'class' => 'feature')) ?>
-        <?php echo image_tag('beta_feature_slide4.jpg', array('id' => 'beta_feature_4', 'class' => 'feature')) ?>
-        <?php echo image_tag('beta_feature_slide5.jpg', array('id' => 'beta_feature_5', 'class' => 'feature')) ?>
-        
-        <?php echo link_to('check out the new official tech limelight blog', 'http://blog.techlimelight.com', array('id' => 'beta_blog')) ?>
-        <a id="beta_twitter" href="http://www.twitter.com/techlimelight"><img src="http://twitter-badges.s3.amazonaws.com/follow_me-b.png" alt="Follow techlimelight on Twitter"/></a>
-        <iframe id="beta_facebook" src="http://www.facebook.com/plugins/likebox.php?id=128840593825022&amp;width=300&amp;connections=0&amp;stream=false&amp;header=false&amp;height=62" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:62px;" allowTransparency="true"></iframe>
-      </div>
-    </div>
-    <div id="ajax_notice" class="rnd_5 hide"></div>
-  <?php else: ?>
-
   <body class="<?php echo $top_help ? 'top_help_on' : '' ?>">
     <noscript>
       <div id="no_javascript"><?php echo sfConfig::get('app_site_name') ?> uses javascript extensively. Please enable it in your browser.</div>
@@ -138,8 +91,6 @@
     <div id="ajax_error" class="rnd_5 hide"></div>
 
     <?php include_partial('content/limePlayer') ?>
-    
-    <?php endif; // beta splash page endif ?>
 
     <?php
     if (sfConfig::get("sf_environment") == 'prod' || sfConfig::get("sf_environment") == 'staging') {
