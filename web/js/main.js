@@ -944,19 +944,22 @@ $(document).ready(function(){
   });
 
   // user change profile picture
-  if ($('#user_cpi').length > 0) {
-    $('#user_cpi').uploadify({
-      'uploader'    : '/js/uploadify/uploadify.swf',
-      'script'      : $('#user_cpi').metadata().url,
-      'cancelImg'   : '/js/uploadify/cancel.png',
-      'auto'        : true,
-      'sizeLimit'   : '2097152',
-      'buttonText'  : 'change image',
-      'onComplete'  : function(a,b,c,d) {
-        displayNotice('Profile image successfully changed', 1);
-      }
-    });
-  }
+  $('#user_cpi').livequery(function() {
+    var $self = $(this);
+    if ($self.length > 0) {
+      $self.uploadify({
+        'uploader'    : '/js/uploadify/uploadify.swf',
+        'script'      : $('#user_cpi').metadata().url,
+        'cancelImg'   : '/js/uploadify/cancel.png',
+        'auto'        : true,
+        'sizeLimit'   : '2097152',
+        'buttonText'  : 'change image',
+        'onComplete'  : function(a,b,c,d) {
+          displayNotice('Profile image successfully changed', 1);
+        }
+      });
+    }
+  });
 
   // feeds
   $('.feed_more').live('click', function() {
@@ -1490,7 +1493,7 @@ $(document).ready(function(){
   var limelightSubmit = function()
   {
     var self = $('#limelightSuggest_F .submit');
-    self.unbind('click').text('submitting...').addClass('submitting');
+    self.die('click').text('submitting...').addClass('submitting');
     var formData = {};
 
     $('h2.error').hide();
@@ -1510,7 +1513,7 @@ $(document).ready(function(){
     $.post(self.metadata().url, formData, function(data) {
       if (data.result == 'error')
       {
-        self.bind('click.submit', limelightSubmit).text('suggest limelight').removeClass('submitting');
+        self.live('click.submit', limelightSubmit).text('suggest limelight').removeClass('submitting');
 
         // handle the errors
         $('#limelightSuggest_F .error_list').remove();
@@ -1534,15 +1537,15 @@ $(document).ready(function(){
       }
       else if (data.result == 'login')
       {
-        self.bind('click.submit', limelightSubmit).text('suggest limelight').removeClass('submitting');
+        self.live('click.submit', limelightSubmit).text('suggest limelight').removeClass('submitting');
         authenticate();
       }
     }, 'json')
   };
-  $('#limelightSuggest_F .submit').bind('click.submit', limelightSubmit);
+  $('#limelightSuggest_F .submit').live('click.submit', limelightSubmit);
 
   // manufacturer autocomplete on limelight suggest form
-  $('#limelight_company_name').focus(function() {
+  $('#limelight_company_name').live('focus', function() {
     var self = $(this);
     if (!self.metadata().searchloaded)
     {
@@ -1559,7 +1562,7 @@ $(document).ready(function(){
   });
 
   // specification autocomplete on specification add form
-  $('#specification_F #specification_name').focus(function() {
+  $('#specification_F #specification_name').live('focus', function() {
     var self = $(this);
     if (self.metadata().searchloaded == 0)
     {
@@ -1575,14 +1578,14 @@ $(document).ready(function(){
     }
   });
 
-  $('#specification_F').bind('submit', specificationSubmit);
+  $('#specification_F').live('submit', specificationSubmit);
 
   // handle specification submissions
   function specificationSubmit(event)
   {
     var self = $(event.target);
     // unbind while submitting, and bind new function to catch extra form clicks temporarily
-    self.unbind('submit', specificationSubmit).bind('submit', function() {return false;});
+    self.die('submit', specificationSubmit).live('submit', function() {return false;});
     $('#specification_F .submit').text('adding...');
     $.post(self.attr('action'), self.serializeArray(), function(data) {
       if (data.result == 'success')
@@ -1611,7 +1614,7 @@ $(document).ready(function(){
           })
         }
         $('#specification_F .submit').val('add specification');
-        self.bind('submit', specificationSubmit);
+        self.live('submit', specificationSubmit);
       }
       else if (data.result == 'login')
       {
@@ -1630,7 +1633,7 @@ $(document).ready(function(){
   })
 
   // limelight autocomplete on news_add form
-  $('#news_limelight, #song_limelight').focus(function() {
+  $('#news_limelight, #song_limelight').live('focus', function() {
     var self = $(this);
     if (!self.metadata().searchloaded)
     {
@@ -1670,12 +1673,12 @@ $(document).ready(function(){
   });
 
   // add a limelight (not from autocomplete) on news add form
-  $('#news_limelight, #song_limelight').keyup(function(e) {
+  $('#news_limelight, #song_limelight').live('keyup', function(e) {
     if(e.keyCode == 13) {
       addLimelight($(this));
     }
   })
-  $('#newsAdd_F .limelight_add, #songAdd_F .limelight_add').click(function() {addLimelight($(this).parent().next().children('.ac_input'))});
+  $('#newsAdd_F .limelight_add, #songAdd_F .limelight_add').live('click', function() {addLimelight($(this).parent().next().children('.ac_input'))});
   function addLimelight($target)
   {
     if ($target.val() == '')
@@ -1720,7 +1723,7 @@ $(document).ready(function(){
 
           // set the idle timer, after which the wiki section is unlocked
           editor.idleTimer(parseInt(self.metadata().inactivity));
-          editor.bind("idle.idleTimer", function(){
+          editor.live("idle.idleTimer", function(){
             $.post(self.metadata().unload_url, {'code':0}, function() {window.location.reload();} )
           });
 
@@ -1814,12 +1817,12 @@ $(document).ready(function(){
   })
 
   // handle slice submissions
-  $('#slice_F').bind('submit', sliceSubmit);
+  $('#slice_F').live('submit', sliceSubmit);
   function sliceSubmit(event)
   {
     var self = $(event.target);
     // unbind while submitting, and bind new function to catch extra form clicks temporarily
-    self.unbind('submit', sliceSubmit).bind('submit', function() {return false;});
+    self.die('submit', sliceSubmit).live('submit', function() {return false;});
     $('#slice_F .submit').text('creating...');
     $.post(self.attr('action'), self.serializeArray(), function(data) {
       if (data.result == 'success')
@@ -1848,7 +1851,7 @@ $(document).ready(function(){
           })
         }
         $('#slice_F .submit').val('create it');
-        self.bind('submit', sliceSubmit);
+        self.live('submit', sliceSubmit);
       }
       else if (data.result == 'login')
       {
@@ -2062,13 +2065,13 @@ $(document).ready(function(){
   })
 
   // pro/con submit
-  $('#pro_F, #con_F').bind('submit', proconSubmit);
+  $('#pro_F, #con_F').live('submit', proconSubmit);
   function proconSubmit(event)
   {
     var $self = $(event.target);
     event.preventDefault();
     // unbind while submitting, and bind new function to catch extra form clicks temporarily
-    $self.unbind('submit', proconSubmit).bind('submit', function() {return false;});
+    $self.die('submit', proconSubmit).live('submit', function() {return false;});
     $self.find('.submit').text('adding...');
     $.post($self.attr('action'), $self.serializeArray(), function(data) {
       if (data.result == 'success')
@@ -2097,7 +2100,7 @@ $(document).ready(function(){
           })
         }
         $self.find('.submit').val('submit');
-        $self.bind('submit', proconSubmit);
+        $self.live('submit', proconSubmit);
       }
       else if (data.result == 'login')
       {
@@ -2251,7 +2254,7 @@ $(document).ready(function(){
   var newsSubmit = function()
   {
     var self = $('.news_add .submit');
-    self.unbind('click').text('submitting...').addClass('submitting');
+    self.die('click').text('submitting...').addClass('submitting');
     var formData = {};
 
     $('h2.error').hide();
@@ -2280,7 +2283,7 @@ $(document).ready(function(){
     $.post(self.metadata().url, formData, function(data) {
       if (data.result == 'error')
       {
-        self.bind('click.submit', newsSubmit).text('submit news story').removeClass('submitting');
+        self.live('click.submit', newsSubmit).text('submit news story').removeClass('submitting');
 
         // handle the basic info errors
         $('.news_add .error_list').remove();
@@ -2314,36 +2317,39 @@ $(document).ready(function(){
       }
       else if (data.result == 'login')
       {
-        self.bind('click.submit', newsSubmit).text('submit news story').removeClass('submitting');
+        self.live('click.submit', newsSubmit).text('submit news story').removeClass('submitting');
         authenticate();
       }
     }, 'json')
   };
-  $('.news_add .submit').bind('click.submit', newsSubmit);
+  $('.news_add .submit').live('click.submit', newsSubmit);
 
   // news add page image upload
-  if ($('#news_add_image').length > 0) {
-    $('#news_image').val('');
-    $('#news_add_image').uploadify({
-      'uploader'    : '/js/uploadify/uploadify.swf',
-      'script'      : $('#news_add_image').metadata().url,
-      'auto'        : true,
-      'fileDesc'    : 'png, jpg, gif, jpeg',
-      'fileExt'     : '*.png;*.jpg;*.gif;*.jpeg',
-      'buttonImg'   : '/images/news_add_choose_image.gif',
-      'width'       : 278,
-      'height'      : 40,
-      'sizeLimit'   : 2000000,
-      'buttonText'  : 'choose image',
-      'onComplete'  : function(a,b,c,d) {
-        // hack to get around strange uploadify response data
-        var data = d.split('$**$');
-        data = JSON.parse(data[0]);
-        $('#news_add_imageUploader').replaceWith('<img src="' + data.filePath + '" class="news_img rnd_3" />');
-        $('#news_image').val(data.fileName);
-      }
-    });
-  }
+  $('#news_add_image').livequery(function() {
+    var $self = $(this);
+    if ($self.length > 0) {
+      $('#news_image').val('');
+      $self.uploadify({
+        'uploader'    : '/js/uploadify/uploadify.swf',
+        'script'      : $self.metadata().url,
+        'auto'        : true,
+        'fileDesc'    : 'png, jpg, gif, jpeg',
+        'fileExt'     : '*.png;*.jpg;*.gif;*.jpeg',
+        'buttonImg'   : '/images/news_add_choose_image.gif',
+        'width'       : 278,
+        'height'      : 40,
+        'sizeLimit'   : 2000000,
+        'buttonText'  : 'choose image',
+        'onComplete'  : function(a,b,c,d) {
+          // hack to get around strange uploadify response data
+          var data = d.split('$**$');
+          data = JSON.parse(data[0]);
+          $('#news_add_imageUploader').replaceWith('<img src="' + data.filePath + '" class="news_img rnd_3" />');
+          $('#news_image').val(data.fileName);
+        }
+      });
+    }
+  });
 
   // ********************
 
@@ -2355,7 +2361,7 @@ $(document).ready(function(){
   var songSubmit = function()
   {
     var self = $('.song_add .submit');
-    self.unbind('click').text('submitting...').addClass('submitting');
+    self.die('click').text('submitting...').addClass('submitting');
     var formData = {};
 
     $('h2.error').hide();
@@ -2376,7 +2382,7 @@ $(document).ready(function(){
     $.post(self.metadata().url, formData, function(data) {
       if (data.result == 'error')
       {
-        self.bind('click.submit', songSubmit).text('submit song').removeClass('submitting');
+        self.live('click.submit', songSubmit).text('submit song').removeClass('submitting');
 
         // handle the basic info errors
         $('.song_add .error_list').remove();
@@ -2408,26 +2414,27 @@ $(document).ready(function(){
       }
       else if (data.result == 'login')
       {
-        self.bind('click.submit', songSubmit).text('submit song').removeClass('submitting');
+        self.live('click.submit', songSubmit).text('submit song').removeClass('submitting');
         authenticate();
       }
     }, 'json')
   };
-  $('.song_add .submit').bind('click.submit', songSubmit);
+  $('.song_add .submit').live('click.submit', songSubmit);
 
   // song add page file upload
-  if ($('#song_add_file').length > 0) {
+  $('#song_add_file').livequery(function() {
+    var $self = $(this);
     $('#song_file').val('');
-    $('#song_add_file').uploadify({
+    $self.uploadify({
       'uploader'    : '/js/uploadify/uploadify.swf',
-      'script'      : $('#song_add_file').metadata().url,
+      'script'      : $self.metadata().url,
       'auto'        : true,
       'fileDesc'    : 'mp3, mp4, aac, mpa, wma',
       'fileExt'     : '*.mp3;*.mp4;*.aac;*.mpa;*.wma',
       'buttonImg'   : '/images/song_add_choose_file.gif',
       'width'       : 278,
       'height'      : 40,
-      'sizeLimit'   : 10000000,
+      'sizeLimit'   : 15000000,
       'buttonText'  : 'choose audio file',
       'onComplete'  : function(a,b,c,d) {
         // hack to get around strange uploadify response data
@@ -2437,7 +2444,7 @@ $(document).ready(function(){
         $('#song_add_fileUploader').replaceWith('<div class="song_upload_success">Song successfully uploaded!</div>');
       }
     });
-  }
+  });
 
   // ********************
 
@@ -2630,15 +2637,52 @@ $(document).ready(function(){
   //.jPlayer("cssId", "stop", "lplayer_stop")
   .jPlayer("cssId", "loadBar", "lplayer_load_bar")
   .jPlayer("cssId", "playBar", "lplayer_play_bar")
-  .jPlayer("cssId", "volumeMin", "lplayer_volume_min")
+  //.jPlayer("cssId", "volumeMin", "lplayer_volume_min")
   //.jPlayer("cssId", "volumeMax", "lplayer_volume_max")
-  .jPlayer("cssId", "volumeBar", "lplayer_volume_bar")
-  .jPlayer("cssId", "volumeBarValue", "lplayer_volume_bar_value");
+  //.jPlayer("cssId", "volumeBar", "lplayer_volume_bar")
+  //.jPlayer("cssId", "volumeBarValue", "lplayer_volume_bar_value");
 
+  // Make the player
+  $("#lplayer_volume_bar").slider({
+    value: 60,
+    orientation: "horizontal",
+    range: "min",
+    min: 0,
+    max: 100,
+    animate: true
+  });
+  // END MAKE
+
+  // Control the player upon interaction
   $("#lime_player").jPlayer("onProgressChange", function(lp,ppr,ppa,pt,tt) {
     $("#lplayer_play_time").text($.jPlayer.convertTime(pt));
     $("#lplayer_total_time").text($.jPlayer.convertTime(tt));
   });
+
+  // control the volume slider
+  $("#lplayer_volume_bar").slider({
+    slide: function(event, ui) {
+      $("#lime_player").jPlayer("volume", ui.value);
+    }
+  });
+
+  // control the mute button
+  $('#lplayer_volume_min').live('click', function() {
+    var $self = $(this);
+    if ($self.metadata().muted == 0)
+    {
+      $self.metadata().muted = 1;
+      $self.metadata().vol = $("#lplayer_volume_bar").slider('value');
+      $("#lplayer_volume_bar").slider('value', 0);
+      $("#lime_player").jPlayer("volume", 0);
+    }
+    else
+    {
+      $self.metadata().muted = 0;
+      $("#lplayer_volume_bar").slider('value', $self.metadata().vol);
+      $("#lime_player").jPlayer("volume", $self.metadata().vol);
+    }
+  })
 
   $('#lplayer_play_pause').live('click', function() {
     var $self = $(this);
@@ -2660,6 +2704,7 @@ $(document).ready(function(){
   $('.song_play_pause').live('click', function() {
     var $self = $(this);
     var $item = $('#song_'+$self.metadata().song_id);
+    $('.lime_player_overlay').remove();
     if ($self.hasClass('play'))
     {
       // do we need to load a new file?
@@ -2671,6 +2716,7 @@ $(document).ready(function(){
       }
 
       $('#lime_player').jPlayer('play');
+      $('.song_play_pause').removeClass('pause').addClass('play');
       $self.removeClass('play').addClass('pause');
       $('#lplayer_play_pause').removeClass('play').addClass('pause');
       $('.feed.song.playing').removeClass('playing');
