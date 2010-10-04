@@ -6,6 +6,8 @@ foreach ($items as $key => $item) {
       include_component('content', 'feedLimelight', array('id' => $item['Limelight_id'], 'sf_cache_key' => $item['Limelight_id']));
     elseif ($item['type'] == 'News')
       include_component('content', 'feedNews', array('id' => $item['News_id'], 'sf_cache_key' => $item['News_id']));
+    elseif ($item['type'] == 'Song')
+      include_component('content', 'feedSong', array('id' => $item['Song_id'], 'sf_cache_key' => $item['Song_id']));
     elseif ($item['type'] == 'Comment')
       include_component('content', 'feedComment', array('id' => $item['Comment_id'], 'sf_cache_key' => $item['Comment_id']));
   }
@@ -16,6 +18,8 @@ foreach ($items as $key => $item) {
       include_component('content', 'feedLimelight', array('id' => $id, 'sf_cache_key' => $id));
     else if (isset($type) && strtolower($type) == 'news')
       include_component('content', 'feedNews', array('id' => $id, 'sf_cache_key' => $id));
+    else if (isset($type) && strtolower($type) == 'song')
+      include_component('content', 'feedSong', array('id' => $id, 'sf_cache_key' => $id));
     else if (isset($type) && strtolower($type) == 'comment')
       include_component('content', 'feedComment', array('id' => $id, 'sf_cache_key' => $id));
   }

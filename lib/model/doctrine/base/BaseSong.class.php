@@ -22,6 +22,7 @@
  * @property Doctrine_Collection $Limelights
  * @property Doctrine_Collection $SongLimelights
  * @property Doctrine_Collection $Comments
+ * @property Doctrine_Collection $SongTags
  * @property Doctrine_Collection $Favorited
  * @property Doctrine_Collection $Views
  * @property Doctrine_Collection $Plays
@@ -45,6 +46,7 @@
  * @method Doctrine_Collection getLimelights()          Returns the current record's "Limelights" collection
  * @method Doctrine_Collection getSongLimelights()      Returns the current record's "SongLimelights" collection
  * @method Doctrine_Collection getComments()            Returns the current record's "Comments" collection
+ * @method Doctrine_Collection getSongTags()            Returns the current record's "SongTags" collection
  * @method Doctrine_Collection getFavorited()           Returns the current record's "Favorited" collection
  * @method Doctrine_Collection getViews()               Returns the current record's "Views" collection
  * @method Doctrine_Collection getPlays()               Returns the current record's "Plays" collection
@@ -67,6 +69,7 @@
  * @method Song                setLimelights()          Sets the current record's "Limelights" collection
  * @method Song                setSongLimelights()      Sets the current record's "SongLimelights" collection
  * @method Song                setComments()            Sets the current record's "Comments" collection
+ * @method Song                setSongTags()            Sets the current record's "SongTags" collection
  * @method Song                setFavorited()           Sets the current record's "Favorited" collection
  * @method Song                setViews()               Sets the current record's "Views" collection
  * @method Song                setPlays()               Sets the current record's "Plays" collection
@@ -177,6 +180,10 @@ abstract class BaseSong extends Item
         $this->hasMany('Comment as Comments', array(
              'local' => 'id',
              'foreign' => 'Song_id'));
+
+        $this->hasMany('ItemTag as SongTags', array(
+             'local' => 'id',
+             'foreign' => 'item_id'));
 
         $this->hasMany('SongFavorite as Favorited', array(
              'local' => 'id',

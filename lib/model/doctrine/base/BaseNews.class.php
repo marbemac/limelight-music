@@ -20,7 +20,7 @@
  * @property Doctrine_Collection $NewsLimelights
  * @property Doctrine_Collection $Links
  * @property Doctrine_Collection $Comments
- * @property Doctrine_Collection $Tags
+ * @property Doctrine_Collection $NewsTags
  * @property Doctrine_Collection $UserAction
  * @property Doctrine_Collection $Favorited
  * @property Doctrine_Collection $Views
@@ -42,7 +42,7 @@
  * @method Doctrine_Collection getNewsLimelights()      Returns the current record's "NewsLimelights" collection
  * @method Doctrine_Collection getLinks()               Returns the current record's "Links" collection
  * @method Doctrine_Collection getComments()            Returns the current record's "Comments" collection
- * @method Doctrine_Collection getTags()                Returns the current record's "Tags" collection
+ * @method Doctrine_Collection getNewsTags()            Returns the current record's "NewsTags" collection
  * @method Doctrine_Collection getUserAction()          Returns the current record's "UserAction" collection
  * @method Doctrine_Collection getFavorited()           Returns the current record's "Favorited" collection
  * @method Doctrine_Collection getViews()               Returns the current record's "Views" collection
@@ -63,7 +63,7 @@
  * @method News                setNewsLimelights()      Sets the current record's "NewsLimelights" collection
  * @method News                setLinks()               Sets the current record's "Links" collection
  * @method News                setComments()            Sets the current record's "Comments" collection
- * @method News                setTags()                Sets the current record's "Tags" collection
+ * @method News                setNewsTags()            Sets the current record's "NewsTags" collection
  * @method News                setUserAction()          Sets the current record's "UserAction" collection
  * @method News                setFavorited()           Sets the current record's "Favorited" collection
  * @method News                setViews()               Sets the current record's "Views" collection
@@ -166,7 +166,7 @@ abstract class BaseNews extends Item
              'local' => 'id',
              'foreign' => 'News_id'));
 
-        $this->hasMany('ItemTag as Tags', array(
+        $this->hasMany('ItemTag as NewsTags', array(
              'local' => 'id',
              'foreign' => 'item_id'));
 

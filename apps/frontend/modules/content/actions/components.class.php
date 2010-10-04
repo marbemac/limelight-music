@@ -35,6 +35,11 @@ class contentComponents extends sfComponents
     $this->item = Doctrine::getTable('News')->getForFeed($this->id);
   }
 
+  public function executeFeedSong()
+  {
+    $this->item = Doctrine::getTable('Song')->getForFeed($this->id);
+  }
+
   public function executeFeedLimelight()
   {
     $this->item = Doctrine::getTable('Limelight')->getForFeed($this->id);

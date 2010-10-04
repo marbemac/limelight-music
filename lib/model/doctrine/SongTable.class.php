@@ -28,12 +28,51 @@ class SongTable extends ItemTable
         ->from('Song s')
         ->leftJoin('s.Limelights ll')
         ->leftJoin('s.Comments c WITH c.status = ?', 'Active')
-        ->leftJoin('s.Tags st WITH status = ?', 'Active')
+        ->leftJoin('s.SongTags st WITH st.type = ? AND st.status = ?', array('song', 'Active'))
         ->leftJoin('st.Tag t')
         ->leftJoin('s.Favorited sf')
         ->where('s.id = ?', $song_id);
     $results = $q->fetchArray();
     return $results[0];
+  }
+
+  public function getScoreboxInfo($song_id, $user_id) {
+    $data = array('pos_amount' => 0, 'neg_amount' => 0, 'scored' => 0);
+
+    $q = Doctrine_Query::create()
+        ->select('COUNT(amount) AS pos_amount')
+        ->from('SongScore')
+        ->where('item_id = ? AND status = ? AND amount > 0', array($song_id, 'Active'));
+    $result = $q->fetchOne();
+    $data['pos_amount'] = $result['pos_amount'];
+
+    $q = Doctrine_Query::create()
+        ->select('COUNT(amount) AS neg_amount')
+        ->from('SongScore')
+        ->where('item_id = ? AND status = ? AND amount < 0', array($song_id, 'Active'));
+    $result = $q->fetchOne();
+    $data['neg_amount'] = $result['neg_amount'];
+
+    $data['pos_progress'] = ($data['pos_amount'] + $data['neg_amount'] == 0) ? 5 : $data['pos_amount'] / ($data['pos_amount'] + $data['neg_amount']);
+    $data['neg_progress'] = ($data['pos_amount'] + $data['neg_amount'] == 0) ? 5 : $data['neg_amount'] / ($data['pos_amount'] + $data['neg_amount']);
+
+    $q = Doctrine_Query::create()
+        ->select('amount')
+        ->from('SongScore')
+        ->where('item_id = ? AND user_id = ?', array($song_id, $user_id));
+    $result = $q->fetchOne();
+    if ($result['amount'])
+    {
+      $data['pos_scored'] = $result['amount'] > 0 ? 'on' : '';
+      $data['neg_scored'] = $result['amount'] < 0 ? 'on' : '';
+    }
+    else
+    {
+      $data['pos_scored'] = 'scorable';
+      $data['neg_scored'] = 'scorable';
+    }
+
+    return $data;
   }
 
   public function getByFilters($type, $time_period, $sort_by, $categories, $limit, $offset) {

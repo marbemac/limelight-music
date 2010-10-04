@@ -1,12 +1,11 @@
-<div id="lime_player_C">
+<div id="lime_player_C" data-song_id="">
   
   <div id="lime_player"></div>
 
   <div class="lp-single-player">
     <div class="lp-interface">
       <ul class="lp-controls">
-        <li><a href="#" id="lplayer_play" class="lp-play" tabindex="1"></a></li>
-        <li><a href="#" id="lplayer_pause" class="lp-pause" tabindex="1"></a></li>
+        <li id="lplayer_play_pause" class="play"></li>
         <li><a href="#" id="lplayer_next" class="lp-next" tabindex="1"></a></li>
         <li><a href="#" id="lplayer_prev" class="lp-prev" tabindex="1"></a></li>
       </ul>

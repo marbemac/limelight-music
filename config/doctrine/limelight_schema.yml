@@ -688,10 +688,13 @@ ItemTag:
       local: tag_id
       foreignAlias: ItemTags
       onDelete: CASCADE
-    Item:
-      class: News
+    News:
       local: item_id
-      foreignAlias: Tags
+      foreignAlias: NewsTags
+      onDelete: CASCADE
+    Song:
+      local: item_id
+      foreignAlias: SongTags
       onDelete: CASCADE
 
 #############

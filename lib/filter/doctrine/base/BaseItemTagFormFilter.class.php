@@ -20,8 +20,8 @@ abstract class BaseItemTagFormFilter extends ItemFormFilter
     $this->widgetSchema   ['tag_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Tag'), 'add_empty' => true));
     $this->validatorSchema['tag_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Tag'), 'column' => 'id'));
 
-    $this->widgetSchema   ['item_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Item'), 'add_empty' => true));
-    $this->validatorSchema['item_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Item'), 'column' => 'id'));
+    $this->widgetSchema   ['item_id'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('News'), 'add_empty' => true));
+    $this->validatorSchema['item_id'] = new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('News'), 'column' => 'id'));
 
     $this->widgetSchema   ['type'] = new sfWidgetFormChoice(array('choices' => array('' => '', 'news' => 'news', 'song' => 'song', 'limelight' => 'limelight')));
     $this->validatorSchema['type'] = new sfValidatorChoice(array('required' => false, 'choices' => array('news' => 'news', 'song' => 'song', 'limelight' => 'limelight')));

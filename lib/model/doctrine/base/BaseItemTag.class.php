@@ -11,7 +11,8 @@
  * @property enum $type
  * @property sfGuardUser $User
  * @property Tag $Tag
- * @property News $Item
+ * @property News $News
+ * @property Song $Song
  * @property Doctrine_Collection $Scores
  * @property Doctrine_Collection $Flags
  * 
@@ -21,7 +22,8 @@
  * @method enum                getType()    Returns the current record's "type" value
  * @method sfGuardUser         getUser()    Returns the current record's "User" value
  * @method Tag                 getTag()     Returns the current record's "Tag" value
- * @method News                getItem()    Returns the current record's "Item" value
+ * @method News                getNews()    Returns the current record's "News" value
+ * @method Song                getSong()    Returns the current record's "Song" value
  * @method Doctrine_Collection getScores()  Returns the current record's "Scores" collection
  * @method Doctrine_Collection getFlags()   Returns the current record's "Flags" collection
  * @method ItemTag             setScore()   Sets the current record's "score" value
@@ -30,7 +32,8 @@
  * @method ItemTag             setType()    Sets the current record's "type" value
  * @method ItemTag             setUser()    Sets the current record's "User" value
  * @method ItemTag             setTag()     Sets the current record's "Tag" value
- * @method ItemTag             setItem()    Sets the current record's "Item" value
+ * @method ItemTag             setNews()    Sets the current record's "News" value
+ * @method ItemTag             setSong()    Sets the current record's "Song" value
  * @method ItemTag             setScores()  Sets the current record's "Scores" collection
  * @method ItemTag             setFlags()   Sets the current record's "Flags" collection
  * 
@@ -91,7 +94,12 @@ abstract class BaseItemTag extends Item
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
 
-        $this->hasOne('News as Item', array(
+        $this->hasOne('News', array(
+             'local' => 'item_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
+        $this->hasOne('Song', array(
              'local' => 'item_id',
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));

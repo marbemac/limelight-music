@@ -117,7 +117,7 @@ $(document).ready(function(){
       })
     })
   })
-  $('.user_link a').live('click', function() { $(this).qtip("hide") });
+  $('.user_link a').live('click', function() {$(this).qtip("hide")});
 
   // **********
   // FILTERS
@@ -1675,7 +1675,7 @@ $(document).ready(function(){
       addLimelight($(this));
     }
   })
-  $('#newsAdd_F .limelight_add, #songAdd_F .limelight_add').click(function() { addLimelight($(this).parent().next().children('.ac_input')) });
+  $('#newsAdd_F .limelight_add, #songAdd_F .limelight_add').click(function() {addLimelight($(this).parent().next().children('.ac_input'))});
   function addLimelight($target)
   {
     if ($target.val() == '')
@@ -2619,13 +2619,14 @@ $(document).ready(function(){
 
   $('#lime_player').jPlayer( {
     ready: function () {
-      this.element.jPlayer("setFile", "/uploads/songs/files/marry.mp3"); // Auto-Plays the file
+      //this.element.jPlayer("setFile", "/uploads/songs/files/marry.mp3"); // Auto-Plays the file
     },
     customCssIds: true,
+    nativeSupport: true,
     swfPath: "/js"
   })
-  .jPlayer("cssId", "play", "lplayer_play")
-  .jPlayer("cssId", "pause", "lplayer_pause")
+  //.jPlayer("cssId", "play", "lplayer_play")
+  //.jPlayer("cssId", "pause", "lplayer_pause")
   //.jPlayer("cssId", "stop", "lplayer_stop")
   .jPlayer("cssId", "loadBar", "lplayer_load_bar")
   .jPlayer("cssId", "playBar", "lplayer_play_bar")
@@ -2638,6 +2639,50 @@ $(document).ready(function(){
     $("#lplayer_play_time").text($.jPlayer.convertTime(pt));
     $("#lplayer_total_time").text($.jPlayer.convertTime(tt));
   });
+
+  $('#lplayer_play_pause').live('click', function() {
+    var $self = $(this);
+    var $item = $('#song_'+$('#lime_player_C').metadata().song_id);
+    if ($self.hasClass('play'))
+    {
+      $item.find('.song_play_pause').removeClass('play').addClass('pause');
+      $self.removeClass('play').addClass('pause');
+      $('#lime_player').jPlayer('play');
+    }
+    else
+    {
+      $item.find('.song_play_pause').removeClass('pause').addClass('play');
+      $self.removeClass('pause').addClass('play');
+      $('#lime_player').jPlayer('pause');
+    }
+  })
+
+  $('.song_play_pause').live('click', function() {
+    var $self = $(this);
+    var $item = $('#song_'+$self.metadata().song_id);
+    if ($self.hasClass('play'))
+    {
+      // do we need to load a new file?
+      if ($('#lp-song-title').text() != $item.children('.name').text())
+      {
+        $('#lime_player').jPlayer('setFile', '/uploads/songs/files/'+$self.metadata().file);
+        $('#lime_player_C').metadata().song_id = $self.metadata().song_id;
+        $('#lp-song-title').text($item.children('.name').text()).attr('href', $item.children('.name').attr('href'));
+      }
+
+      $('#lime_player').jPlayer('play');
+      $self.removeClass('play').addClass('pause');
+      $('#lplayer_play_pause').removeClass('play').addClass('pause');
+      $('.feed.song.playing').removeClass('playing');
+      $item.addClass('playing');
+    }
+    else if ($self.hasClass('pause'))
+    {
+      $('#lime_player').jPlayer('pause');
+      $self.removeClass('pause').addClass('play');
+      $('#lplayer_play_pause').removeClass('pause').addClass('play');
+    }
+  })
 
   // END JPLAYER
 

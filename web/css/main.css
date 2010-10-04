@@ -406,10 +406,13 @@ div:focus {
 .song_play_pause.play { background-position: left; }
 .song_play_pause.pause { background-position: right; }
 
-.feed.song { position: relative; padding: 0 0 0 75px; }
-.feed.song .play_score_box { position: absolute; width: 75px; left: -75px; border-right: 1px solid #DD9C81; }
-.feed.song .play_score_box .play_pause {  }
-.feed.song .play_score_box .sb_full {  }
+.feed.song { position: relative; padding: 0 0 0 85px; height: 165px; margin: 0 0 20px 10px; border-bottom: 1px solid #BC3A03; }
+.feed.song.playing { background: url('../images/song_playing_bg.png') repeat-x; }
+.feed.song .play_score_box { position: absolute; width: 80px; height: 130px; left: 0px; border-right: 1px solid #DD9C81; padding: 8px 0; }
+.feed.song .play_score_box .song_play_pause { cursor: pointer; position: absolute; top: 10px; left: 21px; }
+.feed.song .play_score_box .sb_full { position: absolute; left: 9px; top: 85px; }
+.feed.song .name { font-weight: bold; font-size: 24px; display: block; margin: 3px 0 0 10px; float: left; }
+.feed.song .date { color: #999; margin: 2px 0 0 13px; font-size: 12px; }
 
 .feed.limelight { background-color: #ACC451; margin: 0 0 10px 10px; padding: 0 350px 0 0; clear: left; position: relative; height: 260px; }
 .feed.limelight .sb_l {
@@ -735,6 +738,25 @@ div:focus {
 .mod_action:hover { border: 2px solid red; }
 .mod_action_pos { background-color: #7EB749; padding: 1px 4px; border: 2px solid black; color: #fff; cursor: pointer; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
 .mod_action_pos:hover { border: 2px solid green; }
+
+.sb_full { width: 60px; font-weight: bold; border: 1px solid #999; }
+.sb_full .score_pos,.sb_full .score_neg { position: absolute; left: 0px; padding: 0 0 0 20px; }
+.sb_full .score_pos { top: -20px; }
+.sb_full .score_neg { bottom: -10px; }
+.sb_full .score_pos .button,.sb_full .score_neg .button { background: url('../images/score_box_updown.gif'); width: 15px; height: 15px; cursor: pointer; position: absolute; left: 0px; top: 0px; }
+.sb_full .score_pos .button { background-position: top left; }
+.sb_full .score_neg .button { background-position: bottom left; }
+.sb_full .score_pos .button.scorable:hover { background-position: top center; }
+.sb_full .score_neg .button.scorable:hover { background-position: bottom center; }
+.sb_full .score_pos .button.on { background-position: top right; cursor: default; }
+.sb_full .score_neg .button.on { background-position: bottom right; cursor: default; }
+.sb_full .score_pos .stat_box,.sb_full .score_neg .stat_box { position: relative; top: 6px; width: 38px; height: 3px; border: 1px dotted #fff; }
+.sb_full .score_pos .stat_box:hover { border-color: #BFDA2B; }
+.sb_full .score_neg .stat_box:hover { border-color: #990000; }
+.sb_full .score_pos .progress,.sb_full .score_neg .progress { height: 3px; }
+.sb_full .score_pos .progress { height: 3px; background-color: #BFDA2B; }
+.sb_full .score_neg .progress { background-color: #990000; }
+.sb_full .score { font-size: 20px; padding: 5px 0; width: 60px; text-align: center; background-color: #fff; }
 
 /* score box medium, small, and thumb */
 .sb_l { cursor: default; font-size: 25px; padding: 4px 0; text-align: center; width: 75px; display: block; border: 3px solid #85B71E; color: #656C0B; text-align: center; }
@@ -1551,9 +1573,9 @@ div:focus {
 #lime_player_C .lp-single-player { position: relative; min-width: 1100px; max-width: 1400px; width: 100%; margin: auto; }
 
 #lime_player_C .lp-single-player .lp-controls { position: absolute; left: 0px; top: 1px; }
-#lplayer_play,#lplayer_pause { position: absolute; top: 6px; left: 50px; width: 37px; height: 37px; background: url('../images/lime_player_play_pause.png'); }
-#lplayer_play { background-position: left; }
-#lplayer_pause { background-position: right; }
+#lplayer_play_pause { position: absolute; top: 6px; left: 50px; width: 37px; height: 37px; background: url('../images/lime_player_play_pause.png'); cursor: pointer; }
+#lplayer_play_pause.play { background-position: left; }
+#lplayer_play_pause.pause { background-position: right; }
 #lplayer_prev,#lplayer_next { position: absolute; top: 18px; width: 20px; height: 13px; background: url('../images/lime_player_prev_next.png'); }
 #lplayer_prev { background-position: left; left: 15px; }
 #lplayer_next { background-position: right; left: 103px; }
