@@ -133,14 +133,20 @@ class songActions extends sfActions
       return sfView::NONE;
     }
 
-    // create the 4 file sizes and save
-    $fileName = uniqid('SF') . '.' . $ext;
-    $target_path = dirname(__FILE__).'/../../../../../web'.sfConfig::get('app_song_file_path').'/'.$fileName;
+    require_once (dirname(__FILE__).'/../../../../../config/S3.php');
+    $s3 = new S3(sfConfig::get('app_amazon_access_key_id'), sfConfig::get('app_amazon_secret_key_id'), false);
 
-    if(move_uploaded_file($file, $target_path)) {
+    $fileName = uniqid('SF') . '.' . $ext;
+
+    //create a new bucket
+    //$s3->putBucket("music-limelight-songs", S3::ACL_PUBLIC_READ);
+    if($s3->putObjectFile($file, sfConfig::get('app_amazon_song_bucket'), $fileName, S3::ACL_PUBLIC_READ))
+    {
       $return_data['result'] = 'success';
       $return_data['fileName'] = $fileName;
-    } else {
+    }
+    else
+    {
       $return_data['result'] = 'error';
       $return_data['text'] = 'There was an error uploading the file. Please try again later. If the problem persists, let us know!';
     }

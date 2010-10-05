@@ -18,9 +18,7 @@
       <div class="lp-progress">
         <a id="lp-song-title" href=""></a>
         <div id="lplayer_load_bar" class="lp-load-bar">
-          <div class="lp-play-bar">
-            <div id="lplayer_play_bar"></div>
-          </div>
+          <div id="lplayer_play_bar" class="lp-play-bar"></div>
         </div>
         <div id="lplayer_play_time" class="lp-play-time">00:00</div>
         <div id="lplayer_total_time" class="lp-total-time">00:00</div>

@@ -1,12 +1,17 @@
 # default values
 test:
   rpx_tokenize_url:  http://97.107.135.24/frontend_test.php/tokenize
-
+  site_path:         frontend_test.php/
+  
 staging:
   rpx_tokenize_url:  http://97.107.135.24/frontend_staging.php/tokenize
+  site_path:         .php/
 
 dev:
   rpx_tokenize_url:  http://music.limelight/frontend_dev.php/tokenize
+  site_path:         frontend_dev.php/
+  amazon_song_bucket:    music-limelight-dev
+  amazon_cloud_front_distro: d397k8hnhi5xcz.cloudfront.net
 
 all:
   recaptcha:
@@ -24,14 +29,18 @@ all:
   site_version:        1
   site_name:           Music Limelight
   site_type:           music
+  site_path:           /
 
   # used by janrain in sfGuardAuth tokenize function
   rpx_api_key:          eb14d9c6e438bab0bc18ac214ee3cabfa93124e7
   rpx_tokenize_url:     http://www.techlimelight.com/tokenize
   
   # used by Amazon
-  amazon_access_key_id: AKIAILSKTZKS64ZKOVBQ
-  amazon_associate_id:  1425-1676-1073
+  amazon_access_key_id:  AKIAJ2QSJUQRYKWR3LZA
+  amazon_associate_id:   1425-1676-1073
+  amazon_secret_key_id:  kcaBbTE2Xkj+1Y3yiAk5mnr2T0mqZD/a+rxzMsSJ
+  amazon_song_bucket:    music-limelight-songs
+  amazon_cloud_front_distro: d3g848lc6f2vev.cloudfront.net
 
   # paypal max claim
   paypal:

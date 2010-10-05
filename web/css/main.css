@@ -1589,7 +1589,7 @@ div:focus {
 #lplayer_volume_bar { position: absolute; left: 165px; top: 32px; width: 75px; height: 3px; background-color: #DC9372; }
 #lplayer_volume_min { position: absolute; left: 150px; top: 28px; width: 8px; height: 11px; background: url('../images/lime_player_volume.gif'); cursor: pointer; }
 #lplayer_volume_bar .ui-widget-header { background: #BEE02C; }
-#lplayer_volume_bar .ui-slider-handle { height: 13px; width: 4px; top: -6px; background: #BEE02C; margin-left: 0px; }
+#lplayer_volume_bar .ui-slider-handle { height: 13px; width: 4px; top: -6px; background: #BEE02C; margin-left: 0px; cursor: pointer; }
 #lime_player_C .lp-single-player .lp-volume-bar .lp-volume-bar-slider {  }
 #lime_player_C .lp-single-player .lp-volume-bar .lp-volume-bar-slider { position: absolute; left: 17px; top: 34px; width: 75px; height: 3px; background-color: #DC9372; }
 #lime_player_C .lp-single-player .lp-volume-bar .lp-volume-bar-value { position: absolute; left: 0px; top: 0px; height: 4px; background-color: #fff; }
@@ -1597,7 +1597,9 @@ div:focus {
 
 #lime_player_C .lp-single-player .lp-progress { position: absolute; left: 265px; top: 0px; }
 #lp-song-title { position: absolute; left: 10px; top: 10px; font-weight: bold; color: #fff; width: 265px; }
-#lime_player_C .lp-single-player .lp-play-bar { position: absolute; left: 45px; top: 33px; height: 3px; width: 250px; border: 1px solid #fff; }
+#lime_player_C .lp-single-player .lp-play-bar { position: absolute; left: 45px; top: 33px; height: 3px; width: 250px; border: 1px solid #fff; background: transparent; }
+#lime_player_C .lp-single-player .lp-play-bar .ui-slider-range { background: #fff; }
+#lime_player_C .lp-single-player .lp-play-bar .ui-slider-handle { display: none; }
 #lplayer_play_bar { position: absolute; left: 0px; top: 0px; height: 3px; background-color: #fff; }
 #lplayer_play_time,#lplayer_total_time { position: absolute; top: 27px; left: 0px; color: #fff; font-weight: bold; }
 #lplayer_play_time { left: 0px; }

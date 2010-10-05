@@ -12,6 +12,24 @@ if ($('#ll_head_image').length > 0)
   $('#ll_head_image .left').css('left', $left);
   $('#ll_head_image .right').css('left', $right);
 }
+
+// adjust the URL post page load
+var $pathname = window.location.href.split('#');
+if ($pathname.length == 1)
+{
+  $pathname = window.location.pathname.split('.php/');
+  var $temp = $pathname[$pathname.length-1];
+  var $path = window.location.href.split(window.location.pathname);
+  $path = $path[0];
+  if ($pathname.length > 1)
+  {
+    window.location.href = $path+$pathname[0]+'.php/'+'#'+$pathname[0]+'.php/'+$pathname[1];
+  }
+  else
+  {
+    window.location.href = $path+'/#/'+$pathname[0];
+  }
+}
 // END PRELOAD //
 
 $(document).ready(function(){
@@ -24,14 +42,14 @@ $(document).ready(function(){
   // ********** BETA SPLASH PAGE *********** //
   $('#beta_email').focus();
   $('#beta_blog').fadeIn(2000);
-  $('#beta_store_email').click(function() {submitBetaEmail()});
+  $('#beta_store_email').live('click', function() {submitBetaEmail()});
   $('#beta_email').keyup(function(e) {
     if(e.keyCode == 13) {
       submitBetaEmail();
     }
   })
-  $('#beta_access_code').click(function() {$(this).val('')});
-  $('#beta_access').click(function() {betaAccess()});
+  $('#beta_access_code').live('click', function() {$(this).val('')});
+  $('#beta_access').live('click', function() {betaAccess()});
   $('#beta_access_code').keyup(function(e) {
     if(e.keyCode == 13) {
       betaAccess();
@@ -69,7 +87,7 @@ $(document).ready(function(){
     }, 'json');
   }
 
-  $('#beta_switchers li:not(.t)').click(function() {
+  $('#beta_switchers li:not(.t)').live('click', function() {
     var $self = $(this);
     if ($self.hasClass('inactive'))
     {
@@ -604,7 +622,7 @@ $(document).ready(function(){
   // FEED
   // ***********
 
-  $('.filter_group div,.filter_group a').click(function() {
+  $('.filter_group div,.filter_group a').live('click', function() {
     var $self = $(this);
     $self.addClass('on', 200).siblings().removeClass('on', 200);
     $('#feed_reload').metadata().reload = 1;
@@ -642,7 +660,7 @@ $(document).ready(function(){
       $self.fadeOut(100).prev().removeClass('hovering');
     })
   })
-  $('.cat_all').click(function() {
+  $('.cat_all').live('click', function() {
     var $self = $(this);
     if ($self.hasClass('on'))
       return false;
@@ -667,7 +685,7 @@ $(document).ready(function(){
       return false;
     }
   })
-  $('.categories_filter li .name').click(function() {
+  $('.categories_filter li .name').live('click', function() {
     var $self = $(this).parent(); // the li
     var on = $self.hasClass('on') ? true : false;
 
@@ -1013,13 +1031,13 @@ $(document).ready(function(){
   // ********************
   // REVENUE
   // ********************
-  $('.redeem a').click(function() {
+  $('.redeem a').live('click', function() {
     if ($(this).metadata().loading == true)
       return false;
 
     $(this).text('redeeming...').css({'color':'#999', 'text-decoration':'none', 'cursor':'default'}).metadata().loading = true;
   })
-  $('.claims_show_more').click(function() {
+  $('.claims_show_more').live('click', function() {
     var $self = $(this);
     var $group = $('.claims li:visible:last').next().metadata().group;
     $('.claims li.claims_'+$group).fadeIn(200);
@@ -1096,7 +1114,7 @@ $(document).ready(function(){
   // ********************
   // BASIC SEARCH
   // ********************
-  $('.bs_C,.ns_C').click(function() {
+  $('.bs_C,.ns_C').live('click', function() {
     var self = $(this);
     var target = self.next();
     if (target.is(":visible"))
@@ -1118,8 +1136,8 @@ $(document).ready(function(){
       location.href = self.metadata().action + '?q=' + self.val()
     }
   });
-  $('#basic_search_img').click(function() {location.href = $(this).prev().metadata().action + '?q=' + $(this).prev().val()})
-  $('.bs_C').click(function() {
+  $('#basic_search_img').live('click', function() {location.href = $(this).prev().metadata().action + '?q=' + $(this).prev().val()})
+  $('.bs_C').live('click', function() {
     var self = $(this);
 
     if (!self.attr('data-searchloaded'))
@@ -1156,14 +1174,14 @@ $(document).ready(function(){
   // HELP TOGGLES
   // ********************
   // to adjust the body padding when the top help bar is shown to new users
-  $('.top_help .close').click(function() {
+  $('.top_help .close').live('click', function() {
     $.post($(this).metadata().url, function() {
       $('.top_help').slideUp(400);
       $('body').removeClass('top_help_on', 400);
       $('.home_welcome').removeClass('help_adjust', 400);
     })
   })
-  $('.hide_features').click(function() {
+  $('.hide_features').live('click', function() {
     $.post($(this).metadata().url, function() {
       $('.home_welcome').fadeOut(1000, function() {
         $('.home_welcome_placeholder').removeClass('home_welcome_placeholder', 500);
@@ -1188,7 +1206,7 @@ $(document).ready(function(){
   // ********************
   // CHANGE USERNAME
   // ********************
-  $('.username_change').click(function() {
+  $('.username_change').live('click', function() {
     var self = $(this);
     var content = '<div class="username_change"><h3>Permanently change your tech limelight username. You may only change your \n\
                    username <span>ONCE</span>. Pick a good one!<h3><div class="error"></div><input type="text" class="rnd_3" maxlength="15" /></div>//////';
@@ -1442,7 +1460,7 @@ $(document).ready(function(){
   })
 
   // handle the limelight suggest page type chooser
-  $('#limelightSuggest_F .types .right div').click(function() {
+  $('#limelightSuggest_F .types .right div').live('click', function() {
     $('#limelightSuggest_F .types .right div').removeClass('on');
     $(this).addClass('on');
     if ($(this).hasClass('product'))
@@ -1470,7 +1488,7 @@ $(document).ready(function(){
   })
 
   // handle the image chooser
-  $('.image_chooser_left').click(function() {
+  $('.image_chooser_left').live('click', function() {
     var $self = $(this);
     var $img = $self.next().next().next().children('img');
     var $next = parseInt($img.attr('data-on'))-1;
@@ -1479,7 +1497,7 @@ $(document).ready(function(){
     $img.attr('src', $img.attr('data-image_choice_'+$next));
     $img.attr('data-on', $next);
   })
-  $('.image_chooser_right').click(function() {
+  $('.image_chooser_right').live('click', function() {
     var $self = $(this);
     var $img = $self.next().next().children('img');
     var $next = parseInt($img.attr('data-on'))+1;
@@ -1626,7 +1644,7 @@ $(document).ready(function(){
   }
 
   // show extra spec content on limelight info pages
-  $('.specs li .expand').click(function() {
+  $('.specs li .expand').live('click', function() {
     var row = $(this).parent().parent();
     $('.specs li .extra').hide();
     row.children('.extra').slideToggle(200);
@@ -1800,7 +1818,7 @@ $(document).ready(function(){
   })
 
   // slices
-  $('.slices .slice').click(function() {
+  $('.slices .slice').live('click', function() {
     var $self = $(this);
 
     if ($self.hasClass('on'))
@@ -2009,7 +2027,7 @@ $(document).ready(function(){
 // ************** end DEPRECATED WHEN WIKI SEGMENTS WERE REMOVED ********************** //
 
   // limelight summary edit
-  $('#ll_head .summary_edit').click(function() {
+  $('#ll_head .summary_edit').live('click', function() {
     var $self = $(this);
     $.get($self.metadata().url, function(data) {
       if (data.result == 'success')
@@ -2030,7 +2048,7 @@ $(document).ready(function(){
       }
     }, 'json');
   })
-  $('#ll_head .summary_edit_submit:not(.loaded)').click(function() {
+  $('#ll_head .summary_edit_submit:not(.loaded)').live('click', function() {
     var $self = $(this);
     var summary = $.trim($('#ll_head .summary:not(.toggle) textarea').val());
     var prev = $.trim($('#ll_head .summary:not(.toggle) p').text());
@@ -2057,7 +2075,7 @@ $(document).ready(function(){
       }
     }, 'json');
   })
-  $('#ll_head .summary_edit_cancel').click(function() {
+  $('#ll_head .summary_edit_cancel').live('click', function() {
     var $self = $(this);
     $('#ll_head .summary:not(.toggle) textarea, #ll_head .summary:not(.toggle) #summary_length').remove();
     $('#ll_head .summary:not(.toggle) p').show();
@@ -2117,7 +2135,7 @@ $(document).ready(function(){
   // sidebar tab switching
   $('.top_list ul li').each(function(key,value) {
     var self = $(this);
-    self.click(function() {
+    self.live('click', function() {
       self.parent().children('.on').removeClass('on');
       self.addClass('on');
       self.parent().parent().children('.list.on').removeClass('on').fadeOut(200, function() {
@@ -2137,7 +2155,7 @@ $(document).ready(function(){
   // ********************
 
   // get and show the related stories, tags, and limelights on the news add page
-  $('.news_add .lookup').click(function() {
+  $('.news_add .lookup').live('click', function() {
     var $self = $(this);
     if ($('#news_source_url').val() == '') return false;
 
@@ -2204,7 +2222,7 @@ $(document).ready(function(){
   })
 
   // the add button for tags on the news story add page
-  $('#newsAdd_F .tag_add').click(function() {news_add_form_add_tag()})
+  $('#newsAdd_F .tag_add').live('click', function() {news_add_form_add_tag()})
   $('input#news_tag').keyup(function(e) {
     if(e.keyCode == 13) {
       news_add_form_add_tag();
@@ -2438,6 +2456,7 @@ $(document).ready(function(){
       'buttonText'  : 'choose audio file',
       'onComplete'  : function(a,b,c,d) {
         // hack to get around strange uploadify response data
+        console.log(d);
         var data = d.split('$**$');
         data = JSON.parse(data[0]);
         $('#song_file').val(data.fileName);
@@ -2456,7 +2475,7 @@ $(document).ready(function(){
   $('.dimmed').attr('title', 'This item is dimmed because its score is too low.');
 
   // Add title to future features
-  $('.future_feature').attr('title', 'This feature is not yet implemented.').click(function() {return false;});
+  $('.future_feature').attr('title', 'This feature is not yet implemented.').live('click', function() {return false;});
 
   // Add blind class to an element button, and the id of the element you wish
   // to toggle blind to the attribute blindElem.
@@ -2635,8 +2654,8 @@ $(document).ready(function(){
   //.jPlayer("cssId", "play", "lplayer_play")
   //.jPlayer("cssId", "pause", "lplayer_pause")
   //.jPlayer("cssId", "stop", "lplayer_stop")
-  .jPlayer("cssId", "loadBar", "lplayer_load_bar")
-  .jPlayer("cssId", "playBar", "lplayer_play_bar")
+  //.jPlayer("cssId", "loadBar", "lplayer_load_bar")
+  //.jPlayer("cssId", "playBar", "lplayer_play_bar")
   //.jPlayer("cssId", "volumeMin", "lplayer_volume_min")
   //.jPlayer("cssId", "volumeMax", "lplayer_volume_max")
   //.jPlayer("cssId", "volumeBar", "lplayer_volume_bar")
@@ -2651,17 +2670,27 @@ $(document).ready(function(){
     max: 100,
     animate: true
   });
+  $("#lplayer_play_bar").slider({
+    value: 0,
+    orientation: "horizontal",
+    range: "min",
+    min: 0,
+    max: 100,
+    animate: true
+  });
   // END MAKE
 
   // Control the player upon interaction
   $("#lime_player").jPlayer("onProgressChange", function(lp,ppr,ppa,pt,tt) {
     $("#lplayer_play_time").text($.jPlayer.convertTime(pt));
     $("#lplayer_total_time").text($.jPlayer.convertTime(tt));
+    $("#lplayer_play_bar").slider('value', ppa);
   });
 
   // control the volume slider
   $("#lplayer_volume_bar").slider({
     slide: function(event, ui) {
+      $('#lplayer_volume_min').metadata().muted = 0;
       $("#lime_player").jPlayer("volume", ui.value);
     }
   });
@@ -2683,6 +2712,14 @@ $(document).ready(function(){
       $("#lime_player").jPlayer("volume", $self.metadata().vol);
     }
   })
+
+  // control the track slider
+  $("#lplayer_play_bar").slider({
+    slide: function(event, ui) {
+      var $diag = $("#lime_player").jPlayer('getData', 'diag');
+      $("#lime_player").jPlayer("playHeadTime", $diag.totalTime*(ui.value/100));
+    }
+  });
 
   $('#lplayer_play_pause').live('click', function() {
     var $self = $(this);
@@ -2710,7 +2747,8 @@ $(document).ready(function(){
       // do we need to load a new file?
       if ($('#lp-song-title').text() != $item.children('.name').text())
       {
-        $('#lime_player').jPlayer('setFile', '/uploads/songs/files/'+$self.metadata().file);
+        $('#lime_player').jPlayer('setFile', 'https://'+$('#sbucket').metadata().val+'/'+$self.metadata().file);
+        //$('#lime_player').jPlayer('setFile', 'rmtp://s1rcpo43m19g70.cloudfront.net/'+$self.metadata().file);
         $('#lime_player_C').metadata().song_id = $self.metadata().song_id;
         $('#lp-song-title').text($item.children('.name').text()).attr('href', $item.children('.name').attr('href'));
       }

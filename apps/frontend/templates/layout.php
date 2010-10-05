@@ -139,6 +139,8 @@
 
     <?php include_javascripts() ?>
 
+    <div class="hide" id="sbucket" data-val="<?php echo sfConfig::get('app_amazon_cloud_front_distro') ?>"></div>
+
     <!-- for RPX login -->
     <script type="text/javascript">
       var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
