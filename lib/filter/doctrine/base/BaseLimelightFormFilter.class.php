@@ -29,6 +29,9 @@ abstract class BaseLimelightFormFilter extends ItemFormFilter
     $this->widgetSchema   ['total_plays'] = new sfWidgetFormFilterInput();
     $this->validatorSchema['total_plays'] = new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false)));
 
+    $this->widgetSchema   ['favorited_count'] = new sfWidgetFormFilterInput();
+    $this->validatorSchema['favorited_count'] = new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false)));
+
     $this->widgetSchema   ['favorite_badge_flag'] = new sfWidgetFormFilterInput();
     $this->validatorSchema['favorite_badge_flag'] = new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false)));
 
@@ -195,6 +198,7 @@ abstract class BaseLimelightFormFilter extends ItemFormFilter
       'profile_image' => 'Text',
       'total_views' => 'Number',
       'total_plays' => 'Number',
+      'favorited_count' => 'Number',
       'favorite_badge_flag' => 'Number',
       'reviewable' => 'Number',
       'wiki_lock' => 'Number',
