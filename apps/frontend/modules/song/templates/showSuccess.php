@@ -24,12 +24,12 @@
   else:
   ?>
   <?php
-  include_component('comment', 'showComments', array(
-      'type'         => 'Song',
-      'item'         => $song,
-      'sf_cache_key' => 'comments_Song_'.$song['id'].'-'.$user
-    ));
-  ?>
+//  include_component('comment', 'showComments', array(
+//      'type'         => 'Song',
+//      'item'         => $song,
+//      'sf_cache_key' => 'comments_Song_'.$song['id'].'-'.$user
+//    ));
+//  ?>
   <?php endif ?>
 </div>
 
