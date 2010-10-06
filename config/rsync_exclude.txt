@@ -8,5 +8,3 @@
 /web/*_cache.php
 /web/*_staging.php
 /web/*_test.php
-/config/databases.yml
-/data/sql/schema.sql
