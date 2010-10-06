@@ -91,6 +91,8 @@
     <div id="ajax_notice" class="rnd_5 hide"></div>
     <div id="ajax_error" class="rnd_5 hide"></div>
 
+    <div id="site_loading" class="rnd_3 hide">loading...</div>
+
     <?php include_partial('content/limePlayer') ?>
 
     <?php

@@ -22,15 +22,38 @@ if ($pathname.length == 1)
 // IMPORTANT, main site navigation ajax shit
 // ********************
 $.address.change(function(event) {
-  $('#container').load(event.value, function() {
-    if($('#lime_player_C').metadata().id)
+  $.ajax({
+    type: "GET",
+    url: event.value,
+    beforeSend: function(request) {
+      $('#site_loading').oneTime(400, function(){ $(this).show() }).text('loading...');
+    },
+    success: function(html) {
+      $('#site_loading').stopTime().hide();
+      $('#container').html(html);
+      if($('#lime_player_C').metadata().id)
+      {
+        var $status = $('#lplayer_play_pause').hasClass('play') ? 'play' : 'pause';
+        $('#song_'+$('#lime_player_C').metadata().id).addClass('playing').find('.song_play_pause').removeClass('play').addClass($status);
+      }
+      $('.ui-tooltip').remove();
+    },
+    error: function(request, status, error)
     {
-      var $status = $('#lplayer_play_pause').hasClass('play') ? 'play' : 'pause';
-      $('#song_'+$('#lime_player_C').metadata().id).addClass('playing').find('.song_play_pause').removeClass('play').addClass($status);
+      console.log(request);
+      if (request.status == '404') {
+        $('#site_loading').stopTime().hide();
+        $('#container').html(request.responseText);
+      }
+      else if (request.status == '500')
+      {
+        $('#site_loading').text('Oops, there was an error! If this persists, please let us know.');
+      }
     }
-    $('.ui-tooltip').remove();
-  })
+  });
 });
+
+
 $('a').live('click', function() {
     if ($(this).hasClass('xa'))
       return;
