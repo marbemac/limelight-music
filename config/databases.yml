@@ -14,6 +14,22 @@ staging:
       username: evario
       password: sTrNMYx7tMALDfve
 
+music-staging:
+  default:
+    class: sfDoctrineDatabase
+    param:
+      dsn:      mysql:host=localhost;dbname=limelight_tech
+      username: evario
+      password: sTrNMYx7tMALDfve
+
+tech-staging:
+  default:
+    class: sfDoctrineDatabase
+    param:
+      dsn:      mysql:host=localhost;dbname=limelight_music
+      username: evario
+      password: sTrNMYx7tMALDfve
+
 all:
   default:
     class: sfDoctrineDatabase

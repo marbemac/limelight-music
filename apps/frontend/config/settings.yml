@@ -36,7 +36,21 @@ staging:
     cache:                  true
     logging_enabled:        false
     etag:                   true
-    
+
+staging-tech:
+  .settings:
+    no_script_name:         false
+    cache:                  true
+    logging_enabled:        false
+    etag:                   true
+
+staging-music:
+  .settings:
+    no_script_name:         false
+    cache:                  true
+    logging_enabled:        false
+    etag:                   true
+
 all:
   .general:
 
