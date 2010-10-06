@@ -13,26 +13,8 @@
 <input id="song_name_slug" disabled readonly type=hidden value="<?php echo $song['name_slug'] ?>" />
 
 <div class="content_panel">
-  <div id="s_head">
-    <?php
-    if ($song['status'] == 'Active')
-    {
-      include_partial('content/scoreBox', array(
-          'class' => 'news_'.$song['id'],
-          'score' => $song['score'],
-          'type' => 'sb_m',
-          'target' => '.song_'.$song['id'],
-          'title' => 'rate this song',
-          'my' => 'top left',
-          'at' => 'bottom center',
-          'url' => url_for('song_rate_box', array('id' => $song['id']))
-        )
-      );
-    }
-    ?>
-    <div id="s_head_name"><?php echo $song['name'] ?></div>
-    <div class="clearLeft"></div>
-  </div>
+
+  <?php include_component('content', 'feedSong', array('id' => $song['id'], 'sf_cache_key' => $song['id'])); ?>
 
   <?php
   if ($song['status'] == 'Flagged'):

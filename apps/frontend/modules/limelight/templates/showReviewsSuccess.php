@@ -12,7 +12,7 @@ if ($sf_user->isAuthenticated() && ($sf_user->hasGroup('admin') || $sf_user->has
   else
     $cacheKey = 'user';
 
-  include_component('limelight', 'limelightHead', array('limelight' => $limelight, 'limelightStats' => $limelightStats, 'page' => 'reviews', 'sf_cache_key' => 'll_id='.$limelight->id.'&group='.$cacheKey.'&page=reviews'));
+  include_component('limelight', sfConfig::get('app_site_type').'LimelightHead', array('limelight' => $limelight, 'limelightStats' => $limelightStats, 'page' => 'reviews', 'sf_cache_key' => 'll_id='.$limelight->id.'&group='.$cacheKey.'&page=reviews'));
 ?>
 
 <div class="clearLeft"><br /></div>

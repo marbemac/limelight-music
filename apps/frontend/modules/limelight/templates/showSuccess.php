@@ -2,7 +2,7 @@
 
 <?php
   slot('title', sprintf('%s info', $limelight['name']));
-  include_component('limelight', 'limelightHead', array('limelight' => $limelight, 'page' => 'info', 'sf_cache_key' => $limelight['id']));
+  include_component('limelight', sfConfig::get('app_site_type').'LimelightHead', array('limelight' => $limelight, 'page' => 'info', 'sf_cache_key' => $limelight['id']));
 
   if ($limelight['is_stub'])
   {

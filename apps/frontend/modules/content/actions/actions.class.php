@@ -103,6 +103,15 @@ class contentActions extends sfActions
     return sfView::NONE;
   }
 
+  public function executeReloadTopHeader()
+  {
+    if (!$this->getRequest()->isXmlHttpRequest())
+      $this->forward404();
+
+    $this->renderPartial(sfConfig::get('app_site_type').'.mainHeader');
+    return sfView::NONE;
+  }
+
   public function executeTagSearchahead($request)
   {
     $items = Doctrine::getTable('Tag')->getSearchaheadList();

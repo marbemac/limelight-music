@@ -31,6 +31,7 @@
  * @property Doctrine_Collection $LimelightSlices
  * @property Doctrine_Collection $Wikis
  * @property Doctrine_Collection $News
+ * @property Doctrine_Collection $Songs
  * @property Doctrine_Collection $Specifications
  * @property Doctrine_Collection $LimelightSpecifications
  * @property Doctrine_Collection $NewsLinks
@@ -84,6 +85,7 @@
  * @method Doctrine_Collection getLimelightSlices()         Returns the current record's "LimelightSlices" collection
  * @method Doctrine_Collection getWikis()                   Returns the current record's "Wikis" collection
  * @method Doctrine_Collection getNews()                    Returns the current record's "News" collection
+ * @method Doctrine_Collection getSongs()                   Returns the current record's "Songs" collection
  * @method Doctrine_Collection getSpecifications()          Returns the current record's "Specifications" collection
  * @method Doctrine_Collection getLimelightSpecifications() Returns the current record's "LimelightSpecifications" collection
  * @method Doctrine_Collection getNewsLinks()               Returns the current record's "NewsLinks" collection
@@ -136,6 +138,7 @@
  * @method sfGuardUser         setLimelightSlices()         Sets the current record's "LimelightSlices" collection
  * @method sfGuardUser         setWikis()                   Sets the current record's "Wikis" collection
  * @method sfGuardUser         setNews()                    Sets the current record's "News" collection
+ * @method sfGuardUser         setSongs()                   Sets the current record's "Songs" collection
  * @method sfGuardUser         setSpecifications()          Sets the current record's "Specifications" collection
  * @method sfGuardUser         setLimelightSpecifications() Sets the current record's "LimelightSpecifications" collection
  * @method sfGuardUser         setNewsLinks()               Sets the current record's "NewsLinks" collection
@@ -304,6 +307,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'foreign' => 'user_id'));
 
         $this->hasMany('News', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Song as Songs', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

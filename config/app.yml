@@ -118,6 +118,8 @@ all:
     add_tags_max:           10
     add_limelights_min:     1
     add_limelights_max:     8
+    # the amount of time a song needs to be played to count as a play
+    count_as_play:          30
   limelight:
     image_path:             /uploads/ll_images
     tag_num:                10

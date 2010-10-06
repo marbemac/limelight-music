@@ -66,14 +66,15 @@
       <div id="container">
         <?php echo $sf_content ?>
       </div>
+      <div class="clear"></div>
       <div id="f_wrapper">
-        <div id="f" class="rnd_5">footer</div>
+        <div id="f" class="rnd_5"></div>
       </div>
       <div class="clear"></div>
 
       <!-- put at bottom for SEO -->
       <div id="wrapper_top_content">
-        <?php include_partial('content/mainHeader') ?>
+        <?php include_partial('content/'.sfConfig::get('app_site_type').'.mainHeader') ?>
         <div id="top_advertisement"></div>
         <?php include_component('content', 'categoryRibbon') ?>
       </div>
@@ -97,11 +98,11 @@
       use_javascript('library.v'.sfConfig::get('app_library_js_version').'.js');
 
       // on which pages do we need the bloated CKE editor?
-      if (($sf_context->getModuleName() == 'limelight' && $sf_context->getActionName() == 'show') || ($sf_context->getModuleName() == 'wiki' && $sf_context->getActionName() == 'revision'))
-      {
+//      if (($sf_context->getModuleName() == 'limelight' && $sf_context->getActionName() == 'show') || ($sf_context->getModuleName() == 'wiki' && $sf_context->getActionName() == 'revision'))
+//      {
         use_javascript('ckeditor/ckeditor.js');
         use_javascript('ckeditor/adapters/jquery.js');
-      }
+//      }
 
       use_javascript('combined.v'.sfConfig::get('app_custom_js_version').'.js');
     }
@@ -112,11 +113,11 @@
       use_javascript('jquery-ui.js');
 
       // on which pages do we need the bloated CKE editor?
-      if (($sf_context->getModuleName() == 'limelight' && $sf_context->getActionName() == 'show') || ($sf_context->getModuleName() == 'wiki' && $sf_context->getActionName() == 'revision'))
-      {
+//      if (($sf_context->getModuleName() == 'limelight' && $sf_context->getActionName() == 'show') || ($sf_context->getModuleName() == 'wiki' && $sf_context->getActionName() == 'revision'))
+//      {
         use_javascript('ckeditor/ckeditor.js');
         use_javascript('ckeditor/adapters/jquery.js');
-      }
+//      }
 
       use_javascript('jquery.scroll.js');
       use_javascript('jquery.metadata.js');
@@ -134,6 +135,7 @@
       use_javascript('jquery.autocomplete.js');
       use_javascript('jquery.livequery.js');
       use_javascript('main.js');
+      use_javascript(sfConfig::get('app_site_type').'.main.js');
     }
     ?>
 
@@ -153,8 +155,7 @@
     </script>
     <div class="rpx_help login_C hide">
       <div class="rpx_help login rnd_5">
-        We at Tech Limelight believe in <a href="http://en.wikipedia.org/wiki/KISS_principle" target="_blank">KISS</a>. Choose a provider below to login securely.
-        Even mix up which provider you choose - you'll still enjoy a <span>single, seamless Tech Limelight experience</span>.
+        Let's make things easier. Choose a provider below to login securely.
         <?php echo image_tag('rpx_login_help_arrow.gif') ?>
       </div>
     </div>
@@ -173,8 +174,8 @@
     <div class="rpx_help register_C hide">
       <div class="rpx_help register rnd_5">
         Why go through a tedious registration process? Why even have to remember another password?
-        Here at <span>tech limelight</span> we don't think you should have to. Simply <span>login</span> using your <span>existing credentials</span>
-        with any of the <span>providers</span> below and we'll create a <span>personalized tech limelight experience</span> for you!
+        Here at <span><?php echo sfConfig::get('app_site_name') ?></span> we don't think you should have to. Simply <span>login</span> using your <span>existing credentials</span>
+        with any of the <span>providers</span> below and we'll create a <span>personalized <?php echo sfConfig::get('app_site_name') ?> experience</span> for you!
         <?php echo image_tag('rpx_login_help_arrow.gif') ?>
       </div>
     </div>

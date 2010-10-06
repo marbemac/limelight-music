@@ -67,7 +67,15 @@ class limelightComponents extends sfComponents
       $this->score_increase = '';
   }
   
-  public function executeLimelightHead()
+  public function executeTechLimelightHead()
+  {
+    $user = $this->getUser();
+    $user_id = $user->isAuthenticated() ? $user->getGuardUser()->id : 0;
+//    $this->tags = Doctrine::getTable('LimelightTag')->getTags($this->limelight['id']);
+    $this->limelightStats = Doctrine::getTable('Limelight')->getLimelightStats($this->limelight['id'], $this->user_id);
+  }
+
+  public function executeMusicLimelightHead()
   {
     $user = $this->getUser();
     $user_id = $user->isAuthenticated() ? $user->getGuardUser()->id : 0;

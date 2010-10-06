@@ -73,4 +73,18 @@ class contentComponents extends sfComponents
 
     $this->categories = Doctrine::getTable('Category')->getCategories();
   }
+
+  public function executeScoreBoxFull()
+  {
+    $user_id = $this->getUser()->isAuthenticated() ? $this->getUser()->getGuardUser()->id : 0;
+
+    $this->data = Doctrine::getTable($this->type)->getScoreboxInfo($this->item_id, $user_id);
+  }
+
+  public function executeFavorite()
+  {
+    $user_id = $this->getUser()->isAuthenticated() ? $this->getUser()->getGuardUser()->id : 0;
+
+    $this->favorited = $user_id != 0 ? Doctrine::getTable('Favorite')->checkFavorite($user_id, $this->item_id, $this->type.'Favorite') : false;
+  }
 }

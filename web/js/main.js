@@ -387,6 +387,22 @@ $(document).ready(function(){
       }
     }, 'json')
   }
+
+  // new quick favorite box!
+  $('.favorite').live('click', function() {
+    var $self = $(this);
+    if ($self.hasClass('on'))
+    {
+      $.post($self.metadata().unfav_url);
+      $self.toggleClass('on').attr('title', 'click to favorite this item');
+    }
+    else
+    {
+      $.post($self.metadata().fav_url);
+      $self.toggleClass('on').attr('title', 'click to unfavorite this item');
+    }
+  })
+
   // END FAVORITE
 
   // **********
@@ -481,6 +497,26 @@ $(document).ready(function(){
       }
     }, 'json')
   }
+
+  // submit score box fulls!
+  $('.sb_full .button.scorable').live('click', function() {
+    var $self = $(this);
+    $.post($self.metadata().url, function(data) {
+      if (data.result == 'success')
+      {
+        $self.parent().parent().find('.button').removeClass('scorable');
+        $self.addClass('on', 500).parent().parent().children('.score').text(data.amount);
+      }
+      else if (data.result == 'login')
+      {
+        authenticate();
+      }
+      else
+      {
+        displayNotice(data.text, 0);
+      }
+    }, 'json');
+  })
 
   // **********
   // AUTOCOMPLETES
@@ -2372,102 +2408,6 @@ $(document).ready(function(){
   // ********************
 
   // ********************
-  // SONGS
-  // ********************
-
-  // handle the news submission form
-  var songSubmit = function()
-  {
-    var self = $('.song_add .submit');
-    self.die('click').text('submitting...').addClass('submitting');
-    var formData = {};
-
-    $('h2.error').hide();
-    $('.error_list').remove();
-
-    // get the basic info
-    formData[$('#songAdd_F #song_name').attr('name')] = $('#songAdd_F #song_name').val();
-    formData[$('#songAdd_F #song_content').attr('name')] = $('#songAdd_F #news_content').val();
-    formData[$('#songAdd_F #song_file').attr('name')] = $('#songAdd_F #song_file').val();
-    formData[$('#songAdd_F #song__csrf_token').attr('name')] = $('#songAdd_F #song__csrf_token').val();
-
-    // get the limelight info
-    formData['limelights'] = {}
-    $.each($('.limelight_add_C .on'), function(index, val) {
-      formData['limelights'][index] = $(val).children('span.name').metadata().name;
-    })
-
-    $.post(self.metadata().url, formData, function(data) {
-      if (data.result == 'error')
-      {
-        self.live('click.submit', songSubmit).text('submit song').removeClass('submitting');
-
-        // handle the basic info errors
-        $('.song_add .error_list').remove();
-        $.each(data.info_error, function(index, val) {
-          if ($(val).error != '')
-          {
-            $('#song_'+val.name).before(val.error);
-          }
-        })
-
-        // handle the limelight errors
-        if (data.limelight_error == true)
-          $('#song_limelight').before('<ul class="error_list limelights"><li>You must select between 1 and 10 limelights. Selected limelights have a solid green border. Click on limelights to toggle between selected and deselected, or add new ones in the input box below. You currently have '+ $('.limelight_add_C .on, .tag_add_C .on').length +' limelights selected.</li></ul>').parent().parent().addClass('limelights');
-        else
-          $('#song_limelight').parent().parent().removeClass('limelights');
-
-        // handle the file errors
-        if (data.file_error == true)
-          $('#song_add_file').after('<ul class="error_list file"><li>You must upload the song file!</li></ul>');
-
-        $.scrollTo($('.song_add .dont'), 500, {onAfter:function() {
-          $('h2.error').fadeIn(1000);
-        }
-        });
-      }
-      else if (data.result == 'success')
-      {
-        window.location = data.url;
-      }
-      else if (data.result == 'login')
-      {
-        self.live('click.submit', songSubmit).text('submit song').removeClass('submitting');
-        authenticate();
-      }
-    }, 'json')
-  };
-  $('.song_add .submit').live('click.submit', songSubmit);
-
-  // song add page file upload
-  $('#song_add_file').livequery(function() {
-    var $self = $(this);
-    $('#song_file').val('');
-    $self.uploadify({
-      'uploader'    : '/js/uploadify/uploadify.swf',
-      'script'      : $self.metadata().url,
-      'auto'        : true,
-      'fileDesc'    : 'mp3, mp4, aac, mpa, wma',
-      'fileExt'     : '*.mp3;*.mp4;*.aac;*.mpa;*.wma',
-      'buttonImg'   : '/images/song_add_choose_file.gif',
-      'width'       : 278,
-      'height'      : 40,
-      'sizeLimit'   : 15000000,
-      'buttonText'  : 'choose audio file',
-      'onComplete'  : function(a,b,c,d) {
-        // hack to get around strange uploadify response data
-        console.log(d);
-        var data = d.split('$**$');
-        data = JSON.parse(data[0]);
-        $('#song_file').val(data.fileName);
-        $('#song_add_fileUploader').replaceWith('<div class="song_upload_success">Song successfully uploaded!</div>');
-      }
-    });
-  });
-
-  // ********************
-
-  // ********************
   // UTILITIES
   // ********************
 
@@ -2475,7 +2415,8 @@ $(document).ready(function(){
   $('.dimmed').attr('title', 'This item is dimmed because its score is too low.');
 
   // Add title to future features
-  $('.future_feature').attr('title', 'This feature is not yet implemented.').live('click', function() {return false;});
+  $('.future_feature').livequery(function() { $(this).attr('title', 'This feature is not yet implemented.').live('click', function() { return false; }) });
+
 
   // Add blind class to an element button, and the id of the element you wish
   // to toggle blind to the attribute blindElem.
@@ -2500,7 +2441,7 @@ $(document).ready(function(){
   });
 
   // Clear default values of inputs with input_clear class when focused on
-  $('.input_clear').focus(function() {
+  $('.input_clear').live('focus', function() {
     var self = $(this);
     if (self.metadata().cleared != 1)
       self.val('').removeClass('input_clear');
@@ -2508,19 +2449,21 @@ $(document).ready(function(){
   });
 
   // Length counter for form fields
-  $('.length_counter').each(function(index,val) {
-    var $self = $(this);
-    var $max_length = $self.attr('maxlength');
-    var $indicator_span = $($self.attr('lengthIndicator') + ' span');
-    var $new_length;
-    $indicator_span.text($self.val().length);
-    $(val).live('keypress', function() {
-      $new_length = $self.val().length;
-      if ($new_length > $max_length) {
-        $self.val($self.val().substring(0, $max_length));
-      } else {
-        $indicator_span.text($new_length);
-      }
+  $('.length_counter').livequery(function() {
+    $(this).each(function(index,val) {
+      var $self = $(this);
+      var $max_length = $self.attr('maxlength');
+      var $indicator_span = $($self.attr('lengthIndicator') + ' span');
+      var $new_length;
+      $indicator_span.text($self.val().length);
+      $(val).live('keypress', function() {
+        $new_length = $self.val().length;
+        if ($new_length > $max_length) {
+          $self.val($self.val().substring(0, $max_length));
+        } else {
+          $indicator_span.text($new_length);
+        }
+      })
     })
   })
   $('.length_counter').live('keypress', function() {
@@ -2544,22 +2487,6 @@ $(document).ready(function(){
     self.parent().children('.checked').removeClass('checked');
     self.addClass('checked');
   })
-
-  // Used to check if the user is still logged in, every 15 min
-//  $(this).everyTime(900000, function() {
-//    if ($('#authURL').attr('name') == 'logged') {
-//      $.ajax({
-//        type: 'GET',
-//        cache: false,
-//        url: $('#authURL').val(),
-//        success: function(text) {
-//          if(text != 'authenticated') {
-//            window.location = '/';
-//          }
-//        }
-//      });
-//    }
-//  });
 
   // Pop up limelights feeds when the user hovers over the limelights tab on items
   $('.feed_lls').livequery(function() {$(this).hover(function() {$(this).children('.list').show()}, function() {$(this).children('.list').hide()})});
@@ -2622,153 +2549,6 @@ $(document).ready(function(){
     });
   });
   // END COMMENTS
-
-  // ********************
-  // IMPORTANT, main site navigation ajax shit
-  // ********************
-  $.address.change(function(event) {
-    $('#container').load(event.value, function() {
-      
-    })
-  });
-  $('a').live('click', function() {
-      if ($(this).hasClass('xa'))
-        return;
-
-      $.address.value($(this).attr('href'));
-      return false;
-  });
-
-  // ********************
-  // JPLAYER
-  // ********************
-
-  $('#lime_player').jPlayer( {
-    ready: function () {
-      //this.element.jPlayer("setFile", "/uploads/songs/files/marry.mp3"); // Auto-Plays the file
-    },
-    customCssIds: true,
-    nativeSupport: true,
-    swfPath: "/js"
-  })
-  //.jPlayer("cssId", "play", "lplayer_play")
-  //.jPlayer("cssId", "pause", "lplayer_pause")
-  //.jPlayer("cssId", "stop", "lplayer_stop")
-  //.jPlayer("cssId", "loadBar", "lplayer_load_bar")
-  //.jPlayer("cssId", "playBar", "lplayer_play_bar")
-  //.jPlayer("cssId", "volumeMin", "lplayer_volume_min")
-  //.jPlayer("cssId", "volumeMax", "lplayer_volume_max")
-  //.jPlayer("cssId", "volumeBar", "lplayer_volume_bar")
-  //.jPlayer("cssId", "volumeBarValue", "lplayer_volume_bar_value");
-
-  // Make the player
-  $("#lplayer_volume_bar").slider({
-    value: 60,
-    orientation: "horizontal",
-    range: "min",
-    min: 0,
-    max: 100,
-    animate: true
-  });
-  $("#lplayer_play_bar").slider({
-    value: 0,
-    orientation: "horizontal",
-    range: "min",
-    min: 0,
-    max: 100,
-    animate: true
-  });
-  // END MAKE
-
-  // Control the player upon interaction
-  $("#lime_player").jPlayer("onProgressChange", function(lp,ppr,ppa,pt,tt) {
-    $("#lplayer_play_time").text($.jPlayer.convertTime(pt));
-    $("#lplayer_total_time").text($.jPlayer.convertTime(tt));
-    $("#lplayer_play_bar").slider('value', ppa);
-  });
-
-  // control the volume slider
-  $("#lplayer_volume_bar").slider({
-    slide: function(event, ui) {
-      $('#lplayer_volume_min').metadata().muted = 0;
-      $("#lime_player").jPlayer("volume", ui.value);
-    }
-  });
-
-  // control the mute button
-  $('#lplayer_volume_min').live('click', function() {
-    var $self = $(this);
-    if ($self.metadata().muted == 0)
-    {
-      $self.metadata().muted = 1;
-      $self.metadata().vol = $("#lplayer_volume_bar").slider('value');
-      $("#lplayer_volume_bar").slider('value', 0);
-      $("#lime_player").jPlayer("volume", 0);
-    }
-    else
-    {
-      $self.metadata().muted = 0;
-      $("#lplayer_volume_bar").slider('value', $self.metadata().vol);
-      $("#lime_player").jPlayer("volume", $self.metadata().vol);
-    }
-  })
-
-  // control the track slider
-  $("#lplayer_play_bar").slider({
-    slide: function(event, ui) {
-      var $diag = $("#lime_player").jPlayer('getData', 'diag');
-      $("#lime_player").jPlayer("playHeadTime", $diag.totalTime*(ui.value/100));
-    }
-  });
-
-  $('#lplayer_play_pause').live('click', function() {
-    var $self = $(this);
-    var $item = $('#song_'+$('#lime_player_C').metadata().song_id);
-    if ($self.hasClass('play'))
-    {
-      $item.find('.song_play_pause').removeClass('play').addClass('pause');
-      $self.removeClass('play').addClass('pause');
-      $('#lime_player').jPlayer('play');
-    }
-    else
-    {
-      $item.find('.song_play_pause').removeClass('pause').addClass('play');
-      $self.removeClass('pause').addClass('play');
-      $('#lime_player').jPlayer('pause');
-    }
-  })
-
-  $('.song_play_pause').live('click', function() {
-    var $self = $(this);
-    var $item = $('#song_'+$self.metadata().song_id);
-    $('.lime_player_overlay').remove();
-    if ($self.hasClass('play'))
-    {
-      // do we need to load a new file?
-      if ($('#lp-song-title').text() != $item.children('.name').text())
-      {
-        $('#lime_player').jPlayer('setFile', 'https://'+$('#sbucket').metadata().val+'/'+$self.metadata().file);
-        //$('#lime_player').jPlayer('setFile', 'rmtp://s1rcpo43m19g70.cloudfront.net/'+$self.metadata().file);
-        $('#lime_player_C').metadata().song_id = $self.metadata().song_id;
-        $('#lp-song-title').text($item.children('.name').text()).attr('href', $item.children('.name').attr('href'));
-      }
-
-      $('#lime_player').jPlayer('play');
-      $('.song_play_pause').removeClass('pause').addClass('play');
-      $self.removeClass('play').addClass('pause');
-      $('#lplayer_play_pause').removeClass('play').addClass('pause');
-      $('.feed.song.playing').removeClass('playing');
-      $item.addClass('playing');
-    }
-    else if ($self.hasClass('pause'))
-    {
-      $('#lime_player').jPlayer('pause');
-      $self.removeClass('pause').addClass('play');
-      $('#lplayer_play_pause').removeClass('pause').addClass('play');
-    }
-  })
-
-  // END JPLAYER
 
 });
 

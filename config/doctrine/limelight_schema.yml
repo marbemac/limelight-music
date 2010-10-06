@@ -63,6 +63,7 @@ Profile:
     login_count:
       type: integer(4)
       default: 0
+    song_playing_id: integer(4)
     first_100: { type: bool, default: 0 }
     first_1000: { type: bool, default: 0 }
     is_mod: { type: bool, default: 0 }
@@ -195,6 +196,8 @@ Limelight:
     score:                         { type: integer(4), default: 0, notnull: true }
     profile_image:                 { type: string(255), default: limelight_profile_default.gif }
     total_views:                   { type: integer(4), default: 0 }
+    total_plays:                   { type: integer(4), default: 0 }
+    favorited_count:               { type: integer(4), default: 0 }
     favorite_badge_flag:           { type: integer(1), default: 0 }
     reviewable:                    { type: integer(1), default: 1 }
     wiki_lock:                     { type: integer(1), default: 0 }
@@ -423,7 +426,7 @@ Song:
     User:
       class: sfGuardUser
       local: user_id
-      foreignAlias: News
+      foreignAlias: Songs
       onDelete: CASCADE
 
 LimelightSong:
@@ -440,6 +443,52 @@ LimelightSong:
       local: song_id
       foreign: id
       foreignAlias: SongLimelights
+      onDelete: CASCADE
+
+Playlist:
+  inheritance:
+    type:             concrete
+    extends:          Item
+  actAs:
+    Sluggable:
+      fields: [name]
+      name: name_slug
+  columns:
+    name:
+      type: string(255)
+      notnull: true
+    score:
+      type: integer(4)
+      default: 0
+      notnull: true
+    total_plays:
+      type: integer(4)
+      default: 0
+    favorited_count:
+      type: integer(4)
+      default: 0
+    favorite_badge_flag: { type: integer(1), default: 0 }
+  relations:
+    User:
+      class: sfGuardUser
+      local: user_id
+      foreignAlias: News
+      onDelete: CASCADE
+
+PlaylistSong:
+  columns:
+    playlist_id: integer(4)
+    song_id: integer(4)
+  relations:
+    Playlist:
+      local: playlist_id
+      foreign: id
+      foreignAlias: PlaylistSongs
+      onDelete: CASCADE
+    Song:
+      local: song_id
+      foreign: id
+      foreignAlias: SongPlaylists
       onDelete: CASCADE
 
 ##################
@@ -710,6 +759,7 @@ UserAction:
     Limelight_id: { type: integer(4), default: null }
     News_id: { type: integer(4), default: null }
     Song_id: { type: integer(4), default: null }
+    Playlist_id: { type: integer(4), default: null }
     Comment_id: { type: integer(4), default: null }
     LimelightProCon_id: { type: integer(4), default: null }
     Wiki_id: { type: integer(4), default: null }
@@ -1309,6 +1359,17 @@ SongScore:
   relations:
     Item:
       class: Song
+      onDelete: CASCADE
+      local: item_id
+      foreignAlias: Scores
+
+PlaylistScore:
+  inheritance:
+    type:             concrete
+    extends:          Score
+  relations:
+    Item:
+      class: Playlist
       onDelete: CASCADE
       local: item_id
       foreignAlias: Scores

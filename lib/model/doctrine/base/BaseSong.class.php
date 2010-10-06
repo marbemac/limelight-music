@@ -21,6 +21,7 @@
  * @property sfGuardUser $User
  * @property Doctrine_Collection $Limelights
  * @property Doctrine_Collection $SongLimelights
+ * @property Doctrine_Collection $SongPlaylists
  * @property Doctrine_Collection $Comments
  * @property Doctrine_Collection $SongTags
  * @property Doctrine_Collection $Favorited
@@ -45,6 +46,7 @@
  * @method sfGuardUser         getUser()                Returns the current record's "User" value
  * @method Doctrine_Collection getLimelights()          Returns the current record's "Limelights" collection
  * @method Doctrine_Collection getSongLimelights()      Returns the current record's "SongLimelights" collection
+ * @method Doctrine_Collection getSongPlaylists()       Returns the current record's "SongPlaylists" collection
  * @method Doctrine_Collection getComments()            Returns the current record's "Comments" collection
  * @method Doctrine_Collection getSongTags()            Returns the current record's "SongTags" collection
  * @method Doctrine_Collection getFavorited()           Returns the current record's "Favorited" collection
@@ -68,6 +70,7 @@
  * @method Song                setUser()                Sets the current record's "User" value
  * @method Song                setLimelights()          Sets the current record's "Limelights" collection
  * @method Song                setSongLimelights()      Sets the current record's "SongLimelights" collection
+ * @method Song                setSongPlaylists()       Sets the current record's "SongPlaylists" collection
  * @method Song                setComments()            Sets the current record's "Comments" collection
  * @method Song                setSongTags()            Sets the current record's "SongTags" collection
  * @method Song                setFavorited()           Sets the current record's "Favorited" collection
@@ -174,6 +177,10 @@ abstract class BaseSong extends Item
              'foreign' => 'limelight_id'));
 
         $this->hasMany('LimelightSong as SongLimelights', array(
+             'local' => 'id',
+             'foreign' => 'song_id'));
+
+        $this->hasMany('PlaylistSong as SongPlaylists', array(
              'local' => 'id',
              'foreign' => 'song_id'));
 

@@ -14,9 +14,9 @@ class Score extends BaseScore
 {
   public function postInsert($event) {
     // what types of items contribute to a limelights score?
-    $limelight_contribute = array('News', 'LimelightWiki', 'LimelightReviewUser', 'LimelightReviewPro', 'LimelightProCon', 'LimelightSpecification', 'NewsLink');
+    $limelight_contribute = array('News', 'LimelightWiki', 'LimelightReviewUser', 'LimelightReviewPro', 'LimelightProCon', 'LimelightSpecification', 'Song');
     // what types of items contribute to a users score?
-    $user_contribute = array('News', 'LimelightWiki', 'NewsTag', 'LimelightProCon', 'LimelightSpecification', 'Comment');
+    $user_contribute = array('News', 'LimelightWiki', 'NewsTag', 'LimelightProCon', 'LimelightSpecification', 'Comment', 'Song');
 
     $item = $this->Item;
     $item_type = get_class($item);
@@ -76,7 +76,7 @@ class Score extends BaseScore
       if (in_array($item_type, $limelight_contribute))
       {
         // is it an item that has a many-many limelight relationship?
-        if ($item_type == 'News')
+        if ($item_type == 'News' || $item_type == 'Song')
         {
           $limelights = $item->Limelights;
           foreach ($limelights as $limelight)

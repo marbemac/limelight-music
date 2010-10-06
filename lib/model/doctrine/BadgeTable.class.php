@@ -8,7 +8,7 @@ class BadgeTable extends Doctrine_Table
         ->from('Badge b')
         ->leftJoin('b.UserBadges ub WITH ub.user_id = ?', $user_id)
         ->leftJoin('b.BadgeLevels bl')
-        ->where('b.status = ?', 'Active')
+        ->where('b.status = ? AND site = ?', array('Active', sfConfig::get('app_site_type')))
         ->orderBy('b.type ASC')
         ->addOrderBy('b.name ASC');
     $q->useResultCache(true, 3600, 'user_'.$user_id.'_badges');

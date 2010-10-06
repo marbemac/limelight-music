@@ -12,5 +12,19 @@
  */
 class SongPlay extends BaseSongPlay
 {
+  public function postInsert($event) {
 
+    // increase the total plays on the song
+    $item = $this->getItem();
+    $item->total_plays += 1;
+    $item->save();
+
+    // increase the total plays on the limelights connected to the song
+    $limelights = $item->Limelights;
+    foreach ($limelights as $limelight)
+    {
+      $limelight->total_plays += 1;
+      $limelight->save();
+    }
+  }
 }

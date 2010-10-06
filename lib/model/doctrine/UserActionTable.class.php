@@ -4,10 +4,10 @@ class UserActionTable extends Doctrine_Table
 {
   // what is available (kind of)?
   private $action_types = array('Limelight', 'News', 'Comment', 'LimelightProCon', 'LimelightWiki',
-                         'LimelightReviewUser', 'LimelightReviewPro');
+                         'LimelightReviewUser', 'LimelightReviewPro', 'Song');
 
   // what are we currently showing in the feeds?
-  private $current_types = array('Limelight', 'News', 'Comment');
+  private $current_types = array('Limelight', 'News', 'Comment', 'Song');
 
   public function getMainfeed($type, $period, $sort_by, $categories, $limit, $offset) {
     $q = Doctrine_Query::create()
@@ -40,8 +40,6 @@ class UserActionTable extends Doctrine_Table
   }
 
   public function getFollowingFeed($user_id, $limit, $offset, $following) {
-    $types = array('Limelight', 'News');
-
     if (count($following) == 0)
       return array();
 

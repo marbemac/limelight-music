@@ -28,6 +28,9 @@ abstract class BaseLimelightForm extends ItemForm
     $this->widgetSchema   ['total_views'] = new sfWidgetFormInputText();
     $this->validatorSchema['total_views'] = new sfValidatorInteger(array('required' => false));
 
+    $this->widgetSchema   ['total_plays'] = new sfWidgetFormInputText();
+    $this->validatorSchema['total_plays'] = new sfValidatorInteger(array('required' => false));
+
     $this->widgetSchema   ['favorite_badge_flag'] = new sfWidgetFormInputText();
     $this->validatorSchema['favorite_badge_flag'] = new sfValidatorInteger(array('required' => false));
 

@@ -24,11 +24,6 @@ Category:
     status: Active
     site: music
 
-  cat_latin:
-    name: Latin
-    status: Active
-    site: music
-
   cat_reggae:
     name: Raggae
     status: Active
@@ -59,17 +54,17 @@ Category:
     status: Active
     site: music
 
-  cat_christian:
-    name: Gospel
+  cat_mashup:
+    name: Mashup
     status: Active
     site: music
 
-  cat_sound:
-    name: Soundtracks
+  cat_rap:
+    name: Rap
     status: Active
     site: music
 
-  cat_kids:
-    name: Kids
+  cat_folk:
+    name: Folk
     status: Active
     site: music

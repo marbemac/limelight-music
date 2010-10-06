@@ -29,6 +29,7 @@
  * @property integer $limelight_count
  * @property integer $flag_count
  * @property integer $login_count
+ * @property integer $song_playing_id
  * @property bool $first_100
  * @property bool $first_1000
  * @property bool $is_mod
@@ -59,6 +60,7 @@
  * @method integer     getLimelightCount()       Returns the current record's "limelight_count" value
  * @method integer     getFlagCount()            Returns the current record's "flag_count" value
  * @method integer     getLoginCount()           Returns the current record's "login_count" value
+ * @method integer     getSongPlayingId()        Returns the current record's "song_playing_id" value
  * @method bool        getFirst100()             Returns the current record's "first_100" value
  * @method bool        getFirst1000()            Returns the current record's "first_1000" value
  * @method bool        getIsMod()                Returns the current record's "is_mod" value
@@ -88,6 +90,7 @@
  * @method Profile     setLimelightCount()       Sets the current record's "limelight_count" value
  * @method Profile     setFlagCount()            Sets the current record's "flag_count" value
  * @method Profile     setLoginCount()           Sets the current record's "login_count" value
+ * @method Profile     setSongPlayingId()        Sets the current record's "song_playing_id" value
  * @method Profile     setFirst100()             Sets the current record's "first_100" value
  * @method Profile     setFirst1000()            Sets the current record's "first_1000" value
  * @method Profile     setIsMod()                Sets the current record's "is_mod" value
@@ -218,6 +221,10 @@ abstract class BaseProfile extends sfDoctrineRecord
         $this->hasColumn('login_count', 'integer', 4, array(
              'type' => 'integer',
              'default' => 0,
+             'length' => 4,
+             ));
+        $this->hasColumn('song_playing_id', 'integer', 4, array(
+             'type' => 'integer',
              'length' => 4,
              ));
         $this->hasColumn('first_100', 'bool', null, array(

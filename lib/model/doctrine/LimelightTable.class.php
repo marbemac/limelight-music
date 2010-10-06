@@ -74,6 +74,21 @@ class LimelightTable extends ItemTable
     return $results;
   }
 
+  public function getSongfeed($ll_id, $limit, $offset) {
+    $q = Doctrine_Query::create()
+        ->select('s.id')
+        ->from('Song s')
+        ->innerJoin('s.SongLimelights sl')
+        ->where('s.status = ? AND sl.limelight_id = ?', array('Active', $ll_id))
+        ->orderBy('s.created_at DESC')
+        ->limit($limit)
+        ->offset($offset);
+
+    $q->useResultCache(true, 60, 'limelight_feed_songs_'.$ll_id.'_'.$limit.'_'.$offset);
+    $results = $q->fetchArray();
+    return $results;
+  }
+
   public function getSpecifications($ll_id, $user_id)
   {
     $q = Doctrine_Query::create()
@@ -224,7 +239,7 @@ class LimelightTable extends ItemTable
   }
 
   public function getFollowingFeed($user_id, $limit, $offset, $following) {
-    $types = array('News');
+    $types = array('News', 'Song');
 
     if (count($following) == 0)
       return array();
@@ -234,22 +249,40 @@ class LimelightTable extends ItemTable
       $following_ids[$key] = $limelight['limelight_id'];
     sort($following_ids, SORT_NUMERIC);
 
-    $q = Doctrine_Query::create()
-        ->select('n.id, ll.id, ll.status')
-        ->from('News n')
-        ->innerJoin('n.Limelights ll')
-        ->andWhereIn('ll.id', $following_ids)
-        ->orderBy('n.created_at DESC')
-        ->limit($limit)
-        ->offset($offset)
-        ->groupBy('n.id');
-    $q->useResultCache(true, 300, 'user_'.$user_id.'_following_limelight_feed_'.$limit.'_'.$offset);
+    if (sfConfig::get('app_site_type') == 'tech')
+    {
+      $q = Doctrine_Query::create()
+          ->select('n.id, ll.id, ll.status')
+          ->from('News n')
+          ->innerJoin('n.Limelights ll')
+          ->andWhereIn('ll.id', $following_ids)
+          ->orderBy('n.created_at DESC')
+          ->limit($limit)
+          ->offset($offset);
+      $q->useResultCache(true, 300, 'user_'.$user_id.'_following_limelight_feed_'.$limit.'_'.$offset);
+    }
+    else if (sfConfig::get('app_site_type') == 'music')
+    {
+      $q = Doctrine_Query::create()
+          ->select('s.id, ll.id, ll.status')
+          ->from('Song s')
+          ->innerJoin('s.Limelights ll')
+          ->andWhereIn('ll.id', $following_ids)
+          ->orderBy('s.created_at DESC')
+          ->limit($limit)
+          ->offset($offset);
+      $q->useResultCache(true, 300, 'user_'.$user_id.'_following_limelight_feed_'.$limit.'_'.$offset);
+    }
+
     $results = $q->fetchArray();
 
     $items= $results;
-    foreach ($results as $news)
+    foreach ($results as $item)
     {
-      $items[] = array('type' => 'News', 'News_id' => $news['id']);
+      if (sfConfig::get('app_site_type') == 'tech')
+        $items[] = array('type' => 'News', 'News_id' => $item['id']);
+      else
+        $items[] = array('type' => 'Song', 'Song_id' => $item['id']);
     }
 
     return $items;

@@ -300,10 +300,6 @@ song_upload_file:
   url:   /songs/add/file
   param: { module: song, action: uploadSong }
 
-song_rate_box:
-  url:  /songs/rateBox/:id
-  param: { module: content, action: rateBox, item_type: Song }
-
 Song_update_score:
   url:  /songs/updateScore/:id/:d
   param: { module: content, action: updateScore, item_type: Song }
@@ -317,12 +313,6 @@ song_flag_box:
 Song_flag:
   url:  /songs/flag/:id
   param: { module: content, action: flag, item_type: Song }
-  requirements:
-    id: \d+
-
-song_favorite_box:
-  url:  /songs/favoriteBox/:id
-  param: { module: content, action: favoriteBox, item_type: Song }
   requirements:
     id: \d+
 
@@ -341,6 +331,18 @@ Song_unfavorite:
 song_disable:
   url:   /songs/disable/:item_id
   param: { module: content, action: disable, item_type: Song }
+
+song_play_pause:
+  url:   /songs/play-pause/:id
+  param: { module: song, action: playPause }
+
+song_oncomplete:
+  url:   /songs/oncomlete
+  param: { module: song, action: onComplete }
+
+song_load_interact:
+  url:   /songs/load_interact
+  param: { module: song, action: loadInteract }
 
 song_show:
   url:   /songs/:name_slug
@@ -712,6 +714,19 @@ lime_show_news_more:
     id: \d+
     page: \d+
 
+lime_show_songs:
+  url:   /limelights/:name_slug/songs
+  class: sfDoctrineRoute
+  options: { model: Limelight, type: object }
+  param: { module: limelight, action: showSongs }
+
+lime_show_songs_more:
+  url:  /limelights/:id/songs/:page
+  param: { module: limelight, action: showSongs }
+  requirements:
+    id: \d+
+    page: \d+
+
 lime_show_products:
   url:   /limelights/:name_slug/products
   class: sfDoctrineRoute
@@ -822,6 +837,10 @@ toggle_ajax_feed:
 rankings_ajax:
   url:   /rAj/:period
   param: { module: rankings, action: rankingsFeed }
+
+reload_top_header:
+  url:   /rTH/
+  param: { module: content, action: reloadTopHeader }
 
 # deal with janrain login/token
 janrain_tokenize:

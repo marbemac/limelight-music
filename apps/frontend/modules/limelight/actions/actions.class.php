@@ -40,6 +40,7 @@ class limelightActions extends sfActions
   {
     $this->form = new LimelightForm();
     $this->categories = Doctrine::getTable('Category')->getCategories();
+    $this->setTemplate(sfConfig::get('app_site_type').'.suggest');
   }
 
   // Process a new limelight suggestion
@@ -61,7 +62,7 @@ class limelightActions extends sfActions
       $submission = $request->getParameter('limelight');
 
       // check if limelight type
-      if (!in_array($submission['limelight_type'], array('product', 'technology', 'company', 'source')))
+      if (!in_array($submission['limelight_type'], array('product', 'technology', 'company', 'source', 'artist')))
       {
         $errors['result'] = 'error';
         $errors['info_error'][] = array('name' => '#limelightSuggest_F .item.types label', 'error' => 'error_on');
@@ -629,6 +630,43 @@ class limelightActions extends sfActions
 //    {
 //      $this->limelightStats = Doctrine::getTable('Limelight')->getLimelightStats($this->limelight['id'], $this->user_id);
 //    }
+  }
+
+  public function executeShowSongs(sfWebRequest $request)
+  {
+    $user = $this->getUser();
+    $user_id = $user->isAuthenticated() ? $user->getGuardUser()->id : 0;
+    $this->user_id = $user->isAuthenticated() ? $user->getGuardUser()->id : 0;
+
+    if ($request->hasParameter('id'))
+    {
+      $this->limelight_id = $request->getParameter('id');
+    }
+    else
+    {
+      $this->limelight = $this->getRoute()->getObject();
+      $this->limelight_id = $this->limelight->id;
+    }
+
+    $this->items = Doctrine::getTable('Limelight')->getSongFeed(
+            $this->limelight_id,
+            sfConfig::get('app_limelight_feed_num'),
+            sfConfig::get('app_limelight_feed_num') * ($request->getParameter('page', 1)-1)
+    );
+    $this->next_page = $request->getParameter('page', 1)+1;
+    $this->feed_more_url = 'lime_show_songs_more';
+
+    if (sfConfig::get('app_site_type') == 'tech' && $this->getRequest()->isXmlHttpRequest())
+    {
+      return $this->renderPartial('user/actionFeed', array(
+        'items' => $this->items,
+        'limelight_id' => $this->limelight_id,
+        'next_page' => $this->next_page,
+        'type' => 'song',
+        'feed_more_url' => $this->feed_more_url
+      ));
+      return sfView::NONE;
+    }
   }
 
   public function executeShowProducts(sfWebRequest $request)

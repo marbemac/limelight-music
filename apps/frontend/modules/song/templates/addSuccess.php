@@ -77,6 +77,7 @@ slot('title', 'submit a song');
       <div class="right">
         <input id="song_add_file" data-url="<?php echo url_for('song_upload_file') ?>" />
         <input id="song_file" name="song[filename]" type="hidden" />
+        <?php echo image_tag('ajax-loader.gif', array('class' => 'ajax_loader hide')) ?>
         <div class="file_help rnd_2">
           Inappropriate files will earn you a strike.
         </div>

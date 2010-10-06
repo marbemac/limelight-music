@@ -1,10 +1,10 @@
-<div id="lime_player_C" data-song_id="">
+<div id="lime_player_C" data-id="" data-load_interact_url="<?php echo url_for('song_load_interact') ?>">
 
   <div class="lime_player_overlay">
     <?php echo image_tag('lime_player_choose_song.png') ?>
   </div>
 
-  <div id="lime_player"></div>
+  <div id="lime_player" data-oncomplete_url="<?php echo url_for('song_oncomplete') ?>"></div>
 
   <div class="lp-single-player">
     <div class="lp-interface">
@@ -25,30 +25,6 @@
       </div>
     </div>
 
-    <ul class="lp-interact">
-      <li>
-        <div></div>
-      </li>
-      <li>
-        <div>share</div>
-      </li>
-      <li>
-        <div class="favorite"></div>
-      </li>
-      <li>
-        <div class="sb_song rnd_5">
-          <div class="neg"></div>
-          <div class="pos"></div>
-          
-        </div>
-      </li>
-    </ul>
-
-    <div id="lplayer_playlist" class="lp-playlist">
-      <ul>
-        <li></li>
-      </ul>
-    </div>
-  </div>
+    <ul class="lp-interact"></ul>
 
 </div>

@@ -23,7 +23,14 @@ class Favorite extends BaseFavorite
     $item->save();
 
     $cacheDriver = $this->getTable()->getAttribute(Doctrine_Core::ATTR_RESULT_CACHE);
-    if (get_class($this) == 'NewsFavorite')
+    if (get_class($this) == 'SongFavorite')
+    {
+      // delete the corresponding news cache for this user
+      $cacheDriver->delete('song_stats_'.$item->id.'_'.$this->user_id);
+      // delete the users favorited list
+      $cacheDriver->deleteByPrefix('user_'.$this->user_id.'_favorited_song');
+    }
+    else if (get_class($this) == 'NewsFavorite')
     {
       // delete the corresponding news cache for this user
       $cacheDriver->delete('news_stats_'.$item->id.'_'.$this->user_id);
@@ -46,7 +53,14 @@ class Favorite extends BaseFavorite
     $item->save();
 
     $cacheDriver = $this->getTable()->getAttribute(Doctrine_Core::ATTR_RESULT_CACHE);
-    if (get_class($this) == 'NewsFavorite')
+    if (get_class($this) == 'SongFavorite')
+    {
+      // delete the corresponding news cache for this user
+      $cacheDriver->delete('song_stats_'.$item->id.'_'.$this->user_id);
+      // delete the users favorited list
+      $cacheDriver->deleteByPrefix('user_'.$this->user_id.'_favorited_song');
+    }
+    else if (get_class($this) == 'NewsFavorite')
     {
       // delete the corresponding news cache for this user
       $cacheDriver->delete('news_stats_'.$item->id.'_'.$this->user_id);

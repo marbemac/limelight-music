@@ -15,11 +15,4 @@ class songComponents extends sfComponents
     $this->form = new NewsForm();
   }
 
-  public function executeScoreBoxFull()
-  {
-    $user_id = $this->getUser()->isAuthenticated() ? $this->getUser()->getGuardUser()->id : 0;
-
-    $this->data = Doctrine::getTable('Song')->getScoreboxInfo($this->item_id, $user_id);
-  }
-
 }

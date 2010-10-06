@@ -125,7 +125,7 @@ class songActions extends sfActions
     $ext = pathinfo($_FILES['Filedata']['name']);
     $ext = $ext['extension'];
 
-    if (!in_array($ext, $file_types) || $_FILES['Filedata']['size'] > 10000000)
+    if (!in_array($ext, $file_types) || $_FILES['Filedata']['size'] > 15000000)
     {
       $return_data['result'] = 'error';
       $return_data['text'] = 'Unsupported extension ('.$ext.') or file is too big ('.$_FILES['Filedata']['size'].').';
@@ -144,6 +144,7 @@ class songActions extends sfActions
     {
       $return_data['result'] = 'success';
       $return_data['fileName'] = $fileName;
+      $return_data['realName'] = $_FILES['Filedata']['name'];
     }
     else
     {
@@ -167,6 +168,145 @@ class songActions extends sfActions
     $items = Doctrine::getTable('News')->getForNewsLookup($query);
 
     $this->renderText(json_encode($items));
+    return sfView::NONE;
+  }
+
+  public function executeOnComplete(sfWebRequest $request)
+  {
+    $user = $this->getUser();
+    $user_id = (!$user->isAuthenticated()) ? 1 : $user->getGuardUser()->id;
+
+    $song_status = $user->hasAttribute('play_song') ? json_decode($user->getAttribute('play_song')) : false;
+
+    if (!$song_status)
+    {
+      return sfView::NONE;
+    }
+
+    $song_status->played_time = time() - $song_status->start_time;
+    if ($song_status->played_time >= sfConfig::get('app_song_count_as_play') && !$song_status->play_counted)
+    {
+      $sp = new SongPlay();
+      $sp->item_id = $id;
+      $sp->count = 1;
+      $sp->user_id = $user_id;
+      $sp->save();
+    }
+
+    $song_status->status = 'paused';
+    $song_status->start_time = time();
+    $song_status->played_time = 0;
+    $song_status->play_counted = false;
+    $user->setAttribute('play_song', json_encode($song_status));
+    return sfView::NONE;
+  }
+
+  public function executePlayPause(sfWebRequest $request)
+  {
+    $user = $this->getUser();
+    $user_id = (!$user->isAuthenticated()) ? 1 : $user->getGuardUser()->id;
+
+    // the song id
+    $id = $request->getParameter('id');
+    $progress_bar_change = $request->getParameter('progress_bar_change', null);
+    $status = $request->getParameter('status', null);
+
+    /*
+     *  the song status hash
+     *  id: the song id
+     *  status: either playing or paused
+     *  start_time: the unixtime of when the song was last started playing
+     *  played_time: the total playing time of the song
+     */
+    $song_status = $user->hasAttribute('play_song') ? json_decode($user->getAttribute('play_song')) : false;
+
+    if (!isset($song_status->id) || !isset($song_status->status) || !isset($song_status->start_time) || !isset($song_status->play_counted) || !isset($song_status->played_time) || !isset($song_status->file_name))
+    {
+      $song_status->id = null;
+      $song_status->status = null;
+      $song_status->start_time = null;
+      $song_status->played_time = null;
+      $song_status->play_counted = null;
+      $song_status->file_name = null;
+    }
+
+    // are we / have we recently played a song, and is that song the song we are manipulating now?
+    if ($song_status && $song_status->id == $id)
+    {
+      if ($status == 'playing')
+      {
+        $song_status->start_time = time();
+        $song_status->status = 'playing';
+      }
+      else if (!$progress_bar_change)
+      {
+        $song_status->status = 'paused';
+        $song_status->played_time += time() - $song_status->start_time;
+        if ($song_status->played_time >= sfConfig::get('app_song_count_as_play') && !$song_status->play_counted)
+        {
+          $sp = new SongPlay();
+          $sp->item_id = $id;
+          $sp->count = 1;
+          $sp->user_id = $user_id;
+          $sp->save();
+          $song_status->play_counted = true;
+        }
+      }
+      $user->setAttribute('play_song', json_encode($song_status));
+
+      $result['result'] = 'success';
+      $result['file_name'] = $song_status->file_name;
+      $result['status'] = $song_status;
+      $this->renderText(json_encode($result));
+      return sfView::NONE;
+    }
+    
+    // get the song data
+    $file_name = Doctrine::getTable('Song')->getFilename($id);
+    if (!$file_name)
+    {
+      $result['result'] = 'error';
+      $result['text'] = 'The file could not be loaded. Please try again later. If the problem persists, let us know!';
+      Doctrine::getTable('Log')->newLog('Song play/pause', 'Could not load filename for song id '.$id, $user_id, $_SERVER['REMOTE_ADDR']);
+      $this->renderText(json_encode($result));
+      return sfView::NONE;
+    }
+    
+    // we were previously playing a song, and we are trying to play a new one
+    if ($song_status && $status == 'playing')
+    {
+      $song_status->played_time += time() - $song_status->start_time;
+      if ($song_status->played_time >= sfConfig::get('app_song_count_as_play') && !$song_status->play_counted)
+      {
+        $sp = new SongPlay();
+        $sp->item_id = $id;
+        $sp->count = 1;
+        $sp->user_id = $user_id;
+        $sp->save();
+        $song_status->play_counted = true;
+      }
+    }
+
+    $song_status->status = 'playing';
+    $song_status->start_time = time();
+    $song_status->play_counted = false;
+    $song_status->played_time = 0;
+    $song_status->file_name = $file_name['filename'];
+    $song_status->id = $id;
+
+    $user->setAttribute('play_song', json_encode($song_status));
+
+    $result['result'] = 'success';
+    $result['file_name'] = $file_name['filename'];
+    $result['status'] = $song_status;
+    $this->renderText(json_encode($result));
+    return sfView::NONE;
+  }
+
+  public function executeLoadInteract(sfWebRequest $request)
+  {
+    $id = $request->getParameter('id', null);
+    $this->renderPartial('limePlayerInteract', array('id' => $id));
     return sfView::NONE;
   }
 

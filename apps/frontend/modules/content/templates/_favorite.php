@@ -1,9 +1,4 @@
-<?php if ($item['favorited']): ?>
-
-<span class="user_action interactedButton rnd_3" data-url="<?php echo url_for($url.'_undo', array('item_id' => $item['id'], 'count' => $item['favorited_count'])) ?>" title="you and <?php echo $item['favorited_count'] - 1 ?> others have favorited this item">unfavorite - <?php echo $item['favorited_count'] ?></span>
-
-<?php else: ?>
-
-<span class="user_action interactPosButton rnd_3" data-url="<?php echo url_for($url, array('item_id' => $item['id'], 'count' => $item['favorited_count'])) ?>" title="Add this item to your favorites">favorite - <?php echo $item['favorited_count'] ?></span>
-
-<?php endif; ?>
+<div class="favorite <?php echo $favorited ? 'on' : '' ?>"
+     title="<?php echo $favorited ? 'click to unfavorite this item' : 'click to favorite this item' ?>"
+     data-fav_url="<?php echo url_for('Song_favorite', array('id' => $item_id)) ?>"
+     data-unfav_url="<?php echo url_for('Song_unfavorite', array('id' => $item_id)) ?>"></div>

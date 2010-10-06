@@ -2,7 +2,7 @@
 
 <?php
 slot('title', sprintf('%s products | Tech Limelight', $limelight['name']));
-include_component('limelight', 'limelightHead', array('limelight' => $limelight, 'page' => 'products', 'sf_cache_key' => $limelight['id'].'-products'));
+include_component('limelight', sfConfig::get('app_site_type').'LimelightHead', array('limelight' => $limelight, 'page' => 'products', 'sf_cache_key' => $limelight['id'].'-products'));
 ?>
 
 <div class="content_panel">

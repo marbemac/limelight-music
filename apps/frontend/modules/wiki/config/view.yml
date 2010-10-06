@@ -3,7 +3,7 @@ default:
     sidebar1: [limelight, topLimelights]
     sidebar2: [user, topUsers]
     sidebar3: [user, topModUsers]
-    sidebar4: [limelight, stats]
+    sidebar4: []
     sidebar5: []
     sidebar6: []
     sidebar7: []

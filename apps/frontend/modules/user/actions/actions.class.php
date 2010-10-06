@@ -45,53 +45,6 @@ class userActions extends sfActions
     $this->renderText(json_encode($result));
     return sfView::NONE;
   }
-
-  public function executeBetaGiveaway($request)
-  {
-    $result = array();
-    $group = trim($request->getParameter('c'));
-    $guess = $request->getParameter('g');
-    $email = trim($request->getParameter('e'));
-
-    $be = Doctrine::getTable('BetaEmail')->findOneByEmail($email);
-    if (!$be)
-    {
-      $be = new BetaEmail();
-      $be->email = $email;
-      $be->ip = $_SERVER['REMOTE_ADDR'];
-      $be->save();
-    }
-
-    $code = sfConfig::get('app_beta_giveaway_group');
-    if ($group != $code)
-    {
-      $result['result'] = 'error';
-      $result['text'] = 'That\'s not the right code! Visit the Tech Limelight twitter or facebook page to get the latest giveaway code.';
-      $this->renderText(json_encode($result));
-      return sfView::NONE;
-    }
-    $previous = Doctrine::getTable('BetaGiveaway')->checkSubmission($be->id);
-    if ($previous)
-    {
-      $result['result'] = 'error';
-      $result['text'] = 'You already made a guess for this giveaway. We\'ll let you know if you win.
-                         Follow us on Twitter and Facebook to be notified when the next one starts!';
-      $this->renderText(json_encode($result));
-      return sfView::NONE;
-    }
-
-    $bg = new BetaGiveaway();
-    $bg->guess = LimelightUtils::slugify($guess);
-    $bg->group_code = sfConfig::get('app_beta_giveaway_group_code');
-    $bg->beta_email_id = $be->id;
-    $bg->save();
-
-    $result['result'] = 'success';
-    $result['text'] = 'Congrats, you\'ve successfully entered into the giveaway! We\'ll shoot you an email if you win. Follow us
-                       on Twitter and Facebook to get a notification when the next one starts!';
-    $this->renderText(json_encode($result));
-    return sfView::NONE;
-  }
   // END BETA SPLASH
 
   // new Janrain login handler
@@ -690,16 +643,19 @@ class userActions extends sfActions
 
   public function executeFavorited(sfWebRequest $request) {
     $this->user = Doctrine::getTable('sfGuardUser')->getUserByUsername($request->getParameter('username'));
-    $this->type = $request->getParameter('type', 'news');
+    $default = sfConfig::get('app_site_type') == 'tech' ? 'news' : 'song';
+    $this->type = $request->getParameter('type', $default);
     $this->order_by = $request->getParameter('order_by', 'favorite_date');
     $this->items = Doctrine::getTable('Favorite')->getUserFavoriteFeed($this->user->id, sfConfig::get('app_user_feed_num'), 0, $this->order_by, $this->type);
     $this->next_page = 2;
     $this->feed_more_url = 'user_favorited_more';
+    $this->setTemplate(sfConfig::get('app_site_type').'.favorited');
   }
 
   public function executeFavoritedMore(sfWebRequest $request) {
     $this->user = Doctrine::getTable('sfGuardUser')->getUserByUsername($request->getParameter('username'));
-    $this->type = $request->getParameter('type', 'news');
+    $default = sfConfig::get('app_site_type') == 'tech' ? 'news' : 'song';
+    $this->type = $request->getParameter('type', $default);
     $this->order_by = $request->getParameter('order_by', 'favorite_date');
     $this->items = Doctrine::getTable('Favorite')->getUserFavoriteFeed(
       $this->user->id,
@@ -719,7 +675,7 @@ class userActions extends sfActions
         'type' => $this->type
       ));
     else
-      $this->setTemplate('favorited');
+      $this->setTemplate(sfConfig::get('app_site_type').'.favorited');
   }
 
   public function executeSettings(sfWebRequest $request) {

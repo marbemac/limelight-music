@@ -32,8 +32,8 @@ class SongTable extends ItemTable
         ->leftJoin('st.Tag t')
         ->leftJoin('s.Favorited sf')
         ->where('s.id = ?', $song_id);
-    $results = $q->fetchArray();
-    return $results[0];
+    $result = $q->fetchOne();
+    return $result;
   }
 
   public function getScoreboxInfo($song_id, $user_id) {
@@ -53,8 +53,8 @@ class SongTable extends ItemTable
     $result = $q->fetchOne();
     $data['neg_amount'] = $result['neg_amount'];
 
-    $data['pos_progress'] = ($data['pos_amount'] + $data['neg_amount'] == 0) ? 5 : $data['pos_amount'] / ($data['pos_amount'] + $data['neg_amount']);
-    $data['neg_progress'] = ($data['pos_amount'] + $data['neg_amount'] == 0) ? 5 : $data['neg_amount'] / ($data['pos_amount'] + $data['neg_amount']);
+    $data['pos_progress'] = ($data['pos_amount'] + $data['neg_amount'] == 0) ? 5 : ($data['pos_amount'] / ($data['pos_amount'] + $data['neg_amount']))*100;
+    $data['neg_progress'] = ($data['pos_amount'] + $data['neg_amount'] == 0) ? 5 : ($data['neg_amount'] / ($data['pos_amount'] + $data['neg_amount']))*100;
 
     $q = Doctrine_Query::create()
         ->select('amount')
@@ -73,6 +73,16 @@ class SongTable extends ItemTable
     }
 
     return $data;
+  }
+
+  public function getFilename($song_id)
+  {
+    $q = Doctrine_Query::create()
+        ->select('filename')
+        ->from('Song')
+        ->where('id = ?', $song_id)
+        ->useResultCache(true, 86000, 'song_filename_'.$song_id);
+    return $q->fetchOne();
   }
 
   public function getByFilters($type, $time_period, $sort_by, $categories, $limit, $offset) {

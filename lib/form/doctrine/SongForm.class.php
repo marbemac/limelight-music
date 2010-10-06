@@ -31,7 +31,7 @@ class SongForm extends BaseSongForm
     ));
 
     $this->setValidators(array(
-      'name'       => new sfValidatorString(array('trim' => true, 'required' => true, 'min_length' => 5, 'max_length' => 100)),
+      'name'       => new sfValidatorString(array('trim' => true, 'required' => true, 'min_length' => 1, 'max_length' => 100)),
       'content'     => new sfValidatorString(array('trim' => true, 'min_length' => 10, 'required' => false, 'max_length' => 350)),
       'filename'       => new sfValidatorString(array('trim' => true, 'required' => true, 'min_length' => 1, 'max_length' => 100)),
     ));

@@ -2,7 +2,7 @@
 
 <?php
 slot('title', sprintf('%s News | Tech Limelight', $limelight['name']));
-include_component('limelight', 'limelightHead', array('limelight' => $limelight, 'page' => 'news', 'sf_cache_key' => $limelight['id'].'-news'));
+include_component('limelight', sfConfig::get('app_site_type').'LimelightHead', array('limelight' => $limelight, 'page' => 'news', 'sf_cache_key' => $limelight['id'].'-news'));
 ?>
 
 <div class="content_panel">

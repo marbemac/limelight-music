@@ -9,6 +9,7 @@
  * @property integer $Limelight_id
  * @property integer $News_id
  * @property integer $Song_id
+ * @property integer $Playlist_id
  * @property integer $Comment_id
  * @property integer $LimelightProCon_id
  * @property integer $Wiki_id
@@ -34,6 +35,7 @@
  * @method integer                getLimelightId()               Returns the current record's "Limelight_id" value
  * @method integer                getNewsId()                    Returns the current record's "News_id" value
  * @method integer                getSongId()                    Returns the current record's "Song_id" value
+ * @method integer                getPlaylistId()                Returns the current record's "Playlist_id" value
  * @method integer                getCommentId()                 Returns the current record's "Comment_id" value
  * @method integer                getLimelightProConId()         Returns the current record's "LimelightProCon_id" value
  * @method integer                getWikiId()                    Returns the current record's "Wiki_id" value
@@ -58,6 +60,7 @@
  * @method UserAction             setLimelightId()               Sets the current record's "Limelight_id" value
  * @method UserAction             setNewsId()                    Sets the current record's "News_id" value
  * @method UserAction             setSongId()                    Sets the current record's "Song_id" value
+ * @method UserAction             setPlaylistId()                Sets the current record's "Playlist_id" value
  * @method UserAction             setCommentId()                 Sets the current record's "Comment_id" value
  * @method UserAction             setLimelightProConId()         Sets the current record's "LimelightProCon_id" value
  * @method UserAction             setWikiId()                    Sets the current record's "Wiki_id" value
@@ -104,6 +107,10 @@ abstract class BaseUserAction extends sfDoctrineRecord
              'length' => 4,
              ));
         $this->hasColumn('Song_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             ));
+        $this->hasColumn('Playlist_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
              ));

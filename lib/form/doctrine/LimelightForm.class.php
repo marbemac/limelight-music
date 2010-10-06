@@ -32,7 +32,7 @@ class LimelightForm extends BaseLimelightForm
     $this->setValidators(array(
       'name'           => new sfValidatorString(array('trim' => true, 'required' => true, 'min_length' => 2, 'max_length' => sfConfig::get('app_limelight_name_max_length'))),
       'company_name'   => new sfValidatorString(array('trim' => true, 'required' => false, 'min_length' => 2, 'max_length' => 40)),
-      'summary'        => new sfValidatorString(array('trim' => true, 'required' => true, 'min_length' => 10, 'max_length' => 275)),
+      'summary'        => new sfValidatorString(array('trim' => true, 'required' => false, 'min_length' => 10, 'max_length' => 275)),
     ));
 
     $summary = new LimelightSummaryForm();

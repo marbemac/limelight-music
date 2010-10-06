@@ -9,6 +9,7 @@
  * @property integer $score
  * @property string $profile_image
  * @property integer $total_views
+ * @property integer $total_plays
  * @property integer $favorite_badge_flag
  * @property integer $reviewable
  * @property integer $wiki_lock
@@ -52,6 +53,7 @@
  * @method integer             getScore()                 Returns the current record's "score" value
  * @method string              getProfileImage()          Returns the current record's "profile_image" value
  * @method integer             getTotalViews()            Returns the current record's "total_views" value
+ * @method integer             getTotalPlays()            Returns the current record's "total_plays" value
  * @method integer             getFavoriteBadgeFlag()     Returns the current record's "favorite_badge_flag" value
  * @method integer             getReviewable()            Returns the current record's "reviewable" value
  * @method integer             getWikiLock()              Returns the current record's "wiki_lock" value
@@ -94,6 +96,7 @@
  * @method Limelight           setScore()                 Sets the current record's "score" value
  * @method Limelight           setProfileImage()          Sets the current record's "profile_image" value
  * @method Limelight           setTotalViews()            Sets the current record's "total_views" value
+ * @method Limelight           setTotalPlays()            Sets the current record's "total_plays" value
  * @method Limelight           setFavoriteBadgeFlag()     Sets the current record's "favorite_badge_flag" value
  * @method Limelight           setReviewable()            Sets the current record's "reviewable" value
  * @method Limelight           setWikiLock()              Sets the current record's "wiki_lock" value
@@ -161,6 +164,11 @@ abstract class BaseLimelight extends Item
              'length' => 255,
              ));
         $this->hasColumn('total_views', 'integer', 4, array(
+             'type' => 'integer',
+             'default' => 0,
+             'length' => 4,
+             ));
+        $this->hasColumn('total_plays', 'integer', 4, array(
              'type' => 'integer',
              'default' => 0,
              'length' => 4,
