@@ -32,8 +32,8 @@ all:
   site_path:           /
 
   # used by janrain in sfGuardAuth tokenize function
-  rpx_api_key:          eb14d9c6e438bab0bc18ac214ee3cabfa93124e7
-  rpx_tokenize_url:     http://www.techlimelight.com/tokenize
+  rpx_api_key:          bff775a2a4a42e155f4298c81568babbe622abbd
+  rpx_tokenize_url:     http://www.mlimelight.com/tokenize
   
   # used by Amazon
   amazon_access_key_id:  AKIAJ2QSJUQRYKWR3LZA

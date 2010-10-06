@@ -64,7 +64,7 @@ all:
           host:       smtp.gmail.com
           port:       465
           encryption: ssl
-          username:   marc@techlimelight.com
+          username:   marc@mlimelight.com
           password:   87yot4
 
 #all:
