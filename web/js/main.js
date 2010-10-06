@@ -12,24 +12,6 @@ if ($('#ll_head_image').length > 0)
   $('#ll_head_image .left').css('left', $left);
   $('#ll_head_image .right').css('left', $right);
 }
-
-// adjust the URL post page load
-var $pathname = window.location.href.split('#');
-if ($pathname.length == 1)
-{
-  $pathname = window.location.pathname.split('.php/');
-  var $temp = $pathname[$pathname.length-1];
-  var $path = window.location.href.split(window.location.pathname);
-  $path = $path[0];
-  if ($pathname.length > 1)
-  {
-    window.location.href = $path+$pathname[0]+'.php/'+'#'+$pathname[0]+'.php/'+$pathname[1];
-  }
-  else
-  {
-    window.location.href = $path+'/#/'+$pathname[0];
-  }
-}
 // END PRELOAD //
 
 $(document).ready(function(){

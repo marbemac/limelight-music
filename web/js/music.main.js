@@ -14,7 +14,7 @@ if ($pathname.length == 1)
   }
   else
   {
-    window.location.href = $path+'/#/'+$pathname[0];
+    window.location.href = $path+'/#'+$pathname[0];
   }
 }
 

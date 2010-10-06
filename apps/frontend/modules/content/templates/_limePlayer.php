@@ -27,4 +27,5 @@
 
     <ul class="lp-interact"></ul>
 
+  </div>
 </div>
