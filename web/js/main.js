@@ -686,15 +686,6 @@ $(document).ready(function(){
     $self.addClass('on');
     $('.categories_filter li, .categories_filter .expander').removeClass('on');
 
-    var catBack = $('.cat_back');
-    if (catBack.length > 0)
-    {
-      var type = (catBack.metadata().type) ? catBack.metadata().type : 'news';
-      var category = $self.metadata().value;
-      feedReload(type, category);
-      return false;
-    }
-
     // if we're on the main feed page
     if ($('#main_feed').length > 0)
     {
@@ -748,16 +739,6 @@ $(document).ready(function(){
     if ($('.categories_filter li.on').length == 0)
     {
       $('.cat_all').addClass('on');
-    }
-
-    // if we're goin back to the main feed
-    var catBack = $('.cat_back');
-    if (catBack.length > 0)
-    {
-      var type = (catBack.metadata().type) ? catBack.metadata().type : 'news';
-      var category = $self.metadata().value;
-      feedReload(type, category);
-      return false;
     }
     
     // if we're on the main feed page
@@ -822,8 +803,8 @@ $(document).ready(function(){
 
         $('#feed_reload_text').text('reloading feed...');
         $.get($('#feed_reload').metadata().url, filters, function(data) {
-          $('#feed_reload_text').fadeOut(1000, function() {$(this).remove()});
-          $('.content_panel').fadeOut(150, function() {$(this).html(data).fadeIn(200)});
+          $('#feed_reload_text').hide().remove();
+          $('#container').fadeOut(50, function() {$(this).html(data).fadeIn(50)});
         })
         $('#feed_reload').metadata().reload = 0;
       })
@@ -841,7 +822,7 @@ $(document).ready(function(){
     filters['categories'][0] = category;
 
     $.get($('#feed_reload').metadata().url, filters, function(data) {
-      window.location = $('#feed_reload').metadata().url;
+      $.address.value($('#feed_reload').metadata().url);;
     })
   }
 

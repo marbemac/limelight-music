@@ -40,7 +40,6 @@ $.address.change(function(event) {
     },
     error: function(request, status, error)
     {
-      console.log(request);
       if (request.status == '404') {
         $('#site_loading').stopTime().hide();
         $('#container').html(request.responseText);
