@@ -21,10 +21,10 @@
       <div class="clear"></div>
       <?php echo link_to('my account', '@user_show?username='.$sf_user->getGuardUser()->username, 'class=my_account rnd_3') ?>
       <?php echo link_to('logout', '@sf_guard_signout', 'class=logout ax rnd_3 id=logout_button') ?>
-      <a class="rpxnow" id="h_relogin" href="https://tech-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Relogin</a>
+      <a class="rpxnow" id="h_relogin" href="https://music-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Relogin</a>
     </div>
   <?php else: ?>
-    <a class="rpxnow" id="h_login" class="login xa" onclick="return false;" href="https://tech-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Sign In</a>
-    <a class="rpxnow" id="h_register" class="register xa" onclick="return false;" href="https://tech-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Register</a>
+    <a class="rpxnow" id="h_login" class="login xa" onclick="return false;" href="https://music-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Sign In</a>
+    <a class="rpxnow" id="h_register" class="register xa" onclick="return false;" href="https://music-limelight.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode(sfConfig::get('app_rpx_tokenize_url')) ?>">Register</a>
   <?php endif ?>
 </div>
