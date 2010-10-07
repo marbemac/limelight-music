@@ -56,6 +56,10 @@ $('a').live('click', function() {
     if ($(this).hasClass('xa'))
       return;
 
+    console.log(window.location);
+    console.log($(this).attr('href'));
+    console.log($.address.path());
+
     $.address.baseURL(window.location);
     $.address.value($(this).attr('href'));
     return false;
