@@ -46,17 +46,17 @@ $.address.change(function(event) {
       }
       else if (request.status == '500')
       {
-        $('#site_loading').text('Oops, there was an error! If this persists, please let us know.');
+        //$('#site_loading').text('Oops, there was an error! If this persists, please let us know.');
       }
     }
   });
 });
 
-
 $('a').live('click', function() {
     if ($(this).hasClass('xa'))
       return;
 
+    $.address.baseURL(window.location);
     $.address.value($(this).attr('href'));
     return false;
 });
